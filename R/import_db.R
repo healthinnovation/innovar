@@ -15,7 +15,7 @@
 #' stringsAsFactors = FALSE)
 #'
 #'
-#'
+#' @import RCurl
 #' @export import_db
 import_db <- function(dataset) {
 

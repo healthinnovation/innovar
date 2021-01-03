@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_admin.div.R
 \name{gen_admin.div}
 \alias{gen_admin.div}
-\title{Create categories for adiministrative divisions (Peru)}
+\title{Create categories for adiministrative divisions (Perú)}
 \usage{
 gen_admin.div(x, method = "Traditional")
 }

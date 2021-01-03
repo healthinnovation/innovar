@@ -24,5 +24,4 @@ df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUAN
 stringsAsFactors = FALSE)
 
 
-
 }

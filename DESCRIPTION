@@ -2,14 +2,30 @@ Package: lis
 Type: Package
 Title: Innovalab Toolkit
 Version: 0.1.1
-Author: Renato Cava
+Authors@R:
+  c(person(given = "Renato",
+           family = "Cava",
+           role = c("cre","aut"),
+           email = "renato.cava@pch.edu.pe",
+           comment = c(ORCID = "0000-0001-8049-7069")),
+    person(given = "Jorge",
+           family = "Ruiz-Cabrejos",
+           role = "aut",
+           email = "jorge.ruiz.c@pch.edu.pe",
+           comment = c(ORCID = "0000-0002-2055-3396"))
+           )
 Maintainer: Renato Cava <renato.cava@pch.edu.pe>
-Description: Libreria de funciones del laboratorio de innovacion en salud.
+Description: Libreria de funciones del Laboratorio de Innovacion en Salud (InnovaLab).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 URL: https://github.com/healthinnovation/lis
 BugReports: https://github.com/healthinnovation/lis/issues
-VignetteBuilder: knitr
-Suggests: knitr, rmarkdown
+VignetteBuilder:
+  knitr
+Imports:
+  RCurl
+Suggests:
+  knitr,
+  rmarkdown

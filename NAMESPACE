@@ -3,3 +3,4 @@
 export(gen_admin.div)
 export(hello)
 export(import_db)
+import(RCurl)
