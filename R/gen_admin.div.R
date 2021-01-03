@@ -5,7 +5,7 @@
 #' @param x x is a list/vector with one of the 25 regions/departments names of Peru (first-level administrative subdivisions)
 #' @param method **method** defines the type of natural, geographical, or administrative division that should be returned
 #' Traditional: Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
-#' TC: [Administratives Macro Regions of the Constitutional Tribunal](https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx)
+#' TC: \href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}
 #' Cardinal: North, South, Amazon Jungle, or Lima & Callao
 #' Traditional Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)
 #'
