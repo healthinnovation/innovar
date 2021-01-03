@@ -11,7 +11,7 @@ Puedes instalar la version de prueba desde
 [GitHub](https://github.com/):
 
 ``` r
-# install.packages("devtools")
+if(!require("devtools")) install.packages("devtools")
 devtools::install_github("healthinnovation/lis")
 ```
 
