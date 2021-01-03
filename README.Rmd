@@ -23,11 +23,21 @@ Libreria de funciones del laboratorio de Innovacion en Salud
 Puedes instalar la version de prueba desde [GitHub](https://github.com/):
 
 ``` r
-# install.packages("devtools")
+if(!require("devtools")) install.packages("devtools")
 devtools::install_github("healthinnovation/lis")
 ```
 
 ```{r example}
 library(lis)
 ```
+
+
+
+
+
+
+
+
+
+
 
