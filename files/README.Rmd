@@ -10,7 +10,11 @@ library(rmapshaper)
 library(ggplot2)
 ```
 
+# Nombres de distritos del Perú
 
+1874 distritos, 196 provincias, 25 regiones.
+
+Los nombres han sido modificados para no contener letras con acentos (e.g. "ñ") o símbolos (e.g. "_").
 
 # Shapefiles y geometrías del Perú
 
@@ -30,9 +34,12 @@ Los shapefiles oficiales disponibles son:
 
 - GEOGPSPerú 2: https://www.geogpsperu.com/2020/07/poblacion-por-distrito-2020-shapefile.html contiene 1875/1874 distritos (al 03/01/2021) teniendo de "extra" el distrito de Santa María de Huachipa, el cual es un centro poblaco parte de Lurigancho-Huachipa. http://www.congreso.gob.pe/Docs/comisiones2017/Comision_de_Descentralizacioni/files/pd_pl_1317_-_huachpa_-_1605.pdf 
 
+El archivo "shp_PER_adm3.Rdata", accesible desde la libreria/paquete de InnovaLab, tiene 1874 distritos generados a partir de los datos de GEOGPSPerú 2.
+
+Por motivos de espacio, el archivo solo conserva el 10% de los polígonos originales (reduciendo el tamaño del archivo de ~60mb a ~1mb).
 
 ```{r}
-shp <- st_read("./WIP/Poblacion_Estimada_2020_por_distrito_GEO_GPS_PERU_Juan_Pablo_Suyo_Pomalia_931381206", 
+shp <- st_read("../WIP/Poblacion_Estimada_2020_por_distrito_GEO_GPS_PERU_Juan_Pablo_Suyo_Pomalia_931381206", 
         stringsAsFactors = F) %>% dplyr::select(reg.code=CCDD,reg=NOMBDEP,
                                                 prov.code=CCPP,prov=NOMBPROV,
                                                 distr.code=CCDI,distr=NOMBDIST,
@@ -43,13 +50,32 @@ shp <- st_read("./WIP/Poblacion_Estimada_2020_por_distrito_GEO_GPS_PERU_Juan_Pab
   dplyr::mutate(ubigeo = replace(ubigeo,ubigeo=="150144","150118"))%>%
   dplyr::group_by(ubigeo) %>% 
   dplyr::summarize(geometry = st_union(geometry)) %>% ungroup() %>%
-  left_join(st_read("./WIP/Poblacion_Estimada_2020_por_distrito_GEO_GPS_PERU_Juan_Pablo_Suyo_Pomalia_931381206", 
+  left_join(st_read("../WIP/Poblacion_Estimada_2020_por_distrito_GEO_GPS_PERU_Juan_Pablo_Suyo_Pomalia_931381206", 
              stringsAsFactors = F)%>% as.data.frame(.) %>% dplyr::select(reg.code=CCDD,reg=NOMBDEP,
                                                      prov.code=CCPP,prov=NOMBPROV,
                                                      distr.code=CCDI,distr=NOMBDIST,
                                                      capital=CAPITAL,ubigeo=UBIGEO))
 
+
+shp <- shp %>%
+  mutate(distr =gsub("_", " ",
+                     gsub("-", " ", iconv(distr,
+                                          from="UTF-8",
+                                          to="ASCII//TRANSLIT"), 
+                          fixed=TRUE),
+                     fixed=TRUE),
+         prov = iconv(prov,
+                      from="UTF-8",
+                      to="ASCII//TRANSLIT"),
+         reg = iconv(reg,
+                     from="UTF-8",
+                     to="ASCII//TRANSLIT"),
+         distr = ifelse(distr=="HUAYA","HUALLA",
+                      ifelse(distr=="MAZAMARI   PANGOA","MAZAMARI",
+                             ifelse(distr=="LARAOS" & prov=="HUAROCHIRI","SAN PEDRO DE LARAOS",distr))),
+         distr=gsub("?", "",distr, 
+                          fixed=TRUE),
+         distr= replace(distr,distr=="HUAYLLO" & prov=="AYMARAES","IHUAYLLO"))
+
 saveRDS(shp,"./shp_PER_adm3.Rdata")  
 ```
-
-
