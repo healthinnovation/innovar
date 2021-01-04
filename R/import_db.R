@@ -30,7 +30,7 @@ import_db <- function(dataset) {
 
   } else if(dataset=="Perú shp") {
 
-    x <- #"https://github.com/thefactmachine/hex-binning-gis-data/raw/master/popDensity.RData"
+    x <- "https://github.com/healthinnovation/lis/blob/master/files/shp_PER_adm3.Rdata?raw=true"
     x <- readRDS(url(x))
 
   }
