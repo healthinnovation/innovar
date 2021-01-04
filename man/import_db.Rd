@@ -10,7 +10,9 @@ import_db(dataset)
 \item{dataset}{is a character specifiying the dataset to request.
 
 Current datasets available are:
+
 - "Perú names": Returns the name of the 1874 districts, 196 provinces and 25 regions of Perú as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
+
 - "Perú shp": Returns the shapefile for thethe 1874 districts, 196 provinces and 25 regions of Perú}
 }
 \description{

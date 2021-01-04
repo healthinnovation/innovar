@@ -5,8 +5,11 @@
 #' @param dataset is a character specifiying the dataset to request.
 #'
 #' Current datasets available are:
+#'
 #' - "Perú names": Returns the name of the 1874 districts, 196 provinces and 25 regions of Perú as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
+#'
 #' - "Perú shp": Returns the shapefile for thethe 1874 districts, 196 provinces and 25 regions of Perú
+#'
 #' @examples df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO",
 #' "PASCO","JUNIN","CUSCO", "PUNO","APURIMAC","AYACUCHO",
 #' "HUANCAVELICA","TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD",
