@@ -6,6 +6,9 @@
 \usage{
 hello()
 }
+\arguments{
+\item{argument}{is a character specifiying the dataset to request.}
+}
 \description{
 Prints 'Hello, world!'.
 }
