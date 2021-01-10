@@ -2,9 +2,7 @@
 
 export(AllpaUtils_names)
 export(gen_admin.div)
-export(hello)
 export(import_db)
 import(RCurl)
-import(dplyr)
 import(fs)
 import(tidyverse)

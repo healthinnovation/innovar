@@ -2,19 +2,27 @@
 % Please edit documentation in R/read_batch.R
 \name{read_batch}
 \alias{read_batch}
-\title{Multiple import}
+\title{Utility for dataset batch importing  in multiple formats}
 \usage{
-read_batch(data_dir, extension = "csv", fun = readr::read_csv, env = TRUE, ...)
+read_batch(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...)
 }
 \arguments{
-\item{argument_2}{Import multiple files}
+\item{data_dir}{data_dir is the file path that contains the files that will be imported}
+
+\item{ext}{extension "*.ext" of the files that will be imported. Default "csv"}
+
+\item{fun}{the import function that will be passsed to `map` to import datasets. Must be able to read files with the `ext` extension}
+
+\item{env}{Whether the file will be imported to .GlobalEnv. If `FALSE` a list containing all the dataset will be generated}
+
+\item{...}{Arguments passed to the import function
+
+Import multiple files}
 }
 \description{
-https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/#'
+Reference: https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/#'
 }
 \examples{
-data_dir <- "~/Dropbox/Work/COVID19/Proyectos/MINEDU/LIS-MINEDU_Shared/Indicadores/3.2. Reapertura 2021/Output data/"
-
 read_batch(data_dir = data_dir)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)

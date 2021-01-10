@@ -1,23 +1,24 @@
-#' Multiple import
+#' Utility for dataset batch importing  in multiple formats
 #'
-#' https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/#'
-#' @param argument_1
-#' @param argument_2
+#' Reference: https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/#'
+#' @param data_dir data_dir is the file path that contains the files that will be imported
+#' @param ext extension "*.ext" of the files that will be imported. Default "csv"
+#' @param fun the import function that will be passsed to `map` to import datasets. Must be able to read files with the `ext` extension
+#' @param env Whether the file will be imported to .GlobalEnv. If `FALSE` a list containing all the dataset will be generated
+#' @param ... Arguments passed to the import function
 #'
 #' Import multiple files
 #'
-#' @examples data_dir <- "~/Dropbox/Work/COVID19/Proyectos/MINEDU/LIS-MINEDU_Shared/Indicadores/3.2. Reapertura 2021/Output data/"
-#'
-#' read_batch(data_dir = data_dir)
+#' @examples read_batch(data_dir = data_dir)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
 #'
 #' @import fs
 #' @import tidyverse
 #' @export import_db
-read_batch <- function(data_dir, extension = "csv", fun = readr::read_csv, env = TRUE, ...) {
+read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...) {
 
-  file <- fs::dir_ls(data_dir, regexp = paste0("\\.", extension, "$"))
+  file <- fs::dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))
 
   data_objects<-file %>%
     map(fun, ...)
