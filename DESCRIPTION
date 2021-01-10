@@ -1,21 +1,27 @@
 Package: lis
 Type: Package
-Title: Innovalab Toolkit
-Version: 0.1.1
+Title: InnovaLab Toolkit
+Version: 0.1.2
 Authors@R:
-  c(person(given = "Renato",
+  c(person(given = "Gabriel",
+           family = "Carrasco-Escobar",
+           role = c("aut"),
+           email = "gabriel.carrasco@upch.edu.pe",
+           comment = c(ORCID = "0000-0002-6945-0419",
+                        webpage = "http://gcarrasco.rbind.io/")),
+    person(given = "Renato",
            family = "Cava",
            role = c("cre","aut"),
-           email = "renato.cava@pch.edu.pe",
+           email = "renato.cava@upch.edu.pe",
            comment = c(ORCID = "0000-0001-8049-7069")),
     person(given = "Jorge",
            family = "Ruiz-Cabrejos",
            role = "aut",
-           email = "jorge.ruiz.c@pch.edu.pe",
+           email = "jorge.ruiz.c@upch.edu.pe",
            comment = c(ORCID = "0000-0002-2055-3396"))
            )
-Maintainer: Renato Cava <renato.cava@pch.edu.pe>
-Description: Libreria de funciones del Laboratorio de Innovacion en Salud (InnovaLab).
+Maintainer: Renato Cava <renato.cava@upch.edu.pe>
+Description: Libreria de funciones del Laboratorio de Innovacion en Salud (InnovaLab) del Insituto de Medicina Tropical "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
