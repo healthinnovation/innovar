@@ -1,4 +1,7 @@
-# lis corporate colors
+#' Vector of custom colors
+#'
+#'
+#' @export lis_colors
 lis_colors <- c(
   `ccvi1`  = "#005378",
   `ccvi2`  = "#006FA0",
@@ -61,7 +64,7 @@ lis_colors <- c(
 #'
 #' @param ... Character names of lis_colors
 #'
-#'
+#' @export lis_cols
 
 lis_cols <- function(...) {
   cols <- c(...)
@@ -71,6 +74,11 @@ lis_cols <- function(...) {
 
   lis_colors[cols]
 }
+
+#' Vector of custom palettes
+#'
+#'
+#' @export lis_palettes
 
 lis_palettes <- list(
   `ccvi`  = lis_cols("ccvi1", "ccvi2", "ccvi3", "ccvi4", "ccvi5"),
@@ -90,6 +98,8 @@ lis_palettes <- list(
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments to pass to colorRampPalette()
 #'
+#'
+#' @export lis_pal
 lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
   pal <- lis_palettes[[palette]]
 
@@ -109,6 +119,9 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' names(lis_palettes) %>%
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
+#'
+#'
+#' @export scale_color_lis
 
 scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
   pal <- lis_pal(palette = palette, reverse = reverse)
@@ -132,6 +145,8 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
 #'
+#'
+#' #' @export scale_fill_lis
 scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
   pal <- lis_pal(palette = palette, reverse = reverse)
 
