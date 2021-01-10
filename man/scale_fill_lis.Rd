@@ -19,3 +19,10 @@ scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE}
 \description{
 Fill scale constructor for lis colors
 }
+\examples{
+library(unikn)
+names(lis_palettes) \%>\%
+map(.f = ~lis_pal(., reverse = T)(10)) \%>\%
+seecol(pal_names = names(lis_palettes))
+
+}

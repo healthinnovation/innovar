@@ -105,7 +105,7 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE
-#' @example library(unikn)
+#' @examples library(unikn)
 #' names(lis_palettes) %>%
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
@@ -127,7 +127,7 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE
-#' @example library(unikn)
+#' @examples library(unikn)
 #' names(lis_palettes) %>%
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
