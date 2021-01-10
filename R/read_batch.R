@@ -15,7 +15,7 @@
 #'
 #' @import fs
 #' @import tidyverse
-#' @export import_db
+#' @export
 read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...) {
 
   file <- fs::dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))

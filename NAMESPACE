@@ -3,6 +3,7 @@
 export(AllpaUtils_names)
 export(gen_admin.div)
 export(import_db)
+export(read_batch)
 import(RCurl)
 import(fs)
 import(tidyverse)
