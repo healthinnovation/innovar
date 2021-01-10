@@ -9,9 +9,12 @@
 #'
 #' Import multiple files
 #'
-#' @examples read_batch(data_dir = data_dir)
+#' @examples
+#'\dontrun{
+#' read_batch(data_dir = data_dir)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
+#'}
 #'
 #' @import fs
 #' @import tidyverse

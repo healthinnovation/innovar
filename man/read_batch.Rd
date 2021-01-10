@@ -23,8 +23,10 @@ Import multiple files}
 Reference: https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/#'
 }
 \examples{
+\dontrun{
 read_batch(data_dir = data_dir)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
+}
 
 }

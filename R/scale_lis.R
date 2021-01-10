@@ -1,7 +1,7 @@
 #' Vector of custom colors
 #'
 #'
-#' @export lis_colors
+#' @export
 lis_colors <- c(
   `ccvi1`  = "#005378",
   `ccvi2`  = "#006FA0",
@@ -78,7 +78,7 @@ lis_cols <- function(...) {
 #' Vector of custom palettes
 #'
 #'
-#' @export lis_palettes
+#' @export
 
 lis_palettes <- list(
   `ccvi`  = lis_cols("ccvi1", "ccvi2", "ccvi3", "ccvi4", "ccvi5"),
@@ -115,11 +115,14 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE
-#' @examples library(unikn)
+#' @examples
+#'\dontrun{
+#' library(unikn)
+#' library(tidyverse)
 #' names(lis_palettes) %>%
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
-#'
+#'}
 #'
 #' @export scale_color_lis
 
@@ -140,11 +143,14 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE
-#' @examples library(unikn)
+#' @examples
+#'\dontrun{
+#' library(unikn)
+#' library(tidyverse)
 #' names(lis_palettes) %>%
 #' map(.f = ~lis_pal(., reverse = T)(10)) %>%
 #' seecol(pal_names = names(lis_palettes))
-#'
+#'}
 #'
 #' #' @export scale_fill_lis
 scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
