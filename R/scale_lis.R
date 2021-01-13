@@ -110,7 +110,7 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 
 #' Color scale constructor for lis colors
 #'
-#' @param palette Character name of palette in lis_palettes
+#' @param palette Character name of palette in lis_palettes. Must one of `ccvi`, `npr`, `Blmbrg`, `ecomst`, `ctp`, `jama`, `mlobo`, `btran`, `nasa`
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
@@ -126,10 +126,10 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #'
 #' @export scale_color_lis
 
-scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_lis <- function(palette = "ctp", discrete = TRUE, reverse = FALSE, ...) {
   pal <- lis_pal(palette = palette, reverse = reverse)
 
-  if (discrete) {
+  if (isTRUE(discrete)) {
     discrete_scale("colour", paste0("lis_", palette), palette = pal, ...)
   } else {
     scale_color_gradientn(colours = pal(256), ...)
@@ -138,7 +138,7 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 
 #' Fill scale constructor for lis colors
 #'
-#' @param palette Character name of palette in lis_palettes
+#' @param palette Character name of palette in lis_palettes. Must one of `ccvi`, `npr`, `Blmbrg`, `ecomst`, `ctp`, `jama`, `mlobo`, `btran`, `nasa`
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
@@ -153,10 +153,10 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 #'}
 #'
 #' #' @export scale_fill_lis
-scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_lis <- function(palette = "ctp", discrete = TRUE, reverse = FALSE, ...) {
   pal <- lis_pal(palette = palette, reverse = reverse)
 
-  if (discrete) {
+  if (isTRUE(discrete)) {
     discrete_scale("fill", paste0("lis_", palette), palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), ...)
