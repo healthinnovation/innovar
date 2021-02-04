@@ -25,8 +25,7 @@ import_db <- function(dataset) {
 
   if(dataset=="Perú names") {
 
-    x <- getURL("https://raw.githubusercontent.com/healthinnovation/lis/master/files/master_distr.csv")
-    x <- read.csv(text = x, stringsAsFactors = F)
+    x <- read.csv("https://raw.githubusercontent.com/healthinnovation/lis/master/files/master_distr.csv", stringsAsFactors = F)
 
   } else if(dataset=="Perú shp") {
 
