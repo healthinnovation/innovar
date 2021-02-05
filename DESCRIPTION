@@ -31,10 +31,11 @@ BugReports: https://github.com/healthinnovation/lis/issues
 VignetteBuilder:
   knitr
 Imports:
-  RCurl,
-  fs,
-  tidyverse,
-  unikn
+    RCurl,
+    fs,
+    tidyverse,
+    unikn,
+    magrittr
 Suggests:
   knitr,
   rmarkdown
