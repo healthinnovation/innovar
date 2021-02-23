@@ -1,8 +1,6 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<img src="https://user-images.githubusercontent.com/23284899/108910025-48929200-75f3-11eb-9739-ccb1abccec83.png" align="right" hspace="10" vspace="0" width="20%">
 
 # lis
-
 Libreria de funciones del laboratorio de Innovacion en Salud
 
 ## Instalacion
