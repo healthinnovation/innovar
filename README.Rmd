@@ -1,0 +1,43 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# lis
+
+Libreria de funciones del laboratorio de Innovacion en Salud
+
+## Instalacion
+
+
+Puedes instalar la version de prueba desde [GitHub](https://github.com/):
+
+``` r
+if(!require("devtools")) install.packages("devtools")
+devtools::install_github("healthinnovation/lis")
+```
+
+```{r example}
+library(lis)
+```
+
+
+
+
+
+
+
+
+
+
+
