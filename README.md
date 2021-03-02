@@ -2,7 +2,7 @@
 
 # lis
 <p>
- <a>
+ <a href = "https://github.com/healthinnovation/lis/actions">
  <img src="https://img.shields.io/github/checks-status/healthinnovation/lis/master?color=blue&label=R-CMD-Check&logo=github&logoColor=black&style=flat-square" width="18%">
  </a>
 </p>
