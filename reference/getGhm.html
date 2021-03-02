@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vulnerability Index — vulnerability_index • lis</title>
+<title>Extract Global Human Modification data — getGhm • lis</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Vulnerability Index — vulnerability_index" />
-<meta property="og:description" content="It allows the observations to be ordered by different methods (default
-  percentile rank), and in consideration of domains grouping indicators." />
+<meta property="og:title" content="Extract Global Human Modification data — getGhm" />
+<meta property="og:description" content="A function that extract Global Human Modification data of the year 2016" />
 
 
 
@@ -121,92 +120,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vulnerability Index</h1>
-    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/vulnerability_index.R'><code>R/vulnerability_index.R</code></a></small>
-    <div class="hidden name"><code>vulnerability_index.Rd</code></div>
+    <h1>Extract Global Human Modification data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/getGhm.R'><code>R/getGhm.R</code></a></small>
+    <div class="hidden name"><code>getGhm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>It allows the observations to be ordered by different methods (default
-  percentile rank), and in consideration of domains grouping indicators.</p>
+    <p>A function that extract Global Human Modification data of the year 2016</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vulnerability_index</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  direct <span class='op'>=</span> <span class='cn'>NULL</span>,
-  inverse <span class='op'>=</span> <span class='cn'>NULL</span>,
-  table <span class='op'>=</span> <span class='cn'>NULL</span>,
-  weighted <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  domains <span class='op'>=</span> <span class='st'>"default"</span>,
-  level <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ordered <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  method <span class='op'>=</span> <span class='st'>"percent_rank"</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getGhm</span><span class='op'>(</span><span class='va'>region</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>A dataframe containing the variables that will be analyzed.</p></td>
-    </tr>
-    <tr>
-      <th>direct</th>
-      <td><p>A vector indicating the name of the variables that contribute
-directly to the vulnerability index.</p></td>
-    </tr>
-    <tr>
-      <th>inverse</th>
-      <td><p>A vector indicating the name of the variables that contribute
-inversely to the vulnerability index.</p></td>
-    </tr>
-    <tr>
-      <th>table</th>
-      <td><p>A dataframe indicating the variables "codename", "Dirección",
-"Dominio" and "Escala Geográfica" as a minimum. If this argument is specified,
-it is no longer necessary to specify the direct and inverse arguments.</p></td>
-    </tr>
-    <tr>
-      <th>weighted</th>
-      <td><p>A logical value indicating whether the "Dominio" information is
-used for the index calculation.</p></td>
-    </tr>
-    <tr>
-      <th>domains</th>
-      <td><p>A vector indicating the names of the domains grouping the variables
-of interest. If the argument "table" containing the variable "Dominio" is used,
-only "default" is indicated in this argument.</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>A vector indicating the level of analysis. It currently supports 3
-values:"departamental", "provincial", and "distrital".</p></td>
-    </tr>
-    <tr>
-      <th>ordered</th>
-      <td><p>A logical value indicating whether the cases analyzed will be
-ordered from highest to lowest.</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>A vector indicating the analysis method used for the index.
-Currently only "percent_rank" is supported.</p></td>
-    </tr>
-    <tr>
-      <th>na.rm</th>
-      <td><p>A logical value indicating whether cases where missing values are
-eliminated.</p></td>
+      <th>region</th>
+      <td><p>is a sf object</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A [tibble::tibble()] containing the variables analyzed by the function.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>a sf object with the new variables</p>
 
-    <div class='dont-index'><p>[dplyr::percent_rank()].</p></div>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/healthinnovation/lis'>lis</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/r-spatial/rgee/'>rgee</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://r-spatial.github.io/rgee//reference/ee_Initialize.html'>ee_Initialize</a></span><span class='op'>(</span><span class='op'>)</span>
 
+<span class='va'>region</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>'../district.gpkg'</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>getGhm</span><span class='op'>(</span>region<span class='op'>=</span><span class='va'>region</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
