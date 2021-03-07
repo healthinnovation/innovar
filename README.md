@@ -1,11 +1,11 @@
-<img src="https://user-images.githubusercontent.com/23284899/109600793-b6efbc80-7aeb-11eb-8d4c-dfeb6aeb8a86.png" align="right" hspace="10" vspace="0" width="20%">
+# lis <img src="man/figures/lis_icon.png" align="right" width="18%">
 
-# lis
-<p>
- <a href = "https://github.com/healthinnovation/lis/actions">
- <img src="https://img.shields.io/github/checks-status/healthinnovation/lis/master?color=blue&label=R-CMD-Check&logo=github&logoColor=black&style=flat-square" width="18%">
- </a>
-</p>
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/healthinnovation/lis/workflows/R-CMD-check/badge.svg)](https://github.com/healthinnovation/lis/actions)
+[![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+<!-- badges: end -->
 
 ## Instalacion
 
@@ -22,12 +22,11 @@ library(lis)
 ```
 
 # Redes sociales 
-<p align="center">
+<p align="left">
  <a href = "https://www.facebook.com/imt.innovlab">
  <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" width="10.5%">
  </a>
-
  <a href="https://twitter.com/imt_innovlab">
-  <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=whit" width="9.5%">
+  <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" width="9.5%">
  </a>
 </p>

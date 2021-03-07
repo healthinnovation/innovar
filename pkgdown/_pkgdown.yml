@@ -1,0 +1,46 @@
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/healthinnovation/lis/
+    articles:
+      text: Articles
+      menu:
+      - text: InnovaLab Toolkit
+        href: articles/vignette.html
+
+reference:
+- title: All functions
+  contents:
+  - '`AllpaUtils_names`'
+  - '`extract_value_count`'
+  - '`extract_value_mean`'
+  - '`extract_value_median`'
+  - '`extract_value_sd`'
+  - '`gen_admin.div`'
+  - '`getClimate`'
+  - '`getETP`'
+  - '`getGhm`'
+  - '`getPopulation`'
+  - '`getUrbanlc`'
+  - '`import_db`'
+  - '`lis_colors`'
+  - '`lis_cols`'
+  - '`lis_pal`'
+  - '`lis_palettes`'
+  - '`read_batch`'
+  - '`scale_color_lis`'
+  - '`scale_fill_lis`'
+  - '`vulnerability_index`'
+
