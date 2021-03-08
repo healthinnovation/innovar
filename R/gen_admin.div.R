@@ -11,11 +11,13 @@
 #'
 #' @return Tabla con las divisiones resultantes del Peru
 #'
-#' @examples df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO",
-#' "JUNIN","CUSCO", "PUNO","APURIMAC","AYACUCHO","HUANCAVELICA","TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD",
-#' "ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO","UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE)
-#'
-#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO",
+#' "PASCO","JUNIN","CUSCO","PUNO","APURIMAC","AYACUCHO","HUANCAVELICA","TUMBES","PIURA",
+#' "LAMBAYEQUE","LA LIBERTAD","ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO",
+#' "UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE)
+#' }
 #'
 #' @export gen_admin.div
 gen_admin.div <- function(x,

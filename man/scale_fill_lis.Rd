@@ -28,5 +28,4 @@ map(.f = ~lis_pal(., reverse = T)(10)) \%>\%
 seecol(pal_names = names(lis_palettes))
 }
 
-#' @export scale_fill_lis
 }

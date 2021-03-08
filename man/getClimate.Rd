@@ -12,6 +12,8 @@ getClimate(year, bands, region, fun = "mean")
 \item{bands}{is a specif variable of climate}
 
 \item{region}{is a sf object}
+
+\item{fun}{is a type of fucntion for extract statistic zonal ('mean','median','sum','count')}
 }
 \value{
 a sf object with the new variables

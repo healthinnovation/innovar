@@ -98,7 +98,7 @@ lis_palettes <- list(
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments to pass to colorRampPalette()
 #'
-#'
+#' @importFrom grDevices colorRampPalette
 #' @export lis_pal
 lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
   pal <- lis_palettes[[palette]]
@@ -124,6 +124,7 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' seecol(pal_names = names(lis_palettes))
 #'}
 #'
+#' @importFrom ggplot2 discrete_scale scale_color_gradientn
 #' @export scale_color_lis
 
 scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
@@ -152,7 +153,8 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, 
 #' seecol(pal_names = names(lis_palettes))
 #'}
 #'
-#' #' @export scale_fill_lis
+#' @importFrom ggplot2 discrete_scale scale_fill_gradientn
+#' @export scale_fill_lis
 scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
   pal <- lis_pal(palette = palette, reverse = reverse)
 

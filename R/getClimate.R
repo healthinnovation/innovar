@@ -4,6 +4,7 @@
 #'
 #' @param year  is date format for extract the variable
 #' @param bands  is a specif variable of climate
+#' @param fun   is a type of fucntion for extract statistic zonal ('mean','median','sum','count')
 #' @details Name of some bands
 #' \itemize{
 #' \item pr: Precipitation accumulation in mm
@@ -15,7 +16,7 @@
 #'
 #' @return  a sf object with the new variables
 #' @export
-#'
+#' @importFrom  sf st_transform st_simplify
 #' @examples
 #' \dontrun{
 #' library(lis)
@@ -43,13 +44,13 @@ getClimate <- function(year,bands, region, fun = 'mean') {
     multiply(0.1) %>%
     ee$Image$rename(sprintf("%s%s",'tmax',year))
   if('median' == fun){
-    data <- lis:::extract_value_median(temperature, roi)
+    data <- extract_value_median(temperature, roi)
   } else if('sd' == fun){
     data <- extract_value_sd(temperature, roi)
   } else if('sum' == fun){
-    data <- lis:::extract_value_sum(temperature, roi)
+    data <- extract_value_sum(temperature, roi)
   } else{
-    data <- lis:::extract_value_mean(temperature, roi)
+    data <- extract_value_mean(temperature, roi)
   }
 
   return(data)

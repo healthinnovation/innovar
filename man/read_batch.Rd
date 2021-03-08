@@ -28,5 +28,4 @@ read_batch(data_dir = data_dir)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
 }
-
 }

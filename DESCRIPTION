@@ -33,9 +33,15 @@ VignetteBuilder:
 Imports:
     RCurl,
     fs,
-    tidyverse,
+    sf,
     unikn,
-    magrittr
+    magrittr,
+    dplyr,
+    purrr,
+    stringr,
+    rgee,
+    ggplot2,
+    readr
 Suggests:
   knitr,
   rmarkdown

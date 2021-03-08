@@ -11,9 +11,9 @@ import_db(dataset)
 
 Current datasets available are:
 
-- "Perú names": Returns the name of the 1874 districts, 196 provinces and 25 regions of Perú as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
+- "Peru_names": Returns the name of the 1874 districts, 196 provinces and 25 regions of Perú as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
 
-- "Perú shp": Returns the shapefile for thethe 1874 districts, 196 provinces and 25 regions of Perú}
+- "Peru_shp": Returns the shapefile for thethe 1874 districts, 196 provinces and 25 regions of Perú}
 }
 \description{
 Function 'import_db' the specified dataset.
@@ -25,6 +25,5 @@ df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUAN
 "ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO","UCAYALI",
 "MADRE DE DIOS"),
 stringsAsFactors = FALSE)
-
 
 }

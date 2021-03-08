@@ -22,10 +22,11 @@ Tabla con las divisiones resultantes del Peru
 Function 'gen_admin.div' returns the natural, geographical, or administrative division of Peru that includes the region, province or district provided to the function.
 }
 \examples{
-df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO",
-"JUNIN","CUSCO", "PUNO","APURIMAC","AYACUCHO","HUANCAVELICA","TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD",
-"ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO","UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE)
-
-
+\dontrun{
+df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO",
+"PASCO","JUNIN","CUSCO","PUNO","APURIMAC","AYACUCHO","HUANCAVELICA","TUMBES","PIURA",
+"LAMBAYEQUE","LA LIBERTAD","ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO",
+"UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE)
+}
 
 }

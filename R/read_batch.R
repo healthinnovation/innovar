@@ -15,13 +15,13 @@
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
 #'}
-#'
-#' @import fs
-#' @import tidyverse
+#' @importFrom purrr map
+#' @importFrom fs dir_ls
+#' @importFrom readr read_csv
 #' @export
 read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...) {
 
-  file <- fs::dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))
+  file <- dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))
 
   data_objects<-file %>%
     map(fun, ...)
@@ -31,7 +31,7 @@ read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE,
   if (isTRUE(env)) {
     list2env(data_objects,envir=.GlobalEnv)
   } else {
-    assign("data_list", data_objects, envir=globalenv())
+    assign("data_list", data_objects, envir=as.environment())
   }
 
 }

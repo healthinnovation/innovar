@@ -1,5 +1,10 @@
+^files$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
 _temp funciones
 ^\.github$
+^_pkgdown\.yml$
+^pkgdown$
+RData
+

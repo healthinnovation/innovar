@@ -23,11 +23,7 @@ navbar:
 reference:
 - title: All functions
   contents:
-  - '`AllpaUtils_names`'
-  - '`extract_value_count`'
-  - '`extract_value_mean`'
-  - '`extract_value_median`'
-  - '`extract_value_sd`'
+  - '`allpautils_names`'
   - '`gen_admin.div`'
   - '`getClimate`'
   - '`getETP`'

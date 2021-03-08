@@ -1,13 +1,13 @@
 #' TIYLE
 #'
-#' Function 'AllpaUtils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
+#' Function 'allpautils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
 #'
 #' @param x vector of characters
 #'
 #' @examples df
 #'
-#' @export AllpaUtils_names
-AllpaUtils_names <- function(x) {
+#' @export allpautils_names
+allpautils_names <- function(x) {
 
   x = gsub("_", " ",gsub("-", " ", iconv(x,
                                          from="UTF-8",

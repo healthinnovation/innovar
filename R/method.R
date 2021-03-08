@@ -1,5 +1,11 @@
 #' Set of function to zonal statistic
 #' @noRd
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#' @import rgee
 # Functions for extract the sum of pixels of a rasterdata
 extract_value_sum <- function(x,y,by = 1000){
   y_len <- y$size()$getInfo()
@@ -29,7 +35,13 @@ extract_value_sum <- function(x,y,by = 1000){
 
 #' Set of function to zonal statistic
 #' @noRd
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
 #' mean
+#' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
 extract_value_mean <- function(x,y,by = 1000){
   y_len <- y$size()$getInfo()
@@ -58,7 +70,14 @@ extract_value_mean <- function(x,y,by = 1000){
 
 #' Set of function to zonal statistic
 #' @noRd
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
 #' count
+#' @import rgee
 # Functions for extract the count of pixels of a rasterdata
 extract_value_count <- function(x,y,by = 1000){
   y_len <- y$size()$getInfo()
@@ -87,7 +106,15 @@ extract_value_count <- function(x,y,by = 1000){
 
 #' Set of function to zonal statistic
 #' @noRd
+#'
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
 #' median
+#' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
 extract_value_median <- function(x,y,by = 1000){
   y_len <- y$size()$getInfo()
@@ -116,7 +143,14 @@ extract_value_median <- function(x,y,by = 1000){
 
 #' Set of function to zonal statistic
 #' @noRd
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
 #' median
+#' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
 extract_value_sd <- function(x,y,by = 1000){
   y_len <- y$size()$getInfo()
