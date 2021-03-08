@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set of function to zonal statistic — extract_value_mean • lis</title>
+<title>TIYLE — allpautils_names • lis</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Set of function to zonal statistic — extract_value_mean" />
-<meta property="og:description" content="Set of function to zonal statistic" />
+<meta property="og:title" content="TIYLE — allpautils_names" />
+<meta property="og:description" content="Function 'allpautils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html" />
 
 
 
@@ -124,19 +124,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set of function to zonal statistic</h1>
-    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/method.R'><code>R/method.R</code></a></small>
-    <div class="hidden name"><code>extract_value_mean.Rd</code></div>
+    <h1>TIYLE</h1>
+    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/allpautils_names.R'><code>R/allpautils_names.R</code></a></small>
+    <div class="hidden name"><code>allpautils_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Set of function to zonal statistic</p>
+    <p>Function 'allpautils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_value_mean</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>allpautils_names</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>vector of characters</p></td>
+    </tr>
+    </table>
 
 
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>df</span>
+</div><div class='output co'>#&gt; function (x, df1, df2, ncp, log = FALSE) 
+#&gt; {
+#&gt;     if (missing(ncp)) 
+#&gt;         .Call(C_df, x, df1, df2, log)
+#&gt;     else .Call(C_dnf, x, df1, df2, ncp, log)
+#&gt; }
+#&gt; &lt;bytecode: 0x5581ecde8fa8&gt;
+#&gt; &lt;environment: namespace:stats&gt;</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
