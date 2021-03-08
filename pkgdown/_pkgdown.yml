@@ -25,6 +25,9 @@ reference:
   contents:
   - '`allpautils_names`'
   - '`gen_admin.div`'
+  - '`get_ndvi`'
+  - '`get_evi`'
+  - '`get_savi`'
   - '`getClimate`'
   - '`getETP`'
   - '`getGhm`'
