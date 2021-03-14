@@ -8,3 +8,5 @@ _temp funciones
 ^pkgdown$
 RData
 
+^doc$
+^Meta$
