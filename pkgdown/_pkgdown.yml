@@ -19,8 +19,6 @@ navbar:
       menu:
       - text: InnovaLab Toolkit
         href: articles/vignette.html
-      - text: lis extract
-        href: articles/lis_extract.html
 
 reference:
 - title: All functions

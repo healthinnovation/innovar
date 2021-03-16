@@ -2,9 +2,11 @@ on:
   push:
     branches:
       - master
+      - feature/fix-current-issues
   pull_request:
     branches:
       - master
+      - feature/fix-current-issues
 
 name: R-CMD-check
 
