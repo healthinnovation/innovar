@@ -43,34 +43,34 @@ gen_admin.div <- function(x,
 
   if(method=="Traditional") {
 
-    x = replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x = replace(x, x %in% reg.mountain.north | x %in% reg.mountain.south,"ANDES MOUNTAINS")
-    x = replace(x, x %in% reg.coastal.north | x %in% reg.coastal.south,"COASTAL")
-    x = replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
+    x <- replace(x, x %in% reg.mountain.north | x %in% reg.mountain.south,"ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg.coastal.north | x %in% reg.coastal.south,"COASTAL")
+    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
 
   } else if(method=="TC") {
 
-    x = replace(x, x %in% reg.tc.north,"NORTH")
-    x = replace(x, x %in% reg.tc.south,"SOUTH")
-    x = replace(x, x %in% reg.tc.center,"CENTER")
-    x = replace(x, x %in% reg.tc.east,"EAST")
-    x = replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg.tc.north,"NORTH")
+    x <- replace(x, x %in% reg.tc.south,"SOUTH")
+    x <- replace(x, x %in% reg.tc.center,"CENTER")
+    x <- replace(x, x %in% reg.tc.east,"EAST")
+    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
     # Deberian ser solo los distritos de Lima, Callao, más Huarua/Cañete. Por ahora todo LIMA will do just fine
   } else if(method=="Cardinal") {
 
-    x = replace(x, x %in% reg.north,"NORTH")
-    x = replace(x, x %in% reg.south ,"SOUTH")
-    x = replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x = replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg.north,"NORTH")
+    x <- replace(x, x %in% reg.south ,"SOUTH")
+    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
+    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
 
   } else if(method=="Traditional Cardinal") {
 
-    x = replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x = replace(x, x %in% reg.mountain.south,"SOUTH ANDES MOUNTAINS")
-    x = replace(x, x %in% reg.mountain.north,"NORTH ANDES MOUNTAINS")
-    x = replace(x, x %in% reg.coastal.north,"NORTH COAST")
-    x = replace(x, x %in% reg.coastal.south,"SOUTH COAST")
-    x = replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
+    x <- replace(x, x %in% reg.mountain.south,"SOUTH ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg.mountain.north,"NORTH ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg.coastal.north,"NORTH COAST")
+    x <- replace(x, x %in% reg.coastal.south,"SOUTH COAST")
+    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
   }
   return(x)
 }
