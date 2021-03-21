@@ -41,7 +41,9 @@ Imports:
     stringr,
     rgee,
     ggplot2,
-    readr
+    readr,
+    geojsonio,
+    geojsonsf
 Suggests:
   knitr,
   rmarkdown

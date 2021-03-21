@@ -7,23 +7,35 @@
 #' @return  a sf object with the new variables
 #' @export
 #' @importFrom  sf st_transform st_simplify
-
+#' @importFrom  rgee sf_as_ee
+#' @importFrom dplyr select filter
+#' @examples
+#' @dontrun{
+#' library(lis)
+#' library(rgee)
+#' library(sf)
+#' ee_Initialize()
+#' region <- import_db("Peru_shp")[1,1]
+#' data <- get_ndvi(year = 2009, region = region)
+#' }
 # NDVI
-get_ndvi <- function(year , region) {
 
-  suppressWarnings({roi <- region %>%
-    st_transform(crs = 4326) %>%
-    st_simplify(
-      preserveTopology = TRUE,
-      dTolerance = 0.001
-    ) %>%
-    sf_as_ee()})
+get_ndvi <- function(year, region) {
+  suppressWarnings({
+    roi <- region %>%
+      st_transform(crs = 4326) %>%
+      st_simplify(
+        preserveTopology = TRUE,
+        dTolerance = 0.001
+      ) %>%
+      sf_as_ee()
+  })
 
-  ndvi <- ee$ImageCollection('MODIS/006/MOD13Q1')$
-    select('NDVI')$
+  ndvi <- ee$ImageCollection("MODIS/006/MOD13Q1")$
+    select("NDVI")$
     filter(ee$Filter$calendarRange(year, year, "year"))$
-    mean()$multiply(0.0001)%>%
-    ee$Image$rename(sprintf("%s%s",'ndvi',year))
+    mean()$multiply(0.0001) %>%
+    ee$Image$rename(sprintf("%s%s", "ndvi", year))
 
   data <- extract_value_mean(ndvi, region)
   return(data)
@@ -40,22 +52,35 @@ get_ndvi <- function(year , region) {
 #' @return  a sf object with the new variables
 #' @export
 #' @importFrom  sf st_transform st_simplify
+#' @importFrom  rgee sf_as_ee
+#' @importFrom dplyr select filter
+#' @examples
+#' @dontrun{
+#' library(lis)
+#' library(rgee)
+#' library(sf)
+#' ee_Initialize()
+#' region <- import_db("Peru_shp")[1,1]
+#' data <- get_evi(year = 2009, region = region)
+#' }
 # EVI
-get_evi <- function(year , region) {
 
-  suppressWarnings({roi <- region %>%
-    st_transform(crs = 4326) %>%
-    st_simplify(
-      preserveTopology = TRUE,
-      dTolerance = 0.001
-    ) %>%
-    sf_as_ee()})
+get_evi <- function(year, region) {
+  suppressWarnings({
+    roi <- region %>%
+      st_transform(crs = 4326) %>%
+      st_simplify(
+        preserveTopology = TRUE,
+        dTolerance = 0.001
+      ) %>%
+      sf_as_ee()
+  })
 
-  ndvi <- ee$ImageCollection('MODIS/006/MOD13Q1')$
-    select('EVI')$
+  ndvi <- ee$ImageCollection("MODIS/006/MOD13Q1")$
+    select("EVI")$
     filter(ee$Filter$calendarRange(year, year, "year"))$
-    mean()$multiply(0.0001)%>%
-    ee$Image$rename(sprintf("%s%s",'evi',year))
+    mean()$multiply(0.0001) %>%
+    ee$Image$rename(sprintf("%s%s", "evi", year))
 
   data <- extract_value_mean(ndvi, region)
   return(data)
@@ -71,30 +96,44 @@ get_evi <- function(year , region) {
 #' @return  a sf object with the new variables
 #' @export
 #' @importFrom  sf st_transform st_simplify
+#' @importFrom  rgee sf_as_ee
+#' @importFrom dplyr select filter
+#' @examples
+#' @dontrun{
+#' library(lis)
+#' library(rgee)
+#' library(sf)
+#' ee_Initialize()
+#' region <- import_db("Peru_shp")[1, 1]
+#' data <- get_evi(year = 2009, region = region)
+#' }
 # SAVI
+
 get_savi <- function(year, region) {
+  suppressWarnings({
+    roi <- region %>%
+      st_transform(crs = 4326) %>%
+      st_simplify(
+        preserveTopology = TRUE,
+        dTolerance = 0.001
+      ) %>%
+      sf_as_ee()
+  })
 
-  suppressWarnings({roi <- region %>%
-    st_transform(crs = 4326) %>%
-    st_simplify(
-      preserveTopology = TRUE,
-      dTolerance = 0.001
-    ) %>%
-    sf_as_ee()})
-
-  bandas <- ee$ImageCollection('MODIS/006/MOD13Q1')$
-    select('sur_refl_b01','sur_refl_b02')$
+  bandas <- ee$ImageCollection("MODIS/006/MOD13Q1")$
+    select("sur_refl_b01", "sur_refl_b02")$
     filter(ee$Filter$calendarRange(year, year, "year"))$
     map(function(x) x$multiply(0.0001))$
     mean()
 
-  savi = bandas$expression(
-    '(1 + L) * float(nir - red)/ (nir + red + L)',
+  savi <- bandas$expression(
+    "(1 + L) * float(nir - red)/ (nir + red + L)",
     list(
-      'nir'= bandas$select('sur_refl_b02'),
-      'red'= bandas$select('sur_refl_b01'),
-      'L'= 0.5
-    ))$rename(sprintf("%s%s",'savi',year))
+      "nir" = bandas$select("sur_refl_b02"),
+      "red" = bandas$select("sur_refl_b01"),
+      "L" = 0.5
+    )
+  )$rename(sprintf("%s%s", "savi", year))
 
   data <- extract_value_mean(savi, region)
   return(data)
