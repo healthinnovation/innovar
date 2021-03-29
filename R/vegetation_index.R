@@ -10,13 +10,15 @@
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter
 #' @examples
-#' @dontrun{
+#' \dontrun{
+#'
 #' library(lis)
 #' library(rgee)
 #' library(sf)
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")[1,1]
 #' data <- get_ndvi(year = 2009, region = region)
+#'
 #' }
 # NDVI
 
@@ -55,13 +57,15 @@ get_ndvi <- function(year, region) {
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter
 #' @examples
-#' @dontrun{
+#' \dontrun{
+#'
 #' library(lis)
 #' library(rgee)
 #' library(sf)
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")[1,1]
 #' data <- get_evi(year = 2009, region = region)
+#'
 #' }
 # EVI
 
@@ -99,13 +103,15 @@ get_evi <- function(year, region) {
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter
 #' @examples
-#' @dontrun{
+#' \dontrun{
+#'
 #' library(lis)
 #' library(rgee)
 #' library(sf)
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")[1, 1]
 #' data <- get_evi(year = 2009, region = region)
+#'
 #' }
 # SAVI
 

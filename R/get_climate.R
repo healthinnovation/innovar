@@ -20,7 +20,8 @@
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter
 #' @examples
-#' @dontrun{
+#' \dontrun{
+#'
 #' library(lis)
 #' library(rgee)
 #' library(sf)
@@ -28,7 +29,7 @@
 #' region <- import_db("Peru_shp")[1,1]
 #' data <- get_climate(year = 2009, bands = "pr", region = region, fun = "mean")
 #' }
-#' Function for extract climate data
+# Function for extract climate data
 
 get_climate <- function(year, bands, region, fun = "mean") {
   suppressWarnings({

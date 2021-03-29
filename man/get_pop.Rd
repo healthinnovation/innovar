@@ -17,3 +17,15 @@ a sf object with the new variables
 \description{
 A function that extract a time series of the number of population
 }
+\examples{
+\dontrun{
+
+library(lis)
+library(rgee)
+library(sf)
+ee_Initialize()
+region <- import_db("Peru_shp")[1,1]
+data <- get_climate(year = 2009, region = region)
+
+}
+}

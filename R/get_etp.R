@@ -11,13 +11,15 @@
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter
 #' @examples
-#' @dontrun{
+#' \dontrun{
+#'
 #' library(lis)
 #' library(rgee)
 #' library(sf)
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")[1, 1]
 #' data <- get_climate(year = 2009, region = region, fun = "mean")
+#'
 #' }
 #'
 # Function for extract ETP

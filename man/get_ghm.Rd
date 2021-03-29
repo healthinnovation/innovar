@@ -15,3 +15,15 @@ a sf object with the new variables
 \description{
 A function that extract Global Human Modification data of the year 2016
 }
+\examples{
+\dontrun{
+
+library(lis)
+library(rgee)
+library(sf)
+ee_Initialize()
+region <- import_db("Peru_shp")[1,1]
+data <- get_climate(region = region)
+
+}
+}

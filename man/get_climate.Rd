@@ -30,3 +30,14 @@ Name of some bands
 \item tmmx: Maximum temperature in C°
 }
 }
+\examples{
+\dontrun{
+
+library(lis)
+library(rgee)
+library(sf)
+ee_Initialize()
+region <- import_db("Peru_shp")[1,1]
+data <- get_climate(year = 2009, bands = "pr", region = region, fun = "mean")
+}
+}
