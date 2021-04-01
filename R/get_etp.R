@@ -38,7 +38,7 @@ get_etp <- function(year, region) {
     sum()$multiply(0.1) %>%
     ee$Image$rename(sprintf("%s%s", "etp", year))
 
-  data <- extract_value_mean(
+  data <- ee_mean(
     etp,
     roi
   )

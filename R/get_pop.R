@@ -40,7 +40,7 @@ get_pop <- function(year, region) {
     multiply(10000)$
     rename(sprintf("%s%s", "pob", year))
 
-  data <- extract_value_mean(
+  data <- ee_mean(
     x = worldpop,
     y = roi
   )

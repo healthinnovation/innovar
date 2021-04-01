@@ -4,40 +4,55 @@
 \alias{get_climate}
 \title{Extract climate data of TerraClimate}
 \usage{
-get_climate(year, bands, region, fun = "mean")
+get_climate(to, from, by, band, region, fun = "mean")
 }
 \arguments{
-\item{year}{is date format for extract the variable}
+\item{to, from}{the starting and final range of date.}
 
-\item{bands}{is a specif variable of climate}
+\item{by}{two types of increment of the sequence by \bold{month} and \bold{year}.}
 
-\item{region}{is a sf object}
+\item{band}{name of band.}
 
-\item{fun}{is a type of fucntion for extract statistic zonal ('mean','median','sum','count')}
+\item{region}{region and object sf.}
+
+\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance').}
 }
 \value{
-a sf object with the new variables
+a sf object with the new variables.
 }
 \description{
-A function that extract a time series of climate variables
+A function that extract a time series of climate variables.
 }
 \details{
-Name of some bands
+Name of some bands.
 \itemize{
-\item pr: Precipitation accumulation in mm
-\item ro: Runoff, derived using a one-dimensional soil water balance model in mm
-\item tmmn: Minimum temperature in C°
-\item tmmx: Maximum temperature in C°
+\item \bold{aet:} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
+\item \bold{def:} Climate water deficit, derived using a one-dimensional soil water balance model.
+\item \bold{pdsi:} Palmer Drought Severity Index.
+\item \bold{pet:} Reference evapotranspiration (ASCE Penman-Montieth).
+\item \bold{pr:} Precipitation accumulation.
+\item \bold{ro:} Runoff, derived using a one-dimensional soil water balance model.
+\item \bold{soil:} Soil moisture, derived using a one-dimensional soil water balance model.
+\item \bold{srad:} Downward surface shortwave radiation.
+\item \bold{swe:} Snow water equivalent, derived using a one-dimensional soil water balance model.
+\item \bold{tmmn:} Minimum temperature.
+\item \bold{tmmx:} Maximum temperature.
+\item \bold{vap:} Vapor pressure
+\item \bold{vpd:} Vapor pressure deficit.
+\item \bold{vs:} Wind-speed at 10m.
 }
 }
 \examples{
 \dontrun{
-
 library(lis)
 library(rgee)
 library(sf)
 ee_Initialize()
-region <- import_db("Peru_shp")[1,1]
-data <- get_climate(year = 2009, bands = "pr", region = region, fun = "mean")
+
+#1. Reading a sf object
+region <- import_db("Peru_shp")
+
+#2. Extracting climate information
+data <- region \%>\%  get_climate(to = '2001-02-01',from = '2002-12-31',by = 'month', band = 'tmmx',fun = 'max')
 }
 }

@@ -32,11 +32,12 @@ get_ghm <- function(region) {
       ) %>%
       sf_as_ee()
   })
+
   ghm <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
     sum()$
     rename(sprintf("%s%s", "gHm", 2016))
 
-  data <- extract_value_sum(
+  data <- ee_sum(
     x = ghm,
     y = roi
   )

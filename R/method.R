@@ -4,60 +4,27 @@
 #' @param y region of type Feacture o FeatureCollection
 #'
 #' @param by a limit of pass
-# Functions for extract the sum of pixels of a rasterdata
-
-extract_value_sum <- function(x, y, by = 1000) {
-  y_len <- y$size()$getInfo()
-  for (i in seq(1, y_len, by)) {
-    index <- i - 1
-    print(sprintf("Extracting information [%s/%s]...", index, y_len))
-    ee_value_layer <- ee$FeatureCollection(y) %>%
-      ee$FeatureCollection$toList(by, index) %>%
-      ee$FeatureCollection()
-    if (i == 1) {
-      dataset <- ee_extract(
-        x = x,
-        fun = ee$Reducer$sum(),
-        y = ee_value_layer,
-        sf = T
-      )
-    } else {
-      db_local <- ee_extract(
-        x = x,
-        y = ee_value_layer,
-        fun = ee$Reducer$sum(),
-        sf = T
-      )
-      dataset <- rbind(dataset, db_local)
-    }
-  }
-  return(dataset)
-}
-
-
-#' Set of function to zonal statistic
-#' @noRd
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
-#'
-#' @param by a limit of pass
-#' mean
+#' median
 #' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.count()
 
-extract_value_mean <- function(x, y, by = 1000) {
+ee_count <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
+
   for (i in seq(1, y_len, by)) {
     index <- i - 1
     print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
     ee_value_layer <- ee$FeatureCollection(y) %>%
       ee$FeatureCollection$toList(by, index) %>%
       ee$FeatureCollection()
+
     if (i == 1) {
       dataset <- ee_extract(
         x = x,
-        fun = ee$Reducer$mean(),
+        fun = ee$Reducer$count(),
         y = ee_value_layer,
         sf = T
       )
@@ -65,7 +32,7 @@ extract_value_mean <- function(x, y, by = 1000) {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
-        fun = ee$Reducer$mean(),
+        fun = ee$Reducer$count(),
         sf = T
       )
       dataset <- rbind(dataset, db_local)
@@ -73,7 +40,6 @@ extract_value_mean <- function(x, y, by = 1000) {
   }
   return(dataset)
 }
-
 #' Set of function to zonal statistic
 #' @param x image of type Image o Image Collection
 #'
@@ -81,22 +47,26 @@ extract_value_mean <- function(x, y, by = 1000) {
 #'
 #' @param by a limit of pass
 #'
-#' count
+#' median
 #' @import rgee
-# Functions for extract the count of pixels of a rasterdata
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.Kurtosis()
 
-extract_value_count <- function(x, y, by = 1000) {
+ee_kurstosis <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
+
   for (i in seq(1, y_len, by)) {
     index <- i - 1
     print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
     ee_value_layer <- ee$FeatureCollection(y) %>%
       ee$FeatureCollection$toList(by, index) %>%
       ee$FeatureCollection()
+
     if (i == 1) {
       dataset <- ee_extract(
         x = x,
-        fun = ee$Reducer$count(),
+        fun = ee$Reducer$kurstosis(),
         y = ee_value_layer,
         sf = T
       )
@@ -104,7 +74,7 @@ extract_value_count <- function(x, y, by = 1000) {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
-        fun = ee$Reducer$count(),
+        fun = ee$Reducer$kurtosis(),
         sf = T
       )
       dataset <- rbind(dataset, db_local)
@@ -113,8 +83,53 @@ extract_value_count <- function(x, y, by = 1000) {
   return(dataset)
 }
 
-#' Set of function to zonal statistic
 
+# ee.Reducer.max()
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import  rgee
+# Functions for extract the mean of pixels of a rasterdata
+
+ee_max <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$max(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$max(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+
+
+# ee.Reducer.mean()
+#' Set of function to zonal statistic
 #' @param x image of type Image o Image Collection
 #'
 #' @param y region of type Feacture o FeatureCollection
@@ -125,14 +140,61 @@ extract_value_count <- function(x, y, by = 1000) {
 #' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
 
-extract_value_median <- function(x, y, by = 1000) {
+ee_mean <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
+
   for (i in seq(1, y_len, by)) {
     index <- i - 1
     print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
     ee_value_layer <- ee$FeatureCollection(y) %>%
       ee$FeatureCollection$toList(by, index) %>%
       ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$mean(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$mean(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+
+
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.median
+
+ee_median <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
     if (i == 1) {
       dataset <- ee_extract(
         x = x,
@@ -163,19 +225,23 @@ extract_value_median <- function(x, y, by = 1000) {
 #' median
 #' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.min()
 
-extract_value_sd <- function(x, y, by = 1000) {
+ee_min <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
+
   for (i in seq(1, y_len, by)) {
     index <- i - 1
     print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
     ee_value_layer <- ee$FeatureCollection(y) %>%
       ee$FeatureCollection$toList(by, index) %>%
       ee$FeatureCollection()
+
     if (i == 1) {
       dataset <- ee_extract(
         x = x,
-        fun = ee$Reducer$sd(),
+        fun = ee$Reducer$min(),
         y = ee_value_layer,
         sf = T
       )
@@ -183,7 +249,219 @@ extract_value_sd <- function(x, y, by = 1000) {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
-        fun = ee$Reducer$sd(),
+        fun = ee$Reducer$min(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.mode()
+
+ee_mode <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$mode(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$mode(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.percentile
+
+ee_percentile <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$percentile(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$percentile(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.stdDev
+
+ee_std <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$stdDev(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$stdDev(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.sum
+
+ee_sum <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$sum(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$sum(),
+        sf = T
+      )
+      dataset <- rbind(dataset, db_local)
+    }
+  }
+  return(dataset)
+}
+#' Set of function to zonal statistic
+#' @param x image of type Image o Image Collection
+#'
+#' @param y region of type Feacture o FeatureCollection
+#'
+#' @param by a limit of pass
+#'
+#' median
+#' @import rgee
+# Functions for extract the mean of pixels of a rasterdata
+# ee.Reducer.variance()
+
+ee_variance <- function(x, y, by = 1000) {
+  y_len <- y$size()$getInfo()
+
+  for (i in seq(1, y_len, by)) {
+    index <- i - 1
+    print(sprintf("Extracting information [%s/%s]...", index, y_len))
+
+    ee_value_layer <- ee$FeatureCollection(y) %>%
+      ee$FeatureCollection$toList(by, index) %>%
+      ee$FeatureCollection()
+
+    if (i == 1) {
+      dataset <- ee_extract(
+        x = x,
+        fun = ee$Reducer$variance(),
+        y = ee_value_layer,
+        sf = T
+      )
+    } else {
+      db_local <- ee_extract(
+        x = x,
+        y = ee_value_layer,
+        fun = ee$Reducer$variance(),
         sf = T
       )
       dataset <- rbind(dataset, db_local)

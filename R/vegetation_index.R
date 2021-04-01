@@ -39,7 +39,7 @@ get_ndvi <- function(year, region) {
     mean()$multiply(0.0001) %>%
     ee$Image$rename(sprintf("%s%s", "ndvi", year))
 
-  data <- extract_value_mean(ndvi, region)
+  data <- ee_mean(ndvi, region)
   return(data)
 }
 
@@ -86,7 +86,7 @@ get_evi <- function(year, region) {
     mean()$multiply(0.0001) %>%
     ee$Image$rename(sprintf("%s%s", "evi", year))
 
-  data <- extract_value_mean(ndvi, region)
+  data <- ee_mean(ndvi, region)
   return(data)
 }
 
@@ -141,6 +141,6 @@ get_savi <- function(year, region) {
     )
   )$rename(sprintf("%s%s", "savi", year))
 
-  data <- extract_value_mean(savi, region)
+  data <- ee_mean(savi, region)
   return(data)
 }

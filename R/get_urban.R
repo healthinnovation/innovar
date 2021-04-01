@@ -42,7 +42,7 @@ get_urban <- function(year, region) {
     divide(100000)$
     rename(sprintf("%s%s", "Aurban", year))
 
-  data <- extract_value_sum(
+  data <- ee_sum(
     x = area,
     y = roi
   )
