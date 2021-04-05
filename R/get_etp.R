@@ -9,7 +9,7 @@
 #' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{ETP:} Total evapotranspiration.
+#' \item \bold{ET:} Total evapotranspiration.
 #' \item \bold{LE:}  Average latent heat flux.
 #' \item \bold{PET:} Total potential evapotranspiration.
 #' \item \bold{PLE:} Average potential latent heat flux.
@@ -34,13 +34,11 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_as_ee(region, simplify = 1000)
+#' region_ee <- pol_to_ee(region, "id", simplify = 1000)
 #'
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_etp(
-#'   to = "2001-02-01", from = "2002-12-31",
-#'   by = "month", band = "tmmx", fun = "max"
-#' )
+#' data <- region_ee %>%
+#'   get_etp(to = "2001-02-01", from = "2003-12-31", by = "year", band = "ET", fun = "max")
 #' }
 #' @export
 
@@ -58,14 +56,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
   # Factores by each bands
 
   multiply_factor <- c(
-    ETP = 0.1, LE = 0.0001, PET = 0.1, PLE = 0.0001, ET_QC = 1
+    ET = 0.1, LE = 0.0001, PET = 0.1, PLE = 0.0001, ET_QC = 1
   )
 
 
   # Message of error
 
-  if (end_year > 2000 | start_year < 2022) {
-    print(sprintf("No exist data"))
+  if (start_year <= 2000 | end_year >= 2022) {
+    stop(print(sprintf("No exist data")))
   }
 
   # The main functions

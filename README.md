@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-## Instalacion
+## Instalación
 
 Puedes instalar la version de prueba desde
 [GitHub](https://github.com/):
