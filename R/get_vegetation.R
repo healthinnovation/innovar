@@ -1,6 +1,6 @@
-#' Extract climate data of TerraClimate
+#' Extract of vegetation index
 #'
-#' A function that extract a time series of climate variables.
+#' A function that extract the values of vegetation.
 #'
 #' @param to,from the starting and final range of date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
@@ -10,20 +10,8 @@
 #'
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{aet:} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
-#' \item \bold{def:} Climate water deficit, derived using a one-dimensional soil water balance model.
-#' \item \bold{pdsi:} Palmer Drought Severity Index.
-#' \item \bold{pet:} Reference evapotranspiration (ASCE Penman-Montieth).
-#' \item \bold{pr:} Precipitation accumulation.
-#' \item \bold{ro:} Runoff, derived using a one-dimensional soil water balance model.
-#' \item \bold{soil:} Soil moisture, derived using a one-dimensional soil water balance model.
-#' \item \bold{srad:} Downward surface shortwave radiation.
-#' \item \bold{swe:} Snow water equivalent, derived using a one-dimensional soil water balance model.
-#' \item \bold{tmmn:} Minimum temperature.
-#' \item \bold{tmmx:} Maximum temperature.
-#' \item \bold{vap:} Vapor pressure
-#' \item \bold{vpd:} Vapor pressure deficit.
-#' \item \bold{vs:} Wind-speed at 10m.
+#' \item \bold{NDVI:} Normalized Difference Vegetation Index.
+#' \item \bold{EVI:} Enhanced Vegetation Index.
 #' }
 #'
 #' @return  a sf object with the new variables.
@@ -43,15 +31,16 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_as_ee(region , simplify = 1000)
+#' region_ee <- pol_as_ee(region, simplify = 1000)
+#'
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_climate(
+#' data <- region_ee %>% get_vegetation(
 #'   to = "2001-02-01", from = "2002-12-31",
 #'   by = "month", band = "tmmx", fun = "max")
 #' }
 #' @export
 
-get_climate <- function(to, from, by, band, region, fun = "count") {
+get_vegetation <- function(to, from, by, band, region, fun = "count") {
 
   # Conditions about the times
 
@@ -64,20 +53,19 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   # Factores by each bands
 
   multiply_factor <- c(
-    aet = 0.1, def = 0.1, pdsi = 0.01, pet = 0.1, pr = 1, ro = 1, soil = 0.1,
-    srad = 0.1, swe = 1, tmmn = 0.1, tmmx = 0.1, vap = 0.001, vpd = 0.01, vs = 0.01
+    NDVI = 0.0001, EVI = 0.0001
   )
 
 
   # Message of error
 
-  if (end_year > 2019 | start_year < 1958) {
+  if (end_year > 1999 | start_year <= 2021) {
     print(sprintf("No exist data"))
   }
 
   # The main functions
   if (by == "month" & fun == "count") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -94,7 +82,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_count)
 
   } else if (by == "month" & fun == "first") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -111,7 +99,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_first)
 
   } else if (by == "month" & fun == "kurtosis") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -128,7 +116,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_kurtosis)
 
   } else if (by == "month" & fun == "max") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -145,7 +133,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_max)
 
   } else if (by == "month" & fun == "mean") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -162,7 +150,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_mean)
 
   } else if (by == "month" & fun == "median") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -179,7 +167,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_median)
 
   } else if (by == "month" & fun == "min") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -196,7 +184,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_min)
 
   } else if (by == "month" & fun == "mode") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -213,7 +201,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_mode)
 
   } else if (by == "month" & fun == "percentile") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -230,7 +218,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_percentile)
 
   } else if (by == "month" & fun == "std") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -247,7 +235,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_std)
 
   } else if (by == "month" & fun == "sum") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -264,7 +252,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
     return(img_with_value_sum)
 
   } else if (by == "month" & fun == "variance") {
-    dataset <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    dataset <- ee$ImageCollection("MODIS/006/MOD13Q1")$
       select(c(band))$
       filterDate(to, from)$
       toBands()$
@@ -285,7 +273,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   if (by == "year" & fun == "count") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -305,7 +293,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "kurtosis") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -325,7 +313,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "max") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -345,7 +333,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "mean") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -365,7 +353,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "median") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -385,7 +373,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "min") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -405,7 +393,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "mode") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -418,7 +406,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "percentile") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -438,7 +426,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "std") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -458,7 +446,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "sum") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -478,7 +466,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "variance") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()
@@ -498,7 +486,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   } else if (by == "year" & fun == "first") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+        ee$ImageCollection("MODIS/006/MOD13Q1")$
           select(c(band))$
           filter(ee$Filter$calendarRange(x, x, "year"))$
           sum()

@@ -4,7 +4,7 @@
 \alias{get_climate}
 \title{Extract climate data of TerraClimate}
 \usage{
-get_climate(to, from, by, band, region, fun = "mean")
+get_climate(to, from, by, band, region, fun = "count")
 }
 \arguments{
 \item{to, from}{the starting and final range of date.}
@@ -15,7 +15,7 @@ get_climate(to, from, by, band, region, fun = "mean")
 
 \item{region}{region and object sf.}
 
-\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance').}
+\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').}
 }
 \value{
 a sf object with the new variables.
@@ -44,15 +44,19 @@ Name of some bands.
 }
 \examples{
 \dontrun{
-library(lis)
+
+library(tidyverse)
 library(rgee)
+library(lis)
 library(sf)
 ee_Initialize()
 
-#1. Reading a sf object
+# 1. Reading a sf object
 region <- import_db("Peru_shp")
-
-#2. Extracting climate information
-data <- region \%>\%  get_climate(to = '2001-02-01',from = '2002-12-31',by = 'month', band = 'tmmx',fun = 'max')
+region_ee <- pol_as_ee(region , simplify = 1000)
+# 2. Extracting climate information
+data <- region_ee \%>\% get_climate(
+  to = "2001-02-01", from = "2002-12-31",
+  by = "month", band = "tmmx", fun = "max")
 }
 }
