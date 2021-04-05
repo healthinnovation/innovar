@@ -13,7 +13,7 @@ ee_kurstosis(x, y, by = 1000)
 
 \item{by}{a limit of pass
 
-median}
+kurtosis}
 }
 \description{
 Set of function to zonal statistic

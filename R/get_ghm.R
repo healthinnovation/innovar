@@ -38,7 +38,7 @@
 #' }
 #' @export
 
-get_etp <- function(to, from, band, region, fun = "count") {
+get_ghm <- function(to, from, band, region, fun = "count") {
 
   # Conditions about the times
 

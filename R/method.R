@@ -47,7 +47,7 @@ ee_count <- function(x, y, by = 1000) {
 #'
 #' @param by a limit of pass
 #'
-#' median
+#' kurtosis
 #' @import rgee
 # Functions for extract the mean of pixels of a rasterdata
 # ee.Reducer.Kurtosis()
@@ -513,16 +513,3 @@ ee_first <- function(x, y, by = 1000) {
   }
   return(dataset)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

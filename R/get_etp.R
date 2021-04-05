@@ -7,7 +7,6 @@
 #' @param band name of band.
 #' @param region region and object sf.
 #' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
-#'
 #' @details Name of some bands.
 #' \itemize{
 #' \item \bold{ETP:} Total evapotranspiration.
@@ -18,6 +17,7 @@
 #' }
 #'
 #' @return  a sf object with the new variables.
+#'
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter contains
@@ -39,9 +39,11 @@
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_etp(
 #'   to = "2001-02-01", from = "2002-12-31",
-#'   by = "month", band = "tmmx", fun = "max")
+#'   by = "month", band = "tmmx", fun = "max"
+#' )
 #' }
 #' @export
+
 
 get_etp <- function(to, from, by, band, region, fun = "count") {
 
@@ -57,7 +59,7 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
 
   multiply_factor <- c(
     ETP = 0.1, LE = 0.0001, PET = 0.1, PLE = 0.0001, ET_QC = 1
-    )
+  )
 
 
   # Message of error
@@ -83,7 +85,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_count) %in% actual_names)
     names(img_with_value_count)[id_names] <- new_names
     return(img_with_value_count)
-
   } else if (by == "month" & fun == "first") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -100,7 +101,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_first) %in% actual_names)
     names(img_with_value_first)[id_names] <- new_names
     return(img_with_value_first)
-
   } else if (by == "month" & fun == "kurtosis") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -117,7 +117,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
     names(img_with_value_kurtosis)[id_names] <- new_names
     return(img_with_value_kurtosis)
-
   } else if (by == "month" & fun == "max") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -134,7 +133,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_max) %in% actual_names)
     names(img_with_value_max)[id_names] <- new_names
     return(img_with_value_max)
-
   } else if (by == "month" & fun == "mean") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -151,7 +149,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_mean) %in% actual_names)
     names(img_with_value_mean)[id_names] <- new_names
     return(img_with_value_mean)
-
   } else if (by == "month" & fun == "median") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -168,7 +165,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_median) %in% actual_names)
     names(img_with_value_median)[id_names] <- new_names
     return(img_with_value_median)
-
   } else if (by == "month" & fun == "min") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -185,7 +181,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_min) %in% actual_names)
     names(img_with_value_min)[id_names] <- new_names
     return(img_with_value_min)
-
   } else if (by == "month" & fun == "mode") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -202,7 +197,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_mode) %in% actual_names)
     names(img_with_value_mode)[id_names] <- new_names
     return(img_with_value_mode)
-
   } else if (by == "month" & fun == "percentile") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -219,7 +213,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
     names(img_with_value_percentile)[id_names] <- new_names
     return(img_with_value_percentile)
-
   } else if (by == "month" & fun == "std") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -236,7 +229,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_std) %in% actual_names)
     names(img_with_value_std)[id_names] <- new_names
     return(img_with_value_std)
-
   } else if (by == "month" & fun == "sum") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -253,7 +245,6 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_sum) %in% actual_names)
     names(img_with_value_sum)[id_names] <- new_names
     return(img_with_value_sum)
-
   } else if (by == "month" & fun == "variance") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$
@@ -276,11 +267,11 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
   if (by == "year" & fun == "count") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$ multiply(multiply_factor[[band]])
     img_with_value_count <- ee_count(img_by_year, region)
@@ -292,15 +283,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_count) %in% actual_names)
     names(img_with_value_count)[id_names] <- new_names
     return(img_with_value_count)
-
   } else if (by == "year" & fun == "kurtosis") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_kurtosis <- ee_kurtosis(img_by_year, region)
@@ -312,15 +302,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
     names(img_with_value_kurtosis)[id_names] <- new_names
     return(img_with_value_kurtosis)
-
   } else if (by == "year" & fun == "max") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_max <- ee_max(img_by_year, region)
@@ -332,15 +321,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_max) %in% actual_names)
     names(img_with_value_max)[id_names] <- new_names
     return(img_with_value_max)
-
   } else if (by == "year" & fun == "mean") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_mean <- ee_mean(img_by_year, region)
@@ -352,15 +340,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_mean) %in% actual_names)
     names(img_with_value_mean)[id_names] <- new_names
     return(img_with_value_mean)
-
   } else if (by == "year" & fun == "median") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_median <- ee_median(img_by_year, region)
@@ -372,15 +359,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_median) %in% actual_names)
     names(img_with_value_median)[id_names] <- new_names
     return(img_with_value_median)
-
   } else if (by == "year" & fun == "min") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_min <- ee_min(img_by_year, region)
@@ -392,28 +378,26 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_min) %in% actual_names)
     names(img_with_value_min)[id_names] <- new_names
     return(img_with_value_min)
-
   } else if (by == "year" & fun == "mode") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_mode <- ee_mode(img_by_year, region)
     return(img_with_value_mode)
-
   } else if (by == "year" & fun == "percentile") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_percentile <- ee_percentile(img_by_year, region)
@@ -425,15 +409,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
     names(img_with_value_percentile)[id_names] <- new_names
     return(img_with_value_percentile)
-
   } else if (by == "year" & fun == "std") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_std <- ee_std(img_by_year, region)
@@ -445,15 +428,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_std) %in% actual_names)
     names(img_with_value_std)[id_names] <- new_names
     return(img_with_value_std)
-
   } else if (by == "year" & fun == "sum") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_sum <- ee_sum(img_by_year, region)
@@ -465,15 +447,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_sum) %in% actual_names)
     names(img_with_value_sum)[id_names] <- new_names
     return(img_with_value_sum)
-
   } else if (by == "year" & fun == "variance") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_variance <- ee_variance(img_by_year, region)
@@ -485,15 +466,14 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_variance) %in% actual_names)
     names(img_with_value_variance)[id_names] <- new_names
     return(img_with_value_variance)
-
   } else if (by == "year" & fun == "first") {
     list_img_by_year <- year_list$
       map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("MODIS/006/MOD16A2")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+      ee$ImageCollection("MODIS/006/MOD16A2")$
+        select(c(band))$
+        filter(ee$Filter$calendarRange(x, x, "year"))$
+        sum()
+    }))
 
     img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_first <- ee_first(img_by_year, region)
