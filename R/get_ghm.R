@@ -2,15 +2,8 @@
 #'
 #' A function that extract Global Human Modification data of the year \bold{2016}.
 #'
-#' @param to,from the starting and final range of date.
-#' @param band name of band.
 #' @param region region and object sf.
-#' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
-#'
-#' @details Name of some bands.
-#' \itemize{
-#' \item \bold{gHM:} global Human Modification.
-#' }
+#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first).
 #'
 #' @return  a sf object with the new variables.
 #' @importFrom  sf st_transform st_simplify
@@ -32,264 +25,113 @@
 #' region_ee <- pol_to_ee(region, simplify = 1000)
 #'
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_ghm(
-#'   to = "2001-02-01", from = "2002-12-31",
-#'   by = "month", band = "tmmx", fun = "max")
+#' data <- region_ee %>%
+#' get_gHM(
+#'  fun = "max"
+#' )
 #' }
 #' @export
 
-get_ghm <- function(to, from, band, region, fun = "count") {
-
-  # Conditions about the times
-
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year))
-  year_list <- ee$List(year)
-
-
-  # Factores by each bands
-
-  multiply_factor <- c(gHM	= 1)
-
-  # Message of error
-
-  if (end_year > 2015 | start_year <= 2016) {
-    print(sprintf("No exist data"))
-  }
+get_gHM <- function(region, fun = "count") {
 
   # The main functions
 
   if (fun == "count") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$ multiply(multiply_factor[[band]])
-    img_with_value_count <- ee_count(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_count %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_count) %in% actual_names)
-    names(img_with_value_count)[id_names] <- new_names
-    return(img_with_value_count)
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+          select(c('gHM'))$
+          mosaic()
+
+    img_count <- ee_count(img_base, region)
+    return(img_count)
 
   } else if (fun == "kurtosis") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_kurtosis <- ee_kurtosis(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_kurtosis %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
-    names(img_with_value_kurtosis)[id_names] <- new_names
-    return(img_with_value_kurtosis)
+    img_kurtosis <- ee_kurstosis(img_base, region)
+    return(img_kurtosis)
 
   } else if (fun == "max") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_max <- ee_max(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_max %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_max) %in% actual_names)
-    names(img_with_value_max)[id_names] <- new_names
-    return(img_with_value_max)
+    img_max <- ee_max(img_base, region)
+    return(img_max)
 
   } else if (fun == "mean") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mean <- ee_mean(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_mean %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_mean) %in% actual_names)
-    names(img_with_value_mean)[id_names] <- new_names
-    return(img_with_value_mean)
+    img_mean <- ee_mean(img_base, region)
+    return(img_mean)
 
   } else if (fun == "median") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_median <- ee_median(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_median %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_median) %in% actual_names)
-    names(img_with_value_median)[id_names] <- new_names
-    return(img_with_value_median)
+    img_median <- ee_median(img_base, region)
+    return(img_median)
+
 
   } else if (fun == "min") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_min <- ee_min(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_min %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_min) %in% actual_names)
-    names(img_with_value_min)[id_names] <- new_names
-    return(img_with_value_min)
+    img_min <- ee_min(img_base, region)
+    return(img_min)
 
   } else if (fun == "mode") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mode <- ee_mode(img_by_year, region)
-    return(img_with_value_mode)
+    img_mode <- ee_mode(img_base, region)
+    return(img_mode)
 
   } else if (fun == "percentile") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_percentile <- ee_percentile(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_percentile %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
-    names(img_with_value_percentile)[id_names] <- new_names
-    return(img_with_value_percentile)
+    img_percentile <- ee_percentile(img_base, region)
+    return(img_percentile)
 
   } else if (fun == "std") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_std <- ee_std(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_std %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_std) %in% actual_names)
-    names(img_with_value_std)[id_names] <- new_names
-    return(img_with_value_std)
+    img_std <- ee_std(img_base, region)
+    return(img_std)
 
   } else if (fun == "sum") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_sum <- ee_sum(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_sum %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_sum) %in% actual_names)
-    names(img_with_value_sum)[id_names] <- new_names
-    return(img_with_value_sum)
+    img_sum <- ee_sum(img_base, region)
+    return(img_sum)
 
   } else if (fun == "variance") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_variance <- ee_variance(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_variance %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_variance) %in% actual_names)
-    names(img_with_value_variance)[id_names] <- new_names
-    return(img_with_value_variance)
+    img_variance <- ee_variance(img_base, region)
+    return(img_variance)
 
   } else if (fun == "first") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("CSP/HM/GlobalHumanModification")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$
+      select(c('gHM'))$
+      mosaic()
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_first <- ee_first(img_by_year, region)
-    actual_names <- img_with_value_first %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_first) %in% actual_names)
-    names(img_with_value_first)[id_names] <- new_names
-    return(img_with_value_first)
+    img_first <- ee_first(img_base, region)
+    return(img_first)
   }
 }
