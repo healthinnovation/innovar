@@ -41,7 +41,10 @@ Imports:
     stringr,
     rgee,
     ggplot2,
-    readr
+    readr,
+    rlang,
+    tidyr,
+    broom
 Suggests:
   knitr,
   rmarkdown
