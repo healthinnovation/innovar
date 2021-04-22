@@ -6,7 +6,7 @@
 #' @param by two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region region and object sf.
-#' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
+#' @param fun function for extract statistic zonal (count, kurtosis, max,mean, median , min , mode , percentile, std, sum , variance, first).
 #' @details Name of some bands.
 #' \itemize{
 #' \item \bold{ET:} Total evapotranspiration.
@@ -47,12 +47,10 @@
 get_etp <- function(to, from, by, band, region, fun = "count") {
 
   # Conditions about the times
-
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year))
+  year <- unique(c(start_year:end_year)) %>% ee$Number()
   year_list <- ee$List(year)
-
 
   # Factores by each bands
 
@@ -60,10 +58,9 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     ET = 0.1, LE = 0.0001, PET = 0.1, PLE = 0.0001, ET_QC = 1
   )
 
-
   # Message of error
 
-  if (start_year <= 2000 | end_year >= 2022) {
+    if (start_year <= 2000 | end_year >= 2022) {
     stop(print(sprintf("No exist data")))
   }
 
@@ -84,6 +81,10 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
     id_names <- which(colnames(img_with_value_count) %in% actual_names)
     names(img_with_value_count)[id_names] <- new_names
     return(img_with_value_count)
+
+
+
+
   } else if (by == "month" & fun == "first") {
     dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
       select(c(band))$

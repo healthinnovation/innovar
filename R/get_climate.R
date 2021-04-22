@@ -57,7 +57,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
 
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year))
+  year <- unique(c(start_year:end_year)) %>% ee$Number()
   year_list <- ee$List(year)
 
 

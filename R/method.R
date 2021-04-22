@@ -24,14 +24,20 @@ ee_count <- function(x, y, by = 1000) {
         fun = ee$Reducer$count(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$count(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -64,14 +70,20 @@ ee_kurstosis <- function(x, y, by = 1000) {
         fun = ee$Reducer$kurstosis(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$kurtosis(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -105,14 +117,19 @@ ee_max <- function(x, y, by = 1000) {
         fun = ee$Reducer$max(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$max(),
         sf = T
-      )
+      ) %>% st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -146,14 +163,20 @@ ee_mean <- function(x, y, by = 1000) {
         fun = ee$Reducer$mean(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$mean(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -185,14 +208,20 @@ ee_median <- function(x, y, by = 1000) {
         fun = ee$Reducer$median(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$median(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -226,14 +255,20 @@ ee_min <- function(x, y, by = 1000) {
         fun = ee$Reducer$min(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$min(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -266,14 +301,20 @@ ee_mode <- function(x, y, by = 1000) {
         fun = ee$Reducer$mode(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$mode(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -306,14 +347,20 @@ ee_percentile <- function(x, y, by = 1000) {
         fun = ee$Reducer$percentile(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$percentile(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -346,14 +393,20 @@ ee_std <- function(x, y, by = 1000) {
         fun = ee$Reducer$stdDev(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$stdDev(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -386,14 +439,20 @@ ee_sum <- function(x, y, by = 1000) {
         fun = ee$Reducer$sum(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$sum(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -425,14 +484,20 @@ ee_variance <- function(x, y, by = 1000) {
         fun = ee$Reducer$variance(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$variance(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }
@@ -466,14 +531,20 @@ ee_first <- function(x, y, by = 1000) {
         fun = ee$Reducer$first(),
         y = ee_value_layer,
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
     } else {
       db_local <- ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$first(),
         sf = T
-      )
+      ) %>%
+        st_set_geometry(NULL) %>%
+        as_tibble()
+
       dataset <- rbind(dataset, db_local)
     }
   }

@@ -6,7 +6,7 @@
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region is a feature or feature collection.
-#' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
+#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median , min, mode , percentile , std, sum, variance, first).
 #'
 #' @details Name of some bands.
 #' \itemize{
@@ -46,7 +46,7 @@ get_vegetation <- function(to, from, by, band, region, fun = "count") {
 
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year))
+  year <- unique(c(start_year:end_year)) %>% ee$Number()
   year_list <- ee$List(year)
 
 

@@ -4,28 +4,20 @@
 \alias{get_pop}
 \title{Extract population data of WorldPop}
 \usage{
-get_pop(to, from, band, region, fun = "count")
+get_pop(to, from, region, fun = "count")
 }
 \arguments{
-\item{to, from}{the starting and final range of date.}
+\item{to, from}{are strings of starting and final range of date.}
 
-\item{band}{name of band.}
+\item{region}{is a feature collection.}
 
-\item{region}{is a feature or feature collection}
-
-\item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).}
+\item{fun}{function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).}
 }
 \value{
-a sf object with the new variables.
+a tibble with the new variables.
 }
 \description{
 A function that extract a time series of the number of population by \bold{year}.
-}
-\details{
-Name of some bands.
-\itemize{
-\item \bold{pupulation:} Estimated number of people residing in each grid cell.
-}
 }
 \examples{
 \dontrun{
@@ -42,7 +34,6 @@ region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_pop(
-  to = "2001-01-01", from = "2002-12-31",
-  band = "population", fun = "max")
+  to = "2001", from = "2003",fun = "max")
 }
 }

@@ -15,7 +15,7 @@ get_etp(to, from, by, band, region, fun = "count")
 
 \item{region}{region and object sf.}
 
-\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').}
+\item{fun}{function for extract statistic zonal (count, kurtosis, max,mean, median , min , mode , percentile, std, sum , variance, first).}
 }
 \value{
 a sf object with the new variables.

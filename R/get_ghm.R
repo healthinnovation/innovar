@@ -3,9 +3,10 @@
 #' A function that extract Global Human Modification data of the year \bold{2016}
 #'
 #' @param region region and object sf.
-#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first).
+#' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first}).
 #'
-#' @return  a sf object with the new variables.
+#' @return  a tibble object with the new variables.
+#'
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter contains

@@ -9,10 +9,10 @@ get_gHM(region, fun = "count")
 \arguments{
 \item{region}{region and object sf.}
 
-\item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first).}
+\item{fun}{function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first}).}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract Global Human Modification data of the year \bold{2016}

@@ -2,19 +2,14 @@
 #'
 #' A function that extract a time series of the number of population by \bold{year}.
 #'
-#' @param to,from the starting and final range of date.
-#' @param band name of band.
-#' @param region is a feature or feature collection
-#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
+#' @param to,from are strings of starting and final range of date.
+#' @param region is a feature collection.
+#' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).
 #'
-#' @details Name of some bands.
-#' \itemize{
-#' \item \bold{pupulation:} Estimated number of people residing in each grid cell.
-#' }
+#' @return  a tibble with the new variables.
 #'
-#' @return  a sf object with the new variables.
-#' @importFrom  sf st_transform st_simplify
-#' @importFrom  rgee sf_as_ee
+#' @importFrom sf st_transform st_simplify
+#' @importFrom rgee sf_as_ee
 #' @importFrom dplyr select filter contains
 #' @importFrom purrr is_empty
 #'
@@ -33,263 +28,193 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_pop(
-#'   to = "2001-01-01", from = "2002-12-31",
-#'   band = "population", fun = "max")
+#'   to = "2001", from = "2003",fun = "max")
 #' }
 #' @export
 
-get_pop <- function(to, from, band, region, fun = "count") {
+get_pop <- function(to, from, region, fun = "count") {
 
   # Conditions about the times
-
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year))
-  year_list <- ee$List(year)
-
-  # Factores by each bands
-
-  multiply_factor <- c(population	= 1)
+  range <- unique(c(to:from))
+  list_year <- ee$List(range)
 
   # Message of error
-
-  if (end_year > 1999 | start_year <= 2021) {
-    print(sprintf("No exist data"))
+  if (to < 2000  | from > 2021) {
+    print(sprintf("No exist data of worldpop"))
   }
 
-  # The main functions
+  # The base image collection
+  list_img <- list_year$
+    map(
+      ee_utils_pyfunc(
+        function(x) {
+          ee$ImageCollection("WorldPop/GP/100m/pop")$
+            select(c('population'))$
+            filter(ee$Filter$calendarRange(x, x, "year"))$
+            mosaic()$
+            rename('pop')
+        }
+      )
+    )
+
+  img_by_year <- ee$ImageCollection$
+    fromImages(list_img)$
+    toBands()
+
+  # Conditions
 
   if (fun == "count") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          mosaic()$
-          sum()
-      }))
+    img_count <- ee_count(
+      img_by_year,
+      region
+      )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_count <- ee_count(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_count %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_count) %in% actual_names)
-    names(img_with_value_count)[id_names] <- new_names
-    return(img_with_value_count)
+    id_names <- which(
+       startsWith(
+         names(img_count), prefix = 'pop')
+       )
+
+    names(img_count)[id_names] <- sprintf('pop%s',range)
+    return(img_count)
 
   } else if (fun == "kurtosis") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_kurtosis <- ee_kurstosis(
+      img_by_year,
+      region
+      )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_kurtosis <- ee_kurtosis(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_kurtosis %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
-    names(img_with_value_kurtosis)[id_names] <- new_names
-    return(img_with_value_kurtosis)
+    id_names <- which(
+      startsWith(
+        names(img_kurtosis), prefix = 'pop')
+    )
+
+    names(img_kurtosis)[id_names] <- sprintf('pop%s',range)
+    return(img_kurtosis)
 
   } else if (fun == "max") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_max <- ee_max(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_max <- ee_max(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_max %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_max) %in% actual_names)
-    names(img_with_value_max)[id_names] <- new_names
-    return(img_with_value_max)
+    id_names <- which(
+      startsWith(
+        names(img_max), prefix = 'pop')
+    )
+
+    names(img_max)[id_names] <- sprintf('pop%s',range)
+    return(img_max)
 
   } else if (fun == "mean") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_mean <- ee_mean(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mean <- ee_mean(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_mean %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_mean) %in% actual_names)
-    names(img_with_value_mean)[id_names] <- new_names
-    return(img_with_value_mean)
+    id_names <- which(
+      startsWith(
+        names(img_mean), prefix = 'pop')
+    )
+
+    names(img_mean)[id_names] <- sprintf('pop%s',range)
+    return(img_mean)
 
   } else if (fun == "median") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_median <- ee_median(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_median <- ee_median(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_median %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_median) %in% actual_names)
-    names(img_with_value_median)[id_names] <- new_names
-    return(img_with_value_median)
+    id_names <- which(
+      startsWith(
+        names(img_median), prefix = 'pop')
+    )
+
+    names(img_median)[id_names] <- sprintf('pop%s',range)
+    return(img_median)
 
   } else if (fun == "min") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_min <- ee_min(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_min <- ee_min(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_min %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_min) %in% actual_names)
-    names(img_with_value_min)[id_names] <- new_names
-    return(img_with_value_min)
+    id_names <- which(
+      startsWith(
+        names(img_min), prefix = 'pop')
+    )
+
+    names(img_min)[id_names] <- sprintf('pop%s',range)
+    return(img_min)
 
   } else if (fun == "mode") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_mode <- ee_mode(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mode <- ee_mode(img_by_year, region)
-    return(img_with_value_mode)
+    id_names <- which(
+      startsWith(
+        names(img_mode), prefix = 'pop')
+    )
+
+    names(img_mode)[id_names] <- sprintf('pop%s',range)
+    return(img_mode)
 
   } else if (fun == "percentile") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_percentile <- ee_percentile(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_percentile <- ee_percentile(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_percentile %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
-    names(img_with_value_percentile)[id_names] <- new_names
-    return(img_with_value_percentile)
+    id_names <- which(
+      startsWith(
+        names(img_percentile), prefix = 'pop')
+    )
+
+    names(img_percentile)[id_names] <- sprintf('pop%s',range)
+    return(img_percentile)
 
   } else if (fun == "std") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_std <- ee_std(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_std <- ee_std(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_std %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_std) %in% actual_names)
-    names(img_with_value_std)[id_names] <- new_names
-    return(img_with_value_std)
+    id_names <- which(
+      startsWith(
+        names(img_std), prefix = 'pop')
+    )
+
+    names(img_std)[id_names] <- sprintf('pop%s',range)
+    return(img_std)
 
   } else if (fun == "sum") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_sum <- ee_sum(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_sum <- ee_sum(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_sum %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_sum) %in% actual_names)
-    names(img_with_value_sum)[id_names] <- new_names
-    return(img_with_value_sum)
+    id_names <- which(
+      startsWith(
+        names(img_sum), prefix = 'pop')
+    )
+
+    names(img_sum)[id_names] <- sprintf('pop%s',range)
+    return(img_sum)
 
   } else if (fun == "variance") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
+    img_variance <- ee_variance(
+      img_by_year,
+      region
+    )
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_variance <- ee_variance(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_variance %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_variance) %in% actual_names)
-    names(img_with_value_variance)[id_names] <- new_names
-    return(img_with_value_variance)
+    id_names <- which(
+      startsWith(
+        names(img_variance), prefix = 'pop')
+    )
 
-  } else if (fun == "first") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-        ee$ImageCollection("WorldPop/GP/100m/pop")$
-          select(c(band))$
-          filter(ee$Filter$calendarRange(x, x, "year"))$
-          sum()
-      }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_first <- ee_first(img_by_year, region)
-    actual_names <- img_with_value_first %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_first) %in% actual_names)
-    names(img_with_value_first)[id_names] <- new_names
-    return(img_with_value_first)
+    names(img_variance)[id_names] <- sprintf('pop%s',range)
+    return(img_variance)
   }
 }
