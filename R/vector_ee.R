@@ -9,7 +9,7 @@
 #' @importFrom  rgee sf_as_ee
 #' @export
 
-pto_to_ee <- function(x, id){
+pto_as_ee <- function(x, id){
 
   id_names <- which(colnames(x) %in% c(id))
   sf_object <- x %>%
@@ -34,7 +34,7 @@ pto_to_ee <- function(x, id){
 #' @import sf
 #' @export
 
-pol_to_ee <- function(x , id, simplify = 500){
+pol_as_ee <- function(x , id, simplify = 500){
 
   id_names <- which(colnames(x) %in% c(id))
   sf_object <- x %>%

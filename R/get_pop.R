@@ -1,11 +1,11 @@
 #' Extract population data of WorldPop
 #'
-#' A function that extract a time series of the number of population.
+#' A function that extract a time series of the number of population by \bold{year}.
 #'
 #' @param to,from the starting and final range of date.
 #' @param band name of band.
-#' @param region region and object sf.
-#' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
+#' @param region is a feature or feature collection
+#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
 #'
 #' @details Name of some bands.
 #' \itemize{
@@ -29,11 +29,11 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_to_ee(region, simplify = 1000)
+#' region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_pop(
-#'   to = "2001-02-01", from = "2002-12-31",
+#'   to = "2001-01-01", from = "2002-12-31",
 #'   band = "population", fun = "max")
 #' }
 #' @export
@@ -46,7 +46,6 @@ get_pop <- function(to, from, band, region, fun = "count") {
   end_year <- substr(from, 1, 4) %>% as.numeric()
   year <- unique(c(start_year:end_year))
   year_list <- ee$List(year)
-
 
   # Factores by each bands
 
@@ -70,7 +69,7 @@ get_pop <- function(to, from, band, region, fun = "count") {
           sum()
       }))
 
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$ multiply(multiply_factor[[band]])
+    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
     img_with_value_count <- ee_count(img_by_year, region)
     new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
     actual_names <- img_with_value_count %>%
@@ -294,7 +293,3 @@ get_pop <- function(to, from, band, region, fun = "count") {
     return(img_with_value_first)
   }
 }
-
-
-
-

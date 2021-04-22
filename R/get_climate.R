@@ -5,8 +5,8 @@
 #' @param to,from the starting and final range of date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
-#' @param region region and object sf.
-#' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
+#' @param region is a feature or feature collection.
+#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
 #'
 #' @details Name of some bands.
 #' \itemize{
@@ -43,7 +43,7 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_as_ee(region , simplify = 1000)
+#' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_climate(
 #'   to = "2001-02-01", from = "2002-12-31",
@@ -64,10 +64,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
   # Factores by each bands
 
   multiply_factor <- c(
-    aet = 0.1, def = 0.1, pdsi = 0.01, pet = 0.1, pr = 1, ro = 1, soil = 0.1,
-    srad = 0.1, swe = 1, tmmn = 0.1, tmmx = 0.1, vap = 0.001, vpd = 0.01, vs = 0.01
+    aet = 0.1, def = 0.1, pdsi = 0.01, pet = 0.1,
+    pr = 1, ro = 1, soil = 0.1, srad = 0.1, swe = 1,
+    tmmn = 0.1, tmmx = 0.1, vap = 0.001, vpd = 0.01,
+    vs = 0.01
   )
-
 
   # Message of error
 

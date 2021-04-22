@@ -7,13 +7,14 @@
 ee_count(x, y, by = 1000)
 }
 \arguments{
-\item{x}{image of type Image o Image Collection}
+\item{x}{image of type Image o Image Collection.}
 
-\item{y}{region of type Feacture o FeatureCollection}
+\item{y}{region of type feature or feature collection.}
 
-\item{by}{a limit of pass
-
-median}
+\item{by}{a limit of pass by polygon.}
+}
+\value{
+a object sf with the count values.
 }
 \description{
 Set of function to zonal statistic

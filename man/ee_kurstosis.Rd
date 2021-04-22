@@ -7,13 +7,14 @@
 ee_kurstosis(x, y, by = 1000)
 }
 \arguments{
-\item{x}{image of type Image o Image Collection}
+\item{x}{image of type Image o Image Collection.}
 
-\item{y}{region of type Feacture o FeatureCollection}
+\item{y}{region of type feacture or featureCollection.}
 
-\item{by}{a limit of pass
-
-kurtosis}
+\item{by}{a limit of pass by polygon.}
+}
+\value{
+a object sf with the kurtosis values.
 }
 \description{
 Set of function to zonal statistic

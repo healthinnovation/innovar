@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_vegetation.R
 \name{get_vegetation}
 \alias{get_vegetation}
-\title{Extract of vegetation index}
+\title{Extract vegetation index of MODIS}
 \usage{
 get_vegetation(to, from, by, band, region, fun = "count")
 }
@@ -13,7 +13,7 @@ get_vegetation(to, from, by, band, region, fun = "count")
 
 \item{band}{name of band.}
 
-\item{region}{region and object sf.}
+\item{region}{is a feature or feature collection.}
 
 \item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').}
 }
@@ -41,7 +41,7 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_to_ee(region, simplify = 1000)
+region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(

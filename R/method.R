@@ -1,14 +1,11 @@
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the count values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.count()
 
 ee_count <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -40,17 +37,15 @@ ee_count <- function(x, y, by = 1000) {
   }
   return(dataset)
 }
+
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feacture or featureCollection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' kurtosis
+#' @return a object sf with the kurtosis values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.Kurtosis()
 
 ee_kurstosis <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -84,17 +79,14 @@ ee_kurstosis <- function(x, y, by = 1000) {
 }
 
 
-# ee.Reducer.max()
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
-#' @import  rgee
-# Functions for extract the mean of pixels of a rasterdata
+#' @return a object sf with the maximum values.
+#' @import rgee
 
 ee_max <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -128,17 +120,14 @@ ee_max <- function(x, y, by = 1000) {
 }
 
 
-# ee.Reducer.mean()
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feacture o feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the mean values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
 
 ee_mean <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -171,18 +160,13 @@ ee_mean <- function(x, y, by = 1000) {
   return(dataset)
 }
 
-
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param y region of type Feacture o FeatureCollection
-#'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the count values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.median
 
 ee_median <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -216,16 +200,14 @@ ee_median <- function(x, y, by = 1000) {
 }
 
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the minimum values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.min()
+
 
 ee_min <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -259,16 +241,13 @@ ee_min <- function(x, y, by = 1000) {
 }
 
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature o feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param y region of type Feacture o FeatureCollection
-#'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the minimum values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.mode()
+
 
 ee_mode <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -301,16 +280,14 @@ ee_mode <- function(x, y, by = 1000) {
   return(dataset)
 }
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the percentile values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.percentile
+
 
 ee_percentile <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -343,16 +320,14 @@ ee_percentile <- function(x, y, by = 1000) {
   return(dataset)
 }
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feacture or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the standard deviation values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.stdDev
+
 
 ee_std <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -386,16 +361,13 @@ ee_std <- function(x, y, by = 1000) {
 }
 
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature o feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the sum values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.sum
 
 ee_sum <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -428,16 +400,13 @@ ee_sum <- function(x, y, by = 1000) {
   return(dataset)
 }
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature o feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the variance values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.variance()
 
 ee_variance <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()
@@ -472,16 +441,13 @@ ee_variance <- function(x, y, by = 1000) {
 
 
 #' Set of function to zonal statistic
-#' @param x image of type Image o Image Collection
 #'
-#' @param y region of type Feacture o FeatureCollection
+#' @param x image of type Image o Image Collection.
+#' @param y region of type feature or feature collection.
+#' @param by a limit of pass by polygon.
 #'
-#' @param by a limit of pass
-#'
-#' median
+#' @return a object sf with the first values.
 #' @import rgee
-# Functions for extract the mean of pixels of a rasterdata
-# ee.Reducer.first()
 
 ee_first <- function(x, y, by = 1000) {
   y_len <- y$size()$getInfo()

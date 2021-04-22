@@ -15,7 +15,7 @@ get_gHM(region, fun = "count")
 a sf object with the new variables.
 }
 \description{
-A function that extract Global Human Modification data of the year \bold{2016}.
+A function that extract Global Human Modification data of the year \bold{2016}
 }
 \examples{
 \dontrun{
@@ -28,7 +28,7 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_to_ee(region, simplify = 1000)
+region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\%

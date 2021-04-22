@@ -34,11 +34,12 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_to_ee(region, "id", simplify = 1000)
+#' region_ee <- pol_as_ee(region,  id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>%
-#'   get_etp(to = "2001-02-01", from = "2003-12-31", by = "year", band = "ET", fun = "max")
+#' get_etp(to = "2001-02-01", from = "2003-12-31",
+#'   by = "year", band = "ET", fun = "max")
 #' }
 #' @export
 

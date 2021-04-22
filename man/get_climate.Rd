@@ -13,9 +13,9 @@ get_climate(to, from, by, band, region, fun = "count")
 
 \item{band}{name of band.}
 
-\item{region}{region and object sf.}
+\item{region}{is a feature or feature collection.}
 
-\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').}
+\item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).}
 }
 \value{
 a sf object with the new variables.
@@ -53,7 +53,7 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_as_ee(region , simplify = 1000)
+region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 # 2. Extracting climate information
 data <- region_ee \%>\% get_climate(
   to = "2001-02-01", from = "2002-12-31",

@@ -9,7 +9,7 @@ get_urban(year, region)
 \arguments{
 \item{year}{is date format for extract the variable}
 
-\item{region}{is a sf object}
+\item{region}{is a feature or feature collection}
 }
 \value{
 a sf object with the new variables
@@ -24,7 +24,8 @@ library(lis)
 library(rgee)
 library(sf)
 ee_Initialize()
-region <- import_db("Peru_shp")[1,1]
+region <- import_db("Peru_shp")
+region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 data <- get_climate(year = 2009, region = region)
 
 }

@@ -11,15 +11,15 @@ get_pop(to, from, band, region, fun = "count")
 
 \item{band}{name of band.}
 
-\item{region}{region and object sf.}
+\item{region}{is a feature or feature collection}
 
-\item{fun}{function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').}
+\item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).}
 }
 \value{
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of the number of population.
+A function that extract a time series of the number of population by \bold{year}.
 }
 \details{
 Name of some bands.
@@ -38,11 +38,11 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_to_ee(region, simplify = 1000)
+region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_pop(
-  to = "2001-02-01", from = "2002-12-31",
+  to = "2001-01-01", from = "2002-12-31",
   band = "population", fun = "max")
 }
 }

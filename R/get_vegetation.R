@@ -1,11 +1,11 @@
-#' Extract of vegetation index
+#' Extract vegetation index of MODIS
 #'
 #' A function that extract the values of vegetation.
 #'
 #' @param to,from the starting and final range of date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
-#' @param region region and object sf.
+#' @param region is a feature or feature collection.
 #' @param fun function for extract statistic zonal ('count','kurtosis','max','mean','median','min','mode','percentile','std','sum','variance','first').
 #'
 #' @details Name of some bands.
@@ -31,7 +31,7 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_to_ee(region, simplify = 1000)
+#' region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_vegetation(
@@ -56,10 +56,9 @@ get_vegetation <- function(to, from, by, band, region, fun = "count") {
     NDVI = 0.0001, EVI = 0.0001
   )
 
-
   # Message of error
 
-  if (end_year > 1999 | start_year <= 2021) {
+  if (end_year < 1999 | start_year >= 2021) {
     print(sprintf("No exist data"))
   }
 
