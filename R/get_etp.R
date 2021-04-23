@@ -2,7 +2,7 @@
 #'
 #' A function that extract a ETP time series of MODIS
 #'
-#' @param to,from the starting and final range of date.
+#' @param to,from is a string object,starting and final date.
 #' @param by two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region region and object sf.
@@ -49,7 +49,7 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year)) %>% ee$Number()
+  year <- unique(c(start_year:end_year)) %>% list()
   year_list <- ee$List(year)
 
   # Factores by each bands

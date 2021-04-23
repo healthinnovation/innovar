@@ -7,7 +7,7 @@
 get_pop(to, from, region, fun = "count")
 }
 \arguments{
-\item{to, from}{are strings of starting and final range of date.}
+\item{to, from}{is a string object,starting and final date.}
 
 \item{region}{is a feature collection.}
 

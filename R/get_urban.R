@@ -2,10 +2,10 @@
 #'
 #' A function that extract a time series of the urban area of MODIS Landcover
 #'
-#' @param year  is date format for extract the variable
+#' @param to,from is a string object,starting and final date.
 #' @param region is a feature or feature collection
 #'
-#' @return  a sf object with the new variables
+#' @return  a tibble object with the new variables
 #' @export
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
@@ -24,26 +24,50 @@
 #' }
 # Function for extract urban areas
 
-get_urban <- function(year, region) {
+get_urban <- function(to, from , region) {
 
-  img_modis <- ee$ImageCollection("MODIS/006/MCD12Q1")$
-    filter(ee$Filter$calendarRange(year, year, "year"))$
-    select("LC_Type2")$
-    map(function(img) img$eq(list(13)))$
-    mean()
+  # Conditions about the times
+  range <- unique(c(to:from)) %>% list()
+  list_year <- ee$List(range)
 
-  area <- img_modis$multiply(ee$Image$pixelArea())$
-    divide(100000)$
-    rename(sprintf("%s%s", "Aurban", year))
+  # Message of error
+  if (to < 2001  | from > 2019) {
+    print(sprintf("No exist data of urban area"))
+  }
 
-  data <- ee_sum(
-    x = area,
-    y = roi
-  )
+  list_urban <-
+    list_year$
+    map(
+      ee_utils_pyfunc(
+        function(x) {
+          ee$ImageCollection("MODIS/006/MCD12Q1")$
+            select(c('LC_Type2'))$
+            filter(
+              ee$Filter$calendarRange(
+                x,
+                x,
+                "year")
+              )$
+            map(function(img) img$eq(list(13)))$
+            mean()$
+            multiply(
+              ee$Image$pixelArea())$
+            divide(100000)$
+            rename('urban')
+        }
+      )
+    )
+
+  urban_img <- ee$ImageCollection$
+    fromImages(list_urban)$
+    toBands()$
+    clip(region)
+
+  data <-
+    ee_sum(
+      x = urban_img,
+      y = region
+      )
+
   return(data)
 }
-
-
-
-
-

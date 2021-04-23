@@ -4,15 +4,15 @@
 \alias{get_urban}
 \title{Extract urban area data of MODIS Landcover}
 \usage{
-get_urban(year, region)
+get_urban(to, from, region)
 }
 \arguments{
-\item{year}{is date format for extract the variable}
+\item{to, from}{is a string object,starting and final date.}
 
 \item{region}{is a feature or feature collection}
 }
 \value{
-a sf object with the new variables
+a tibble object with the new variables
 }
 \description{
 A function that extract a time series of the urban area of MODIS Landcover

@@ -2,7 +2,7 @@
 #'
 #' A function that extract a time series of climate variables.
 #'
-#' @param to,from the starting and final range of date.
+#' @param to,from is a string object,starting and final date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region is a feature or feature collection.
@@ -57,7 +57,7 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
 
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year)) %>% ee$Number()
+  year <- unique(c(start_year:end_year)) %>% list()
   year_list <- ee$List(year)
 
 

@@ -7,7 +7,7 @@
 get_etp(to, from, by, band, region, fun = "count")
 }
 \arguments{
-\item{to, from}{the starting and final range of date.}
+\item{to, from}{is a string object,starting and final date.}
 
 \item{by}{two types of increment of the sequence by \bold{month} and \bold{year}.}
 

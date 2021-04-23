@@ -2,7 +2,7 @@
 #'
 #' A function that extract a time series of the number of population by \bold{year}.
 #'
-#' @param to,from are strings of starting and final range of date.
+#' @param to,from is a string object,starting and final date.
 #' @param region is a feature collection.
 #' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).
 #'
@@ -35,7 +35,7 @@
 get_pop <- function(to, from, region, fun = "count") {
 
   # Conditions about the times
-  range <- unique(c(to:from))
+  range <- unique(c(to:from)) %>% list()
   list_year <- ee$List(range)
 
   # Message of error
