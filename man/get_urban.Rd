@@ -7,9 +7,9 @@
 get_urban(to, from, region)
 }
 \arguments{
-\item{to, from}{is a string object,starting and final date.}
+\item{to, from}{it's a string object,starting and final date.}
 
-\item{region}{is a feature or feature collection}
+\item{region}{it's a feature or feature collection}
 }
 \value{
 a tibble object with the new variables
@@ -26,7 +26,7 @@ library(sf)
 ee_Initialize()
 region <- import_db("Peru_shp")
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-data <- get_climate(year = 2009, region = region)
+data <- get_climate(to = '2008', from = '2010', region = region)
 
 }
 }

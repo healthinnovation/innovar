@@ -32,7 +32,7 @@
 #' }
 #' @export
 
-get_gHM <- function(region, fun = "count") {
+get_ghm <- function(region, fun = "count") {
 
   # The base image collection
   img_base <- ee$ImageCollection("CSP/HM/GlobalHumanModification")$

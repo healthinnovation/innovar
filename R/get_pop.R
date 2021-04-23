@@ -2,8 +2,8 @@
 #'
 #' A function that extract a time series of the number of population by \bold{year}.
 #'
-#' @param to,from is a string object,starting and final date.
-#' @param region is a feature collection.
+#' @param to,from it's a string object,starting and final date.
+#' @param region it's a feature collection.
 #' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).
 #'
 #' @return  a tibble with the new variables.
@@ -35,8 +35,20 @@
 get_pop <- function(to, from, region, fun = "count") {
 
   # Conditions about the times
-  range <- unique(c(to:from)) %>% list()
-  list_year <- ee$List(range)
+
+  if(start_year == end_year){
+    year <- unique(
+      c(start_year:end_year)
+    ) %>%
+      list()
+
+    year_list <- ee$List(year)
+  } else {
+    year <- unique(
+      c(start_year:end_year)
+    )
+    year_list <- ee$List(year)
+  }
 
   # Message of error
   if (to < 2000  | from > 2021) {

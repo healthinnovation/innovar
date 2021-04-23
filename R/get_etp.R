@@ -2,7 +2,7 @@
 #'
 #' A function that extract a ETP time series of MODIS
 #'
-#' @param to,from is a string object,starting and final date.
+#' @param to,from it's a string object,starting and final date.
 #' @param by two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region region and object sf.

@@ -2,8 +2,8 @@
 #'
 #' A function that extract a time series of the urban area of MODIS Landcover
 #'
-#' @param to,from is a string object,starting and final date.
-#' @param region is a feature or feature collection
+#' @param to,from it's a string object,starting and final date.
+#' @param region it's a feature or feature collection
 #'
 #' @return  a tibble object with the new variables
 #' @export
@@ -19,7 +19,7 @@
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")
 #' region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-#' data <- get_climate(year = 2009, region = region)
+#' data <- get_climate(to = '2008', from = '2010', region = region)
 #'
 #' }
 # Function for extract urban areas
@@ -27,8 +27,22 @@
 get_urban <- function(to, from , region) {
 
   # Conditions about the times
-  range <- unique(c(to:from)) %>% list()
-  list_year <- ee$List(range)
+  start_year <- substr(to, 1, 4) %>% as.numeric()
+  end_year <- substr(from, 1, 4) %>% as.numeric()
+
+  if(start_year == end_year){
+    year <- unique(
+      c(start_year:end_year)
+    ) %>%
+      list()
+
+    year_list <- ee$List(year)
+  } else {
+    year <- unique(
+      c(start_year:end_year)
+    )
+    year_list <- ee$List(year)
+  }
 
   # Message of error
   if (to < 2001  | from > 2019) {

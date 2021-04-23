@@ -7,9 +7,9 @@
 get_pop(to, from, region, fun = "count")
 }
 \arguments{
-\item{to, from}{is a string object,starting and final date.}
+\item{to, from}{it's a string object,starting and final date.}
 
-\item{region}{is a feature collection.}
+\item{region}{it's a feature collection.}
 
 \item{fun}{function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).}
 }
