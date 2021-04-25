@@ -13,8 +13,8 @@ Puedes instalar la version de prueba desde
 [GitHub](https://github.com/):
 
 ``` r
-if(!require("devtools")) install.packages("devtools")
-devtools::install_github("healthinnovation/lis")
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("healthinnovation/lis")
 ```
 
 ``` r
