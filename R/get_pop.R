@@ -28,13 +28,15 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_pop(
-#'   to = "2001", from = "2003",fun = "max")
+#'   to = "2001-01-01", from = "2003-01-01",fun = "max")
 #' }
 #' @export
 
 get_pop <- function(to, from, region, fun = "count") {
 
   # Conditions about the times
+  start_year <- substr(to, 1, 4) %>% as.numeric()
+  end_year <- substr(from, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(
@@ -56,7 +58,7 @@ get_pop <- function(to, from, region, fun = "count") {
   }
 
   # The base image collection
-  list_img <- list_year$
+  list_img <- year_list$
     map(
       ee_utils_pyfunc(
         function(x) {
@@ -86,7 +88,16 @@ get_pop <- function(to, from, region, fun = "count") {
          names(img_count), prefix = 'pop')
        )
 
-    names(img_count)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_count)[id_names] <- sprintf('pop%s',names_id)
     return(img_count)
 
   } else if (fun == "kurtosis") {
@@ -100,7 +111,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_kurtosis), prefix = 'pop')
     )
 
-    names(img_kurtosis)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_kurtosis)[id_names] <- sprintf('pop%s',names_id)
     return(img_kurtosis)
 
   } else if (fun == "max") {
@@ -114,7 +134,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_max), prefix = 'pop')
     )
 
-    names(img_max)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_max)[id_names] <- sprintf('pop%s',names_id)
     return(img_max)
 
   } else if (fun == "mean") {
@@ -128,7 +157,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_mean), prefix = 'pop')
     )
 
-    names(img_mean)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_mean)[id_names] <- sprintf('pop%s',names_id)
     return(img_mean)
 
   } else if (fun == "median") {
@@ -142,7 +180,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_median), prefix = 'pop')
     )
 
-    names(img_median)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_median)[id_names] <- sprintf('pop%s',names_id)
     return(img_median)
 
   } else if (fun == "min") {
@@ -156,7 +203,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_min), prefix = 'pop')
     )
 
-    names(img_min)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_min)[id_names] <- sprintf('pop%s',names_id)
     return(img_min)
 
   } else if (fun == "mode") {
@@ -170,7 +226,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_mode), prefix = 'pop')
     )
 
-    names(img_mode)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_mode)[id_names] <- sprintf('pop%s',names_id)
     return(img_mode)
 
   } else if (fun == "percentile") {
@@ -184,7 +249,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_percentile), prefix = 'pop')
     )
 
-    names(img_percentile)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_percentile)[id_names] <- sprintf('pop%s',names_id)
     return(img_percentile)
 
   } else if (fun == "std") {
@@ -198,7 +272,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_std), prefix = 'pop')
     )
 
-    names(img_std)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_std)[id_names] <- sprintf('pop%s',names_id)
     return(img_std)
 
   } else if (fun == "sum") {
@@ -212,7 +295,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_sum), prefix = 'pop')
     )
 
-    names(img_sum)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_sum)[id_names] <- sprintf('pop%s',names_id)
     return(img_sum)
 
   } else if (fun == "variance") {
@@ -226,7 +318,16 @@ get_pop <- function(to, from, region, fun = "count") {
         names(img_variance), prefix = 'pop')
     )
 
-    names(img_variance)[id_names] <- sprintf('pop%s',range)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,4
+    )
+
+    names(img_variance)[id_names] <- sprintf('pop%s',names_id)
     return(img_variance)
   }
 }

@@ -47,9 +47,6 @@ get_etp <- function(to, from, band, region, fun = "count") {
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
-  year <- unique(c(start_year:end_year)) %>% list()
-  year_list <- ee$List(year)
-
   # Factores by each bands
 
   multiply_factor <- c(
@@ -63,8 +60,7 @@ get_etp <- function(to, from, band, region, fun = "count") {
   }
 
   # The main functions
-  # NDVI
-  collection_ndvi = ee$ImageCollection('MODIS/006/MOD16A2')$
+  collection = ee$ImageCollection('MODIS/006/MOD16A2')$
     select(c(band))
 
   # date of dataset
@@ -79,7 +75,7 @@ get_etp <- function(to, from, band, region, fun = "count") {
             months$map(
               ee_utils_pyfunc(
                 function (m)
-                  lista_collection[[band]]$
+                  collection$
                   filter(ee$Filter$calendarRange(y, y, 'year'))$
                   filter(ee$Filter$calendarRange(m, m, 'month'))$
                   mean()$
@@ -93,14 +89,43 @@ get_etp <- function(to, from, band, region, fun = "count") {
 
   im_base <- modis$
     filter(ee$Filter$inList('month',c(1:12)))
-  im_base2 <- im_base$
-    filter(ee$Filter$inList('year',list(start_year:end_year)))$
-    toBands()$multiply(multiply_factor[[band]])
+
+  if(start_year == end_year){
+    new_base <- im_base$
+      filter(
+        ee$Filter$inList(
+          'year',
+          list(
+            c(
+              start_year:end_year
+              )
+            )
+          )
+        )$toBands()$
+      multiply(
+        multiply_factor[[band]]
+        )
+  }else{
+    new_base <- im_base$
+      filter(
+        ee$Filter$inList(
+        'year',
+        c(
+          start_year:end_year
+          )
+        )
+        )$
+      toBands()$
+      multiply(
+        multiply_factor[[band]]
+        )
+  }
+
 
   # The main functions
   if (fun == "count") {
     img_count <- ee_count(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -121,9 +146,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     names(img_count)[id_names] <- sprintf('%s%s',band,names_id)
     return(img_count)
 
-  } else if (by == "month" & fun == "kurtosis") {
+  } else if (fun == "kurtosis") {
     img_kurtosis <- ee_kurstosis(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -145,9 +170,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_kurtosis)
 
 
-  } else if (by == "month" & fun == "max") {
+  } else if (fun == "max") {
     img_max <- ee_max(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -169,11 +194,12 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_max)
 
 
-  } else if (by == "month" & fun == "mean") {
+  } else if (fun == "mean") {
     img_mean <- ee_mean(
-      im_base2,
+      new_base,
       region
     )
+
     id_names <- which(
       startsWith(
         names(img_mean),
@@ -193,9 +219,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_mean)
 
 
-  } else if (by == "month" & fun == "median") {
+  } else if (fun == "median") {
     img_median <- ee_median(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -217,9 +243,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_median)
 
 
-  } else if (by == "month" & fun == "min") {
+  } else if (fun == "min") {
     img_min <- ee_min(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -241,9 +267,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_min)
 
 
-  } else if (by == "month" & fun == "mode") {
+  } else if (fun == "mode") {
     img_mode <- ee_mode(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -265,9 +291,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     return(img_mode)
 
 
-  } else if (by == "month" & fun == "percentile") {
+  } else if (fun == "percentile") {
     img_percentile <- ee_percentile(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -288,9 +314,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     names(img_percentile)[id_names] <- sprintf('%s%s',band,names_id)
     return(img_percentile)
 
-  } else if (by == "month" & fun == "std") {
+  } else if (fun == "std") {
     img_std <- ee_std(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -311,9 +337,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     names(img_std)[id_names] <- sprintf('%s%s',band,names_id)
     return(img_std)
 
-  } else if (by == "month" & fun == "sum") {
+  } else if (fun == "sum") {
     img_sum <- ee_sum(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(
@@ -334,9 +360,9 @@ get_etp <- function(to, from, band, region, fun = "count") {
     names(img_sum)[id_names] <- sprintf('%s%s',band,names_id)
     return(img_sum)
 
-  } else if (by == "month" & fun == "variance") {
+  } else if (fun == "variance") {
     img_variance <- ee_variance(
-      im_base2,
+      new_base,
       region
     )
     id_names <- which(

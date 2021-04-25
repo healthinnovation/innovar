@@ -26,7 +26,7 @@ library(sf)
 ee_Initialize()
 region <- import_db("Peru_shp")
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-data <- get_climate(to = '2008', from = '2010', region = region)
+data <- get_climate(to = '2008-01-01', from = '2010-01-01', region = region)
 
 }
 }

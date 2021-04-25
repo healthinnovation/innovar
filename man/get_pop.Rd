@@ -34,6 +34,6 @@ region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_pop(
-  to = "2001", from = "2003",fun = "max")
+  to = "2001-01-01", from = "2003-01-01",fun = "max")
 }
 }
