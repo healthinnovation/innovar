@@ -1,9 +1,8 @@
 #' Extract evapotranspiration data of Modis
 #'
-#' A function that extract a ETP time series of MODIS
+#' A function that extract a ETP time series of MODIS by \bold{month}.
 #'
 #' @param to,from it's a string object,starting and final date.
-#' @param by two types of increment of the sequence by \bold{month} and \bold{year}.
 #' @param band name of band.
 #' @param region region and object sf.
 #' @param fun function for extract statistic zonal (count, kurtosis, max,mean, median , min , mode , percentile, std, sum , variance, first).
@@ -38,13 +37,12 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>%
-#' get_etp(to = "2001-02-01", from = "2003-12-31",
-#'   by = "year", band = "ET", fun = "max")
+#' get_etp(to = "2001-02-01", from = "2003-12-31", band = "ET", fun = "max")
 #' }
 #' @export
 
 
-get_etp <- function(to, from, by, band, region, fun = "count") {
+get_etp <- function(to, from, band, region, fun = "count") {
 
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()
@@ -65,424 +63,299 @@ get_etp <- function(to, from, by, band, region, fun = "count") {
   }
 
   # The main functions
-  if (by == "month" & fun == "count") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+  # NDVI
+  collection_ndvi = ee$ImageCollection('MODIS/006/MOD16A2')$
+    select(c(band))
 
-    img_with_value_count <- ee_count(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_count %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_count) %in% actual_names)
-    names(img_with_value_count)[id_names] <- new_names
-    return(img_with_value_count)
+  # date of dataset
+  months = ee$List$sequence(1, 12)
+  years = ee$List$sequence(start_year,end_year)
 
+  modis = ee$ImageCollection$
+    fromImages(
+      years$map(
+        ee_utils_pyfunc(
+          function (y)
+            months$map(
+              ee_utils_pyfunc(
+                function (m)
+                  lista_collection[[band]]$
+                  filter(ee$Filter$calendarRange(y, y, 'year'))$
+                  filter(ee$Filter$calendarRange(m, m, 'month'))$
+                  mean()$
+                  set('year',y)$
+                  set('month',m))
+            )
+        )
+      )$
+        flatten()
+    )
 
+  im_base <- modis$
+    filter(ee$Filter$inList('month',c(1:12)))
+  im_base2 <- im_base$
+    filter(ee$Filter$inList('year',list(start_year:end_year)))$
+    toBands()$multiply(multiply_factor[[band]])
 
+  # The main functions
+  if (fun == "count") {
+    img_count <- ee_count(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_count),
+        prefix = band)
+    )
 
-  } else if (by == "month" & fun == "first") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
 
-    img_with_value_first <- ee_first(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_first %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_first) %in% actual_names)
-    names(img_with_value_first)[id_names] <- new_names
-    return(img_with_value_first)
+    names(img_count)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_count)
+
   } else if (by == "month" & fun == "kurtosis") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_kurtosis <- ee_kurstosis(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_kurtosis),
+        prefix = band)
+    )
 
-    img_with_value_kurtosis <- ee_kurtosis(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_kurtosis %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
-    names(img_with_value_kurtosis)[id_names] <- new_names
-    return(img_with_value_kurtosis)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_kurtosis)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_kurtosis)
+
+
   } else if (by == "month" & fun == "max") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_max <- ee_max(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_max),
+        prefix = band)
+    )
 
-    img_with_value_max <- ee_max(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_max %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_max) %in% actual_names)
-    names(img_with_value_max)[id_names] <- new_names
-    return(img_with_value_max)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_max)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_max)
+
+
   } else if (by == "month" & fun == "mean") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_mean <- ee_mean(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_mean),
+        prefix = band)
+    )
 
-    img_with_value_mean <- ee_mean(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_mean %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_mean) %in% actual_names)
-    names(img_with_value_mean)[id_names] <- new_names
-    return(img_with_value_mean)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_mean)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_mean)
+
+
   } else if (by == "month" & fun == "median") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_median <- ee_median(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_median),
+        prefix = band)
+    )
 
-    img_with_value_median <- ee_median(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_median %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_median) %in% actual_names)
-    names(img_with_value_median)[id_names] <- new_names
-    return(img_with_value_median)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_median)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_median)
+
+
   } else if (by == "month" & fun == "min") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_min <- ee_min(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_min),
+        prefix = band)
+    )
 
-    img_with_value_min <- ee_min(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_min %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_min) %in% actual_names)
-    names(img_with_value_min)[id_names] <- new_names
-    return(img_with_value_min)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_min)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_min)
+
+
   } else if (by == "month" & fun == "mode") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_mode <- ee_mode(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_mode),
+        prefix = band)
+    )
 
-    img_with_value_mode <- ee_mode(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_mode %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_mode) %in% actual_names)
-    names(img_with_value_mode)[id_names] <- new_names
-    return(img_with_value_mode)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_mode)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_mode)
+
+
   } else if (by == "month" & fun == "percentile") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_percentile <- ee_percentile(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_percentile),
+        prefix = band)
+    )
 
-    img_with_value_percentile <- ee_percentile(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_percentile %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
-    names(img_with_value_percentile)[id_names] <- new_names
-    return(img_with_value_percentile)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_percentile)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_percentile)
+
   } else if (by == "month" & fun == "std") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_std <- ee_std(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_std),
+        prefix = band)
+    )
 
-    img_with_value_std <- ee_std(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_std %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_std) %in% actual_names)
-    names(img_with_value_std)[id_names] <- new_names
-    return(img_with_value_std)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_std)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_std)
+
   } else if (by == "month" & fun == "sum") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_sum <- ee_sum(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_sum),
+        prefix = band)
+    )
 
-    img_with_value_sum <- ee_sum(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_sum %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_sum) %in% actual_names)
-    names(img_with_value_sum)[id_names] <- new_names
-    return(img_with_value_sum)
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
+
+    names(img_sum)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_sum)
+
   } else if (by == "month" & fun == "variance") {
-    dataset <- ee$ImageCollection("MODIS/006/MOD16A2")$
-      select(c(band))$
-      filterDate(to, from)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+    img_variance <- ee_variance(
+      im_base2,
+      region
+    )
+    id_names <- which(
+      startsWith(
+        names(img_variance),
+        prefix = band)
+    )
 
-    img_with_value_variance <- ee_variance(dataset, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 month"), start = 1, stop = 7))
-    actual_names <- img_with_value_variance %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_variance) %in% actual_names)
-    names(img_with_value_variance)[id_names] <- new_names
-    return(img_with_value_variance)
-  }
+    names_id <- substr(
+      seq(
+        as.Date(to),
+        as.Date(from),
+        length.out = length(id_names)
+      ),
+      1,7
+    )
 
+    names(img_variance)[id_names] <- sprintf('%s%s',band,names_id)
+    return(img_variance)
 
-  if (by == "year" & fun == "count") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$ multiply(multiply_factor[[band]])
-    img_with_value_count <- ee_count(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_count %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_count) %in% actual_names)
-    names(img_with_value_count)[id_names] <- new_names
-    return(img_with_value_count)
-  } else if (by == "year" & fun == "kurtosis") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_kurtosis <- ee_kurtosis(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_kurtosis %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_kurtosis) %in% actual_names)
-    names(img_with_value_kurtosis)[id_names] <- new_names
-    return(img_with_value_kurtosis)
-  } else if (by == "year" & fun == "max") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_max <- ee_max(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_max %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_max) %in% actual_names)
-    names(img_with_value_max)[id_names] <- new_names
-    return(img_with_value_max)
-  } else if (by == "year" & fun == "mean") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mean <- ee_mean(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_mean %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_mean) %in% actual_names)
-    names(img_with_value_mean)[id_names] <- new_names
-    return(img_with_value_mean)
-  } else if (by == "year" & fun == "median") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_median <- ee_median(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_median %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_median) %in% actual_names)
-    names(img_with_value_median)[id_names] <- new_names
-    return(img_with_value_median)
-  } else if (by == "year" & fun == "min") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_min <- ee_min(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_min %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_min) %in% actual_names)
-    names(img_with_value_min)[id_names] <- new_names
-    return(img_with_value_min)
-  } else if (by == "year" & fun == "mode") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_mode <- ee_mode(img_by_year, region)
-    return(img_with_value_mode)
-  } else if (by == "year" & fun == "percentile") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_percentile <- ee_percentile(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_percentile %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_percentile) %in% actual_names)
-    names(img_with_value_percentile)[id_names] <- new_names
-    return(img_with_value_percentile)
-  } else if (by == "year" & fun == "std") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_std <- ee_std(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_std %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_std) %in% actual_names)
-    names(img_with_value_std)[id_names] <- new_names
-    return(img_with_value_std)
-  } else if (by == "year" & fun == "sum") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_sum <- ee_sum(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_sum %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_sum) %in% actual_names)
-    names(img_with_value_sum)[id_names] <- new_names
-    return(img_with_value_sum)
-  } else if (by == "year" & fun == "variance") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_variance <- ee_variance(img_by_year, region)
-    new_names <- paste0(band, substr(seq(as.Date(to), as.Date(from), by = "1 year"), start = 1, stop = 4))
-    actual_names <- img_with_value_variance %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_variance) %in% actual_names)
-    names(img_with_value_variance)[id_names] <- new_names
-    return(img_with_value_variance)
-  } else if (by == "year" & fun == "first") {
-    list_img_by_year <- year_list$
-      map(ee_utils_pyfunc(function(x) {
-      ee$ImageCollection("MODIS/006/MOD16A2")$
-        select(c(band))$
-        filter(ee$Filter$calendarRange(x, x, "year"))$
-        sum()
-    }))
-
-    img_by_year <- ee$ImageCollection$fromImages(list_img_by_year)$toBands()$multiply(multiply_factor[[band]])
-    img_with_value_first <- ee_first(img_by_year, region)
-    actual_names <- img_with_value_first %>%
-      select(contains(band)) %>%
-      st_set_geometry(NULL) %>%
-      colnames()
-    id_names <- which(colnames(img_with_value_first) %in% actual_names)
-    names(img_with_value_first)[id_names] <- new_names
-    return(img_with_value_first)
   }
 }

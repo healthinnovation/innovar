@@ -4,12 +4,10 @@
 \alias{get_etp}
 \title{Extract evapotranspiration data of Modis}
 \usage{
-get_etp(to, from, by, band, region, fun = "count")
+get_etp(to, from, band, region, fun = "count")
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
-
-\item{by}{two types of increment of the sequence by \bold{month} and \bold{year}.}
 
 \item{band}{name of band.}
 
@@ -21,7 +19,7 @@ get_etp(to, from, by, band, region, fun = "count")
 a sf object with the new variables.
 }
 \description{
-A function that extract a ETP time series of MODIS
+A function that extract a ETP time series of MODIS by \bold{month}.
 }
 \details{
 Name of some bands.
@@ -48,7 +46,6 @@ region_ee <- pol_as_ee(region,  id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\%
-get_etp(to = "2001-02-01", from = "2003-12-31",
-  by = "year", band = "ET", fun = "max")
+get_etp(to = "2001-02-01", from = "2003-12-31", band = "ET", fun = "max")
 }
 }

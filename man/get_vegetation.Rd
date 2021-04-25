@@ -4,14 +4,12 @@
 \alias{get_vegetation}
 \title{Extract vegetation index of MODIS}
 \usage{
-get_vegetation(to, from, by, band, region, fun = "count")
+get_vegetation(to, from, band, region, fun = "count")
 }
 \arguments{
 \item{to, from}{the starting and final range of date.}
 
-\item{by}{two types of increment of the sequence by \bold{month} and \bold{year}.}
-
-\item{band}{name of band.}
+\item{band}{name of bands.}
 
 \item{region}{is a feature or feature collection.}
 
@@ -21,7 +19,7 @@ get_vegetation(to, from, by, band, region, fun = "count")
 a sf object with the new variables.
 }
 \description{
-A function that extract the values of vegetation.
+A function that extract the values of vegetation by \bold{month}.
 }
 \details{
 Name of some bands.
@@ -45,7 +43,6 @@ region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(
-  to = "2001-02-01", from = "2002-12-31",
-  by = "month", band = "tmmx", fun = "max")
+  to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max")
 }
 }
