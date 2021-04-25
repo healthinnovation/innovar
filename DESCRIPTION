@@ -23,7 +23,12 @@ Authors@R:
            family = "Peña-Calero",
            role = "aut",
            email = "brianmsm@gmail.com",
-           comment = c(ORCID = "0000-0002-1073-9306"))
+           comment = c(ORCID = "0000-0002-1073-9306")),
+    person(given = "Antony",
+           family = "Barja-Ingaruca",
+           role = "aut",
+           email = "antonymarcosbarja@gmail.com",
+           comment = c(ORCID = "0000-0001-5921-2858"))
            )
 Maintainer: Renato Cava <renato.cava@upch.edu.pe>
 Description: Libreria de funciones del Laboratorio de Innovacion en Salud (InnovaLab) del Insituto de Medicina Tropical "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
