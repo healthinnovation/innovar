@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract of vegetation index — get_ndvi • lis</title>
+<title>Set of function to zonal statistic — ee_std • lis</title>
 
 
 <!-- jquery -->
@@ -41,10 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Extract of vegetation index — get_ndvi" />
-<meta property="og:description" content="A function that extract the values of vegetation" />
-
-
+<meta property="og:title" content="Set of function to zonal statistic — ee_std" />
+<meta property="og:description" content="Set of function to zonal statistic" />
 
 
 
@@ -60,15 +58,9 @@
 
 
 
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -101,10 +93,13 @@
     <li>
       <a href="../articles/vignette.html">InnovaLab Toolkit</a>
     </li>
-    <li>
-      <a href="../articles/lis_extract.html">lis extract</a>
-    </li>
   </ul>
+</li>
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -127,33 +122,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract of vegetation index</h1>
-    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/vegetation_index.R'><code>R/vegetation_index.R</code></a></small>
-    <div class="hidden name"><code>get_ndvi.Rd</code></div>
+    <h1>Set of function to zonal statistic</h1>
+    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/method.R'><code>R/method.R</code></a></small>
+    <div class="hidden name"><code>ee_std.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function that extract the values of vegetation</p>
+    <p>Set of function to zonal statistic</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_ndvi</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>region</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ee_std</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>year</th>
-      <td><p>is date format for extract the variable</p></td>
+      <th>x</th>
+      <td><p>image of type Image o Image Collection.</p></td>
     </tr>
     <tr>
-      <th>region</th>
-      <td><p>is a sf object</p></td>
+      <th>y</th>
+      <td><p>region of type feacture or feature collection.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>a limit of pass by polygon.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a sf object with the new variables</p>
+    <p>a object sf with the standard deviation values.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -166,11 +165,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Gabriel Carrasco-Escobar, Renato Cava, Jorge Ruiz-Cabrejos.</p></p>
+  <p>Developed by Gabriel Carrasco-Escobar, Renato Cava, Jorge Ruiz-Cabrejos, Brian Norman Peña-Calero.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -178,8 +177,6 @@
 
   
 
-
-  
 
   </body>
 </html>
