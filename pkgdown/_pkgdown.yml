@@ -30,7 +30,7 @@ reference:
   - '`get_urban`'
   - '`get_vegetation`'
 
-- title: Administration limits
+- title: Administrative limits
   contents:
   - '`import_db`'
   - '`gen_admin.div`'
@@ -39,7 +39,7 @@ reference:
   contents:
   - '`vulnerability_index`'
 
-- title: Colors
+- title: Graphics
   contents:
   - '`lis_colors`'
   - '`lis_cols`'
@@ -48,7 +48,7 @@ reference:
   - '`scale_color_lis`'
   - '`scale_fill_lis`'
 
-- title: Others
+- title: Utils
   contents:
   - '`allpautils_names`'
   - '`read_batch`'
