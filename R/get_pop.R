@@ -5,7 +5,7 @@
 #' @param to,from it's a string object,starting and final date.
 #' @param region it's a feature collection.
 #' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance}).
-#'
+#' @param scale A nominal scale in meters of the projection to work in.
 #' @return  a tibble with the new variables.
 #'
 #' @importFrom sf st_transform st_simplify
@@ -28,11 +28,11 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_pop(
-#'   to = "2001-01-01", from = "2003-01-01",fun = "max")
+#'   to = "2001-01-01", from = "2003-01-01",fun = "max",scale = 100)
 #' }
 #' @export
 
-get_pop <- function(to, from, region, fun = "count") {
+get_pop <- function(to, from, region, fun = "count", scale = 100) {
 
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()
@@ -80,7 +80,8 @@ get_pop <- function(to, from, region, fun = "count") {
   if (fun == "count") {
     img_count <- ee_count(
       img_by_year,
-      region
+      region,
+      scale = scale
       )
 
     id_names <- which(
@@ -103,7 +104,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "kurtosis") {
     img_kurtosis <- ee_kurstosis(
       img_by_year,
-      region
+      region,
+      scale = scale
       )
 
     id_names <- which(
@@ -126,7 +128,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "max") {
     img_max <- ee_max(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -149,7 +152,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "mean") {
     img_mean <- ee_mean(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -172,7 +176,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "median") {
     img_median <- ee_median(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -195,7 +200,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "min") {
     img_min <- ee_min(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -218,7 +224,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "mode") {
     img_mode <- ee_mode(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -241,7 +248,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "percentile") {
     img_percentile <- ee_percentile(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -264,7 +272,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "std") {
     img_std <- ee_std(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -287,7 +296,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "sum") {
     img_sum <- ee_sum(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -310,7 +320,8 @@ get_pop <- function(to, from, region, fun = "count") {
   } else if (fun == "variance") {
     img_variance <- ee_variance(
       img_by_year,
-      region
+      region,
+      scale = scale
     )
 
     id_names <- which(
