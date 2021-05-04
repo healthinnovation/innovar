@@ -4,12 +4,14 @@
 \alias{get_urban}
 \title{Extract urban area data of MODIS Landcover}
 \usage{
-get_urban(to, from, region)
+get_urban(to, from, region, scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
 
 \item{region}{it's a feature or feature collection}
+
+\item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
 a tibble object with the new variables

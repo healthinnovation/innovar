@@ -6,6 +6,7 @@
 #' @param band name of bands.
 #' @param region is a feature or feature collection.
 #' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median , min, mode , percentile , std, sum, variance, first).
+#' @param scale A nominal scale in meters of the projection to work in.
 #'
 #' @details Name of some bands.
 #' \itemize{
@@ -38,7 +39,7 @@
 #' }
 #' @export
 
-get_vegetation <- function(to, from, band, region, fun = "count") {
+get_vegetation <- function(to, from, band, region, fun = "count",scale = 1000) {
 
   # Conditions about the times
 
@@ -123,7 +124,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   if (fun == "count") {
     img_count <- ee_count(
       new_base,
-      region
+      region,
+      scale = scale
       )
     id_names <- which(
       startsWith(
@@ -146,7 +148,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "kurtosis") {
     img_kurtosis <- ee_kurstosis(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -170,7 +173,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "max") {
     img_max <- ee_max(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -194,7 +198,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "mean") {
     img_mean <- ee_mean(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -218,7 +223,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "median") {
     img_median <- ee_median(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -242,7 +248,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "min") {
     img_min <- ee_min(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -266,7 +273,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "mode") {
     img_mode <- ee_mode(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -290,7 +298,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "percentile") {
     img_percentile <- ee_percentile(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -313,7 +322,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "std") {
     img_std <- ee_std(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -336,7 +346,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "sum") {
     img_sum <- ee_sum(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(
@@ -359,7 +370,8 @@ get_vegetation <- function(to, from, band, region, fun = "count") {
   } else if (fun == "variance") {
     img_variance <- ee_variance(
       new_base,
-      region
+      region,
+      scale = scale
     )
     id_names <- which(
       startsWith(

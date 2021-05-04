@@ -4,7 +4,7 @@
 \alias{get_climate}
 \title{Extract climate data of TerraClimate}
 \usage{
-get_climate(to, from, by, band, region, fun = "count")
+get_climate(to, from, by, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -16,6 +16,8 @@ get_climate(to, from, by, band, region, fun = "count")
 \item{region}{is a feature or feature collection.}
 
 \item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).}
+
+\item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
 a sf object with the new variables.

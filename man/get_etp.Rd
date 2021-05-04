@@ -4,7 +4,7 @@
 \alias{get_etp}
 \title{Extract evapotranspiration data of Modis}
 \usage{
-get_etp(to, from, band, region, fun = "count")
+get_etp(to, from, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -14,6 +14,8 @@ get_etp(to, from, band, region, fun = "count")
 \item{region}{region and object sf.}
 
 \item{fun}{function for extract statistic zonal (count, kurtosis, max,mean, median , min , mode , percentile, std, sum , variance, first).}
+
+\item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
 a sf object with the new variables.

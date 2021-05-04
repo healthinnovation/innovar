@@ -4,6 +4,7 @@
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param region it's a feature or feature collection
+#' @param scale A nominal scale in meters of the projection to work in.
 #'
 #' @return  a tibble object with the new variables
 #' @export
@@ -24,7 +25,7 @@
 #' }
 # Function for extract urban areas
 
-get_urban <- function(to, from , region) {
+get_urban <- function(to, from , region, scale = 1000) {
 
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()
@@ -80,7 +81,8 @@ get_urban <- function(to, from , region) {
   data <-
     ee_sum(
       x = urban_img,
-      y = region
+      y = region,
+      scale = scale
       )
 
   return(data)

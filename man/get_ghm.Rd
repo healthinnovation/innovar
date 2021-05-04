@@ -4,12 +4,14 @@
 \alias{get_ghm}
 \title{Extract Global Human Modification data}
 \usage{
-get_ghm(region, fun = "count")
+get_ghm(region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{region}{region and object sf.}
 
 \item{fun}{function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first}).}
+
+\item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
 a tibble object with the new variables.

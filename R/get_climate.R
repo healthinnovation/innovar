@@ -7,6 +7,7 @@
 #' @param band name of band.
 #' @param region is a feature or feature collection.
 #' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
+#' @param scale A nominal scale in meters of the projection to work in.
 #'
 #' @details Name of some bands.
 #' \itemize{
@@ -51,7 +52,7 @@
 #' }
 #' @export
 
-get_climate <- function(to, from, by, band, region, fun = "count") {
+get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) {
 
   # Conditions about the times
 
@@ -97,7 +98,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_count <- ee_count(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
       )
 
     id_names <- which(
@@ -126,7 +129,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_kurstosis <- ee_kurstosis(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -155,7 +160,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_max <- ee_max(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -184,7 +191,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_mean <- ee_mean(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -213,7 +222,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_median <- ee_median(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -242,7 +253,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_min <- ee_min(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -271,7 +284,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_mode <- ee_mode(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -300,7 +315,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_percentile <- ee_percentile(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -329,7 +346,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_std <- ee_std(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -358,7 +377,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_sum <- ee_sum(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -387,7 +408,9 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       multiply(multiply_factor[[band]])
 
     img_variance <- ee_variance(
-      img_base, region
+      img_base,
+      region,
+      scale = scale
     )
 
     id_names <- which(
@@ -429,7 +452,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_count <- ee_count(img_base, region)
+    img_count <- ee_count(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -470,7 +497,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_kurtosis <- ee_kurstosis(img_base, region)
+    img_kurtosis <- ee_kurstosis(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -510,7 +541,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_max <- ee_max(img_base, region)
+    img_max <- ee_max(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -550,7 +585,10 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_mean <- ee_mean(img_base, region)
+    img_mean <- ee_mean(
+      img_base,
+      region,
+      scale = scale)
 
     id_names <- which(
       startsWith(
@@ -590,7 +628,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_median <- ee_median(img_base, region)
+    img_median <- ee_median(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -630,7 +672,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_min <- ee_min(img_base, region)
+    img_min <- ee_min(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -670,7 +716,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_mode <- ee_mode(img_base, region)
+    img_mode <- ee_mode(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -710,7 +760,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_percentile <- ee_percentile(img_base, region)
+    img_percentile <- ee_percentile(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -750,7 +804,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_std <- ee_std(img_base, region)
+    img_std <- ee_std(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -790,7 +848,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_sum <- ee_sum(img_base, region)
+    img_sum <- ee_sum(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(
@@ -830,7 +892,11 @@ get_climate <- function(to, from, by, band, region, fun = "count") {
       toBands()$
       multiply(multiply_factor[[band]])
 
-    img_variance <- ee_variance(img_base, region)
+    img_variance <- ee_variance(
+      img_base,
+      region,
+      scale = scale
+      )
 
     id_names <- which(
       startsWith(

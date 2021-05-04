@@ -4,7 +4,7 @@
 \alias{get_vegetation}
 \title{Extract vegetation index of MODIS}
 \usage{
-get_vegetation(to, from, band, region, fun = "count")
+get_vegetation(to, from, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{the starting and final range of date.}
@@ -14,6 +14,8 @@ get_vegetation(to, from, band, region, fun = "count")
 \item{region}{is a feature or feature collection.}
 
 \item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median , min, mode , percentile , std, sum, variance, first).}
+
+\item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
 a sf object with the new variables.
