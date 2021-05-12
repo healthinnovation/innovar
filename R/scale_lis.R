@@ -1,95 +1,59 @@
-#' Vector of custom colors
-#'
-#'
-#' @export
-lis_colors <- c(
-  `ccvi1`  = "#005378",
-  `ccvi2`  = "#006FA0",
-  `ccvi3`  = "#5C99B3",
-  `ccvi4`  = "#9BCFC8",
-  `ccvi5`  = "#F2DDBD",
-  `npr1`  = "#03595C",
-  `npr2`  = "#58C3B0",
-  `npr3`  = "#E7E2BF",
-  `npr4`  = "#EFA255",
-  `npr5`  = "#DC4326",
-  `Blmbrg1`  = "#C397DC",
-  `Blmbrg2`  = "#9DFAF0",
-  `Blmbrg3`  = "#85D8FC",
-  `Blmbrg4`  = "#F0F0F0",
-  `ecomst1`  = "#EC251D",
-  `ecomst2`  = "#F25941",
-  `ecomst3`  = "#F58A6A",
-  `ecomst4`  = "#F8B797",
-  `ecomst5`  = "#FED1BE",
-  `ecomst6`  = "#CFCDC6",
-  `ctp1`  = "#1C0B07",
-  `ctp2`  = "#632718",
-  `ctp3`  = "#D04D39",
-  `ctp4`  = "#ED9991",
-  `ctp5`  = "#F9DDDC",
-  `jama1`  = "#0B4E60",
-  `jama2`  = "#186179",
-  `jama3`  = "#2E7998",
-  `jama4`  = "#2C9BB4",
-  `jama5`  = "#39A69F",
-  `jama6`  = "#7DC9C1",
-  `jama7`  = "#DAE2BC",
-  `jama8`  = "#FEBE82",
-  `jama9`  = "#F69354",
-  `jama10`  = "#8C3A33",
-  `mlobo1`  = "#191E34",
-  `mlobo2`  = "#094B56",
-  `mlobo3`  = "#00787C",
-  `mlobo4`  = "#3DA48F",
-  `mlobo5`  = "#FEECD5",
-  `btran1`  = "#7F1D6E",
-  `btran2`  = "#DA2D7A",
-  `btran3`  = "#E3506E",
-  `btran4`  = "#F68671",
-  `btran5`  = "#FEDCA0",
-  `nasa1`  = "#070510",
-  `nasa2`  = "#240F4F",
-  `nasa3`  = "#501278",
-  `nasa4`  = "#942A7F",
-  `nasa5`  = "#C33C72",
-  `nasa6`  = "#F7705E",
-  `nasa7`  = "#F5E6B2",
-  `nasa8`  = "#B2CFD3",
-  `nasa9`  = "#87BEEB",
-  `nasa10`  = "#6BB4F8"
-  )
+# Palettes as vectors of colors
 
-#' Function to extract lis colors as hex codes
-#'
-#' @param ... Character names of lis_colors
-#'
-#' @export lis_cols
+ccvi <- c(
+  "ccvi1"  = "#005378", "ccvi2"  = "#006FA0", "ccvi3"  = "#5C99B3",
+  "ccvi4"  = "#9BCFC8", "ccvi5"  = "#F2DDBD"
+)
 
-lis_cols <- function(...) {
-  cols <- c(...)
+npr <- c(
+  "npr1"  = "#03595C", "npr2"  = "#58C3B0", "npr3"  = "#E7E2BF",
+  "npr4"  = "#EFA255", "npr5"  = "#DC4326"
+)
 
-  if (is.null(cols))
-    return (lis_colors)
+blmbrg <- c(
+  "blmbrg1"  = "#C397DC", "blmbrg2"  = "#9DFAF0", "blmbrg3"  = "#85D8FC",
+  "blmbrg4"  = "#F0F0F0"
+)
 
-  lis_colors[cols]
-}
+ecomst <- c(
+  "ecomst1"  = "#EC251D", "ecomst2"  = "#F25941", "ecomst3"  = "#F58A6A",
+  "ecomst4"  = "#F8B797", "ecomst5"  = "#FED1BE", "ecomst6"  = "#CFCDC6"
+)
 
-#' Vector of custom palettes
-#'
-#'
-#' @export
+ctp <- c(
+  "ctp1"  = "#1C0B07", "ctp2"  = "#632718", "ctp3"  = "#D04D39",
+  "ctp4"  = "#ED9991", "ctp5"  = "#F9DDDC"
+)
+
+jama <- c(
+  "jama1"  = "#0B4E60", "jama2"  = "#186179", "jama3"  = "#2E7998",
+  "jama4"  = "#2C9BB4", "jama5"  = "#39A69F", "jama6"  = "#7DC9C1",
+  "jama7"  = "#DAE2BC", "jama8"  = "#FEBE82", "jama9"  = "#F69354",
+  "jama10"  = "#8C3A33"
+)
+
+mlobo <- c(
+  "mlobo1"  = "#191E34", "mlobo2"  = "#094B56", "mlobo3"  = "#00787C",
+  "mlobo4"  = "#3DA48F", "mlobo5"  = "#FEECD5"
+)
+
+btran <- c(
+  "btran1"  = "#7F1D6E", "btran2"  = "#DA2D7A", "btran3"  = "#E3506E",
+  "btran4"  = "#F68671", "btran5"  = "#FEDCA0"
+)
+
+nasa <- c(
+  "nasa1"  = "#070510", "nasa2"  = "#240F4F", "nasa3"  = "#501278",
+  "nasa4"  = "#942A7F", "nasa5"  = "#C33C72", "nasa6"  = "#F7705E",
+  "nasa7"  = "#F5E6B2", "nasa8"  = "#B2CFD3", "nasa9"  = "#87BEEB",
+  "nasa10"  = "#6BB4F8"
+)
+
+# List of palettes
 
 lis_palettes <- list(
-  `ccvi`  = lis_cols("ccvi1", "ccvi2", "ccvi3", "ccvi4", "ccvi5"),
-  `npr`  = lis_cols("npr1", "npr2", "npr3", "npr4", "npr5"),
-  `Blmbrg`  = lis_cols("Blmbrg1", "Blmbrg2", "Blmbrg3", "Blmbrg4"),
-  `ecomst`  = lis_cols("ecomst1", "ecomst2", "ecomst3", "ecomst4","ecomst5","ecomst6"),
-  `ctp`  = lis_cols("ctp1", "ctp2", "ctp3", "ctp4","ctp5"),
-  `jama`  = lis_cols("jama1", "jama2", "jama3", "jama4","jama5","jama6","jama7","jama8","jama9","jama10"),
-  `mlobo`  = lis_cols("mlobo1", "mlobo2", "mlobo3", "mlobo4","mlobo5"),
-  `btran`  = lis_cols("btran1", "btran2", "btran3", "btran4","btran5"),
-  `nasa`  = lis_cols("nasa1", "nasa2", "nasa3", "nasa4","nasa5","nasa6","nasa7","nasa8","nasa9","nasa10")
+  "ccvi" = ccvi, "npr" = npr, "blmbrg" = blmbrg, "ecomst" = ecomst, "ctp" = ctp,
+  "jama" = jama, "mlobo" = mlobo, "btran" = btran, "nasa" = nasa
 )
 
 #' Return function to interpolate a lis color palette
@@ -99,8 +63,8 @@ lis_palettes <- list(
 #' @param ... Additional arguments to pass to colorRampPalette()
 #'
 #' @importFrom grDevices colorRampPalette
-#' @export lis_pal
-lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
+#' @NoRd
+get_ramp <- function(palette = "ccvi", reverse = FALSE, ...) {
   pal <- lis_palettes[[palette]]
 
   if (reverse) pal <- rev(pal)
@@ -128,7 +92,7 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' @export scale_color_lis
 
 scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE, ...) {
-  pal <- lis_pal(palette = palette, reverse = reverse)
+  pal <- lis_ramp(palette = palette, reverse = reverse)
 
   if (discrete) {
     discrete_scale("colour", paste0("lis_", palette), palette = pal, ...)
