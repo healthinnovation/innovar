@@ -82,12 +82,12 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
       img_by_year,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
-       startsWith(
-         names(img_count), prefix = 'pop')
-       )
+      startsWith(
+        names(img_count), prefix = 'pop')
+    )
 
     names_id <- substr(
       seq(
@@ -106,7 +106,7 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
       img_by_year,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       startsWith(
