@@ -28,6 +28,7 @@ Name of some bands.
 \itemize{
 \item \bold{NDVI:} Normalized Difference Vegetation Index.
 \item \bold{EVI:} Enhanced Vegetation Index.
+\item \bold{SAVI:} Soil Adjusted Vegetation Index.
 }
 }
 \examples{
@@ -41,10 +42,11 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
+region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(
-  to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max")
+  to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max"
+)
 }
 }
