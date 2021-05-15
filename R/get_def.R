@@ -6,8 +6,9 @@
 #' @param region region and object sf.
 #' @return  a tibble object with the new variables.
 #' @param scale A nominal scale in meters of the projection to work in.
-#' @importFrom  sf st_transform st_simplify
-#' @importFrom  rgee sf_as_ee
+#'
+#' @importFrom sf st_transform st_simplify
+#' @importFrom rgee sf_as_ee
 #' @importFrom dplyr select filter contains
 #'
 #' @examples

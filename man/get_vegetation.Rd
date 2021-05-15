@@ -41,7 +41,7 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
+region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(

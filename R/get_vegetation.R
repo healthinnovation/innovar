@@ -31,7 +31,7 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
+#' region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_vegetation(
@@ -42,11 +42,10 @@
 get_vegetation <- function(to, from, band, region, fun = "count",scale = 1000) {
 
   # Conditions about the times
-
   start_year <- substr(to, 1, 4) %>% as.numeric()
   end_year <- substr(from, 1, 4) %>% as.numeric()
 
-  # Factores by each bands
+  # Factors by each bands
 
   multiply_factor <- c(
     NDVI = 0.0001, EVI = 0.0001
@@ -60,7 +59,29 @@ get_vegetation <- function(to, from, band, region, fun = "count",scale = 1000) {
 
   # NDVI - EVI
   collection = ee$ImageCollection('MODIS/006/MOD13A1')$
-    select(c(band))
+    select(c(band,'DetailedQA'))
+
+  # filter quality
+  bitwiseExtract <- function(value, fromBit, toBit = fromBit) {
+    maskSize <- ee$Number(1)$add(toBit)$subtract(fromBit)
+    mask <- ee$Number(1)$leftShift(maskSize)$subtract(1)
+    final <- value$rightShift(fromBit)$bitwiseAnd(mask)
+    return(final)
+  }
+
+  filteApply <- function(image) {
+    qa <- image$select("DetailedQA")
+    ndvi <- image$select(c(band))
+    # build filter
+    filter1 <- bitwiseExtract(qa,0,1)
+    filter2 <- bitwiseExtract(qa,15)
+    filter3 <- bitwiseExtract(qa,14)
+    # build mask
+    mask <- filter1$neq(2)$And(filter2$neq(1))$And(filter3$neq(1))
+    # apply mas
+    ndvi$updateMask(mask) %>% return()
+  }
+
   # date of dataset
   months = ee$List$sequence(1, 12)
   years = ee$List$sequence(start_year,end_year)
@@ -76,15 +97,16 @@ get_vegetation <- function(to, from, band, region, fun = "count",scale = 1000) {
                   collection$
                   filter(ee$Filter$calendarRange(y, y, 'year'))$
                   filter(ee$Filter$calendarRange(m, m, 'month'))$
-                  mean()$
+                  map(filteApply)$
+                  max()$
                   set('year',y)$
                   set('month',m)
-                )
               )
-          )
-        )$
+            )
+        )
+      )$
         flatten()
-      )
+    )
 
   im_base <- modis$
     filter(ee$Filter$inList('month',c(1:12)))
@@ -126,7 +148,7 @@ get_vegetation <- function(to, from, band, region, fun = "count",scale = 1000) {
       new_base,
       region,
       scale = scale
-      )
+    )
     id_names <- which(
       startsWith(
         names(img_count),
