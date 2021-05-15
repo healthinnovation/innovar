@@ -104,9 +104,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_count),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -135,9 +135,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_kurstosis),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -166,9 +166,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_max),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -197,9 +197,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mean),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -228,9 +228,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_median),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -259,9 +259,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_min),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -290,9 +290,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mode),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -321,9 +321,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_percentile),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -352,9 +352,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_std),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -383,9 +383,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_sum),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -414,9 +414,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_variance),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -459,9 +459,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_count),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -504,9 +504,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_kurtosis),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -548,9 +548,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_max),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -591,9 +591,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       scale = scale)
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mean),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -635,9 +635,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_median),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -679,9 +679,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_min),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -723,9 +723,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mode),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -767,9 +767,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_percentile),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -811,9 +811,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_std),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -855,9 +855,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_sum),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
@@ -899,9 +899,9 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_variance),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
