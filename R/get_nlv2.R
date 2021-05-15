@@ -32,7 +32,7 @@
 #' }
 #' @export
 
-get_nlv1 <- function(to, from, region, fun = "mean", scale = 100) {
+get_nlv2 <- function(to, from, region, fun = "mean", scale = 100) {
 
   # Conditions about the times
   start_year <- substr(to, 1, 4) %>% as.numeric()

@@ -29,6 +29,9 @@ reference:
   - '`get_pop`'
   - '`get_urban`'
   - '`get_vegetation`'
+  - '`get_nlv1`'
+  - '`get_nlv2`'
+  - '`get_def`'
 
 - title: Administrative limits
   contents:
@@ -52,3 +55,4 @@ reference:
   contents:
   - '`allpautils_names`'
   - '`read_batch`'
+  - '`pol_as_ee`'
