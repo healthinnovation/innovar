@@ -113,7 +113,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        by = '1 month'
         ),
       1,7
       )
@@ -144,7 +144,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -175,7 +175,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -206,7 +206,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -237,7 +237,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -268,7 +268,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -299,7 +299,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -330,7 +330,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -361,7 +361,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -392,7 +392,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
@@ -423,7 +423,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+         by = '1 month'
       ),
       1,7
     )
