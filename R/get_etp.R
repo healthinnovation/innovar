@@ -62,28 +62,25 @@ get_etp <- function(to, from, band, region, fun = "count", scale = 1000) {
   }
 
   # The main functions
-  collection <- ee$ImageCollection("MODIS/006/MOD16A2")$
-    select(c(band), "ET_QC")
-
+  collection <- ee$ImageCollection("MODIS/006/MOD16A2")
   # filter quality
   bitwiseExtract <- function(value, fromBit, toBit = fromBit) {
     maskSize <- ee$Number(1)$add(toBit)$subtract(fromBit)
     mask <- ee$Number(1)$leftShift(maskSize)$subtract(1)
     final <- value$rightShift(fromBit)$bitwiseAnd(mask)
     return(final)
-  }
+    }
 
   filteApply <- function(image) {
-    qa <- image$select("ET_QC")
-    etp <- image$select(c(band))
-    # build filter
-    filter1 <- bitwiseExtract(qa, 3, 4)
-    filter2 <- bitwiseExtract(qa, 1)
-    # build mask
-    mask <- filter1$neq(2)$And(filter2$neq(0))
-    # apply mas
-    etp$updateMask(mask) %>% return()
-  }
+      qa <- image$select("ET_QC")
+      etp <- image$select(c(band))
+      # build filter
+      filter1 <- bitwiseExtract(qa, 3, 4)
+      # build mask
+      mask <- filter1$neq(2)
+      # apply mas
+      etp$updateMask(mask) %>% return()
+    }
 
   # date of dataset
   months <- ee$List$sequence(1, 12)
@@ -92,20 +89,21 @@ get_etp <- function(to, from, band, region, fun = "count", scale = 1000) {
   modis <- ee$
     ImageCollection$
     fromImages(years$map(
-    ee_utils_pyfunc(function(y) {
-      months$map(ee_utils_pyfunc(
-        function(m) {
-          collection$
-            filter(ee$Filter$calendarRange(y, y, "year"))$
-            filter(ee$Filter$calendarRange(m, m, "month"))$
-            map(filteApply)$
-            max()$
-            set("year", y)$
-            set("month", m)
-        }
-      ))
-    })
-  )$flatten())
+      ee_utils_pyfunc(function(y) {
+        months$map(ee_utils_pyfunc(
+          function(m) {
+            collection$
+              filter(ee$Filter$calendarRange(y, y, "year"))$
+              filter(ee$Filter$calendarRange(m, m, "month"))$
+              map(filteApply)$
+              max()$
+              set("year", y)$
+              set("month", m)
+          }
+        ))
+      })
+    )$flatten())
+
 
   im_base <- modis$
     filter(ee$Filter$inList("month", c(1:12)))
@@ -113,32 +111,32 @@ get_etp <- function(to, from, band, region, fun = "count", scale = 1000) {
   if (start_year == end_year) {
     new_base <- im_base$
       filter(
-      ee$Filter$inList(
-        "year",
-        list(
+        ee$Filter$inList(
+          "year",
+          list(
+            c(
+              start_year:end_year
+            )
+          )
+        )
+      )$toBands()$
+      multiply(
+        multiply_factor[[band]]
+      )
+  } else {
+    new_base <- im_base$
+      filter(
+        ee$Filter$inList(
+          "year",
           c(
             start_year:end_year
           )
         )
-      )
-    )$toBands()$
-      multiply(
-      multiply_factor[[band]]
-    )
-  } else {
-    new_base <- im_base$
-      filter(
-      ee$Filter$inList(
-        "year",
-        c(
-          start_year:end_year
-        )
-      )
-    )$
+      )$
       toBands()$
       multiply(
-      multiply_factor[[band]]
-    )
+        multiply_factor[[band]]
+      )
   }
 
 

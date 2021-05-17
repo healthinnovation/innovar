@@ -160,6 +160,7 @@ get_vegetation <- function(to, from, band, region, fun = "count", scale = 1000) 
       })
     )$flatten())
   }
+
   im_base <- modis$
     filter(ee$Filter$inList("month", c(1:12)))
 
