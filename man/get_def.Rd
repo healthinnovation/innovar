@@ -4,7 +4,7 @@
 \alias{get_def}
 \title{Extract deforestation area data from Hansen}
 \usage{
-get_def(to, from, region, scale = 100)
+get_def(from, to, region, scale = 100)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -35,8 +35,8 @@ region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 # 2. Extracting deforestation area data
 data <- region_ee \%>\%
 get_def(
- to = '2001-01-01',
- from = '2005-12-31',
+ from = '2001-01-01',
+ to = '2005-12-31',
  region = region_ee,
  scale = 30
 )

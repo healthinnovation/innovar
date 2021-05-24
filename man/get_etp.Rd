@@ -4,7 +4,7 @@
 \alias{get_etp}
 \title{Extract evapotranspiration data of Modis}
 \usage{
-get_etp(to, from, band, region, fun = "count", scale = 1000)
+get_etp(from, to, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -48,6 +48,6 @@ region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\%
-  get_etp(to = "2001-02-01", from = "2003-12-31", band = "ET", fun = "max")
+  get_etp(from = "2001-02-01", to = "2003-12-31", band = "ET", fun = "max")
 }
 }

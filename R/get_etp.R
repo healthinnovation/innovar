@@ -39,16 +39,16 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>%
-#'   get_etp(to = "2001-02-01", from = "2003-12-31", band = "ET", fun = "max")
+#'   get_etp(from = "2001-02-01", to = "2003-12-31", band = "ET", fun = "max")
 #' }
 #' @export
 
 
-get_etp <- function(to, from, band, region, fun = "count", scale = 1000) {
+get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
   # Factores by each bands
 
   multiply_factor <- c(

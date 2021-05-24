@@ -27,19 +27,19 @@
 #' # 2. Extracting deforestation area data
 #' data <- region_ee %>%
 #' get_def(
-#'  to = '2001-01-01',
-#'  from = '2005-12-31',
+#'  from = '2001-01-01',
+#'  to = '2005-12-31',
 #'  region = region_ee,
 #'  scale = 30
 #' )
 #' }
 #' @export
 
-get_def <- function(to, from, region, scale = 100) {
+get_def <- function(from, to, region, scale = 100) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
   rango <- c(1:19)

@@ -47,17 +47,17 @@
 #' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_climate(
-#'   to = "2001-02-01", from = "2002-12-31",
+#'   from = "2001-02-01", to = "2002-12-31",
 #'   by = "month", band = "tmmx", fun = "max")
 #' }
 #' @export
 
-get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) {
+get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) {
 
   # Conditions about the times
 
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(

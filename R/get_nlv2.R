@@ -28,15 +28,15 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_nlv2(
-#'   to = "2001-01-01", from = "2003-01-01",fun = "max",scale = 1000)
+#'   from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 1000)
 #' }
 #' @export
 
-get_nlv2 <- function(to, from, region, fun = "mean", scale = 100) {
+get_nlv2 <- function(from, to, region, fun = "mean", scale = 100) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(

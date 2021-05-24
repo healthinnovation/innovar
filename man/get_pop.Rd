@@ -4,7 +4,7 @@
 \alias{get_pop}
 \title{Extract population data of WorldPop}
 \usage{
-get_pop(to, from, region, fun = "count", scale = 100)
+get_pop(from, to, region, fun = "count", scale = 100)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -36,6 +36,6 @@ region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_pop(
-  to = "2001-01-01", from = "2003-01-01",fun = "max",scale = 100)
+  from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 100)
 }
 }

@@ -4,7 +4,7 @@
 \alias{get_climate}
 \title{Extract climate data of TerraClimate}
 \usage{
-get_climate(to, from, by, band, region, fun = "count", scale = 1000)
+get_climate(from, to, by, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -58,7 +58,7 @@ region <- import_db("Peru_shp")
 region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 # 2. Extracting climate information
 data <- region_ee \%>\% get_climate(
-  to = "2001-02-01", from = "2002-12-31",
+  from = "2001-02-01", to = "2002-12-31",
   by = "month", band = "tmmx", fun = "max")
 }
 }

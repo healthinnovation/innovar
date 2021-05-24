@@ -4,7 +4,7 @@
 \alias{get_urban}
 \title{Extract urban area data of MODIS Landcover}
 \usage{
-get_urban(to, from, region, scale = 1000)
+get_urban(from, to, region, scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -28,7 +28,7 @@ library(sf)
 ee_Initialize()
 region <- import_db("Peru_shp")
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-data <- get_climate(to = '2008-01-01', from = '2010-01-01', region = region)
+data <- get_climate(from = '2008-01-01', to = '2010-01-01', region = region)
 
 }
 }

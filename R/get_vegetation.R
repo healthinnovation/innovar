@@ -36,16 +36,16 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_vegetation(
-#'   to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max"
+#'   from = "2001-02-01", to = "2002-12-31", band = "NDVI", fun = "max"
 #' )
 #' }
 #' @export
 
-get_vegetation <- function(to, from, band, region, fun = "count", scale = 1000) {
+get_vegetation <- function(from, to, band, region, fun = "count", scale = 1000) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # Factors by each bands
 

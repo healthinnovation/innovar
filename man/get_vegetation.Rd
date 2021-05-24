@@ -4,7 +4,7 @@
 \alias{get_vegetation}
 \title{Extract vegetation index of MODIS}
 \usage{
-get_vegetation(to, from, band, region, fun = "count", scale = 1000)
+get_vegetation(from, to, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{the starting and final range of date.}
@@ -46,7 +46,7 @@ region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(
-  to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max"
+  from = "2001-02-01", to = "2002-12-31", band = "NDVI", fun = "max"
 )
 }
 }
