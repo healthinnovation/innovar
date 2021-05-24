@@ -14,7 +14,7 @@ get_ghm(region, fun = "count", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a tibble object with the new variables.
+a tibble object with the new variable in km².
 }
 \description{
 A function that extract Global Human Modification data of the year \bold{2016}

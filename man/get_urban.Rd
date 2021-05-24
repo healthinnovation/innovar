@@ -14,7 +14,7 @@ get_urban(from, to, region, scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a tibble object with the new variables
+a tibble object with the new variable in km2
 }
 \description{
 A function that extract a time series of the urban area of MODIS Landcover

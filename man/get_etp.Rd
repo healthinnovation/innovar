@@ -26,10 +26,10 @@ A function that extract a ETP time series of MODIS by \bold{month}.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{ET:} Total evapotranspiration.
-\item \bold{LE:}  Average latent heat flux.
-\item \bold{PET:} Total potential evapotranspiration.
-\item \bold{PLE:} Average potential latent heat flux.
+\item \bold{ET (kg/m²):} Total evapotranspiration.
+\item \bold{LE (J/m²):}  Average latent heat flux.
+\item \bold{PET (kg/m²):} Total potential evapotranspiration.
+\item \bold{PLE (j/m²):} Average potential latent heat flux.
 \item \bold{ET_QC:} Evapotranspiration quality control flags
 }
 }

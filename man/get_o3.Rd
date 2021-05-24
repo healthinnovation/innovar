@@ -26,15 +26,15 @@ A function that extract a time series of ozone.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{O3_column_number_density:} Total atmospheric column of O3 between the surface and the top of atmosphere, calculated with the DOAS algorithm.
-\item \bold{O3_column_number_density_amf:} Weighted mean of cloudy and clear air mass factor (amf) weighted by intensity-weighted cloud fraction.
-\item \bold{O3_slant_column_number_density:} O3 ring corrected slant column number density.
-\item \bold{O3_effective_temperature:} Ozone cross section effective temperature.
+\item \bold{O3_column_number_density (mol/m²):} Total atmospheric column of O3 between the surface and the top of atmosphere, calculated with the DOAS algorithm.
+\item \bold{O3_column_number_density_amf (mol/m²):} Weighted mean of cloudy and clear air mass factor (amf) weighted by intensity-weighted cloud fraction.
+\item \bold{O3_slant_column_number_density (mol/m²):} O3 ring corrected slant column number density.
+\item \bold{O3_effective_temperature (K):} Ozone cross section effective temperature.
 \item \bold{cloud_fraction:} Effective cloud fraction. See the Sentinel 5P L2 Input/Output Data Definition Spec, p.220.
-\item \bold{sensor_azimuth_angle	:} 	Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{sensor_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-\item \bold{solar_azimuth_angle:} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{solar_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{sensor_azimuth_angle (degrees):} 	Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{sensor_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{solar_azimuth_angle (degrees):} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{solar_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
  }
 }
 \examples{

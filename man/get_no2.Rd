@@ -26,18 +26,18 @@ A function that extract a time series of nitrogen dioxide.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{NO2_column_number_density:} Total vertical column of NO2 (ratio of the slant column density of NO2 and the total air mass factor).
-\item \bold{tropospheric_NO2_column_number_density:} tropospheric vertical column of NO2.
-\item \bold{stratospheric_NO2_column_number_density:} stratospheric vertical column of NO2
-\item \bold{NO2_slant_column_number_density:} NO2 slant column density
-\item \bold{tropopause_pressure:} topopause pressure
+\item \bold{NO2_column_number_density (mol/m²):} Total vertical column of NO2 (ratio of the slant column density of NO2 and the total air mass factor).
+\item \bold{tropospheric_NO2_column_number_density (mol/m²):} tropospheric vertical column of NO2.
+\item \bold{stratospheric_NO2_column_number_density (mol/m²):} stratospheric vertical column of NO2
+\item \bold{NO2_slant_column_number_density (mol/m²):} NO2 slant column density
+\item \bold{tropopause_pressure (Pa):} topopause pressure
 \item \bold{absorbing_aerosol_index:} 	Aerosol index (at wavelengths 354/388, i.e. the OMI pair) from the AER_AI level 2 product. See Level 2 Algorithms - Aerosol Index.
 \item \bold{cloud_fraction:} Effective cloud fraction. See the Sentinel 5P L2 Input/Output Data Definition Spec, p.220.
-\item \bold{sensor_altitude:} Altitude of the satellite with respect to the geodetic sub-satellite point (WGS84).
-\item \bold{sensor_azimuth_angle:} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{sensor_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-\item \bold{solar_azimuth_angle:} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{solar_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{sensor_altitude (m):} Altitude of the satellite with respect to the geodetic sub-satellite point (WGS84).
+\item \bold{sensor_azimuth_angle (degrees):} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{sensor_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{solar_azimuth_angle (degrees):} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{solar_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
 }
 }
 \examples{

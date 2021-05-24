@@ -26,15 +26,15 @@ A function that extract a time series of ozone.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{SO2_column_number_density:} SO2 vertical column density at ground level, calculated using the DOAS technique.
-\item \bold{SO2_column_number_density_amf:} Weighted mean of cloudy and clear air mass factor (amf) weighted by intensity-weighted cloud fraction.
-\item \bold{SO2_slant_column_number_density:} SO2 ring corrected slant column number density.
+\item \bold{SO2_column_number_density (mol/m²):} SO2 vertical column density at ground level, calculated using the DOAS technique.
+\item \bold{SO2_column_number_density_amf (mol/m²):} Weighted mean of cloudy and clear air mass factor (amf) weighted by intensity-weighted cloud fraction.
+\item \bold{SO2_slant_column_number_density (mol/m²):} SO2 ring corrected slant column number density.
 \item \bold{cloud_fraction:} Effective cloud fraction. See the Sentinel 5P L2 Input/Output Data Definition Spec, p.220.
-\item \bold{sensor_azimuth_angle	:} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{sensor_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-\item \bold{solar_azimuth_angle:} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{solar_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-\item \bold{SO2_column_number_density_15km:} SO2 vertical column density at 15km, calculated using the DOAS technique.
+\item \bold{sensor_azimuth_angle (degree): } Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{sensor_zenith_angle (degree):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{solar_azimuth_angle (degree):} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{solar_zenith_angle (degree):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{SO2_column_number_density_15km (mol/m²):} SO2 vertical column density at 15km, calculated using the DOAS technique.
  }
 }
 \examples{

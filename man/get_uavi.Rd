@@ -26,12 +26,12 @@ A function that extract a time series of Aerosol index variables.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{absorbing_aerosol_index:} A measure of the prevalence of aerosols in the atmosphere, calculated by this \href{https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-5p/level-2/aerosol-index}{equation} using the 354/388 wavelength pair.
-\item \bold{sensor_altitude:} Altitude of the satellite with respect to the geodetic sub-satellite point (WGS84).
-\item \bold{sensor_azimuth_angle	:} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{sensor_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-\item \bold{sensor_zenith_angle:} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
-\item \bold{solar_zenith_angle:}Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{absorbing_aerosol_index (mol/m²):} A measure of the prevalence of aerosols in the atmosphere, calculated by this \href{https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-5p/level-2/aerosol-index}{equation} using the 354/388 wavelength pair.
+\item \bold{sensor_altitude (mol/m²):} Altitude of the satellite with respect to the geodetic sub-satellite point (WGS84).
+\item \bold{sensor_azimuth_angle (degrees):} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{sensor_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+\item \bold{sensor_zenith_angle (degrees):} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
+\item \bold{solar_zenith_angle (degrees):}Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
 }
 }
 \examples{

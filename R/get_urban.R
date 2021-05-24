@@ -6,7 +6,7 @@
 #' @param region it's a feature or feature collection
 #' @param scale A nominal scale in meters of the projection to work in.
 #'
-#' @return  a tibble object with the new variables
+#' @return  a tibble object with the new variable in km2
 #' @export
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
