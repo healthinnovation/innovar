@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract climate data of TerraClimate — get_climate • lis</title>
+<title>Extract Ozone data of Sentinel5 — get_so2 • lis</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Extract climate data of TerraClimate — get_climate" />
-<meta property="og:description" content="A function that extract a time series of climate variables." />
+<meta property="og:title" content="Extract Ozone data of Sentinel5 — get_so2" />
+<meta property="og:description" content="A function that extract a time series of ozone." />
 
 
 
@@ -122,16 +122,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract climate data of TerraClimate</h1>
-    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/get_climate.R'><code>R/get_climate.R</code></a></small>
-    <div class="hidden name"><code>get_climate.Rd</code></div>
+    <h1>Extract Ozone data of Sentinel5</h1>
+    <small class="dont-index">Source: <a href='https://github.com/healthinnovation/lis/blob/master/R/get_so2.R'><code>R/get_so2.R</code></a></small>
+    <div class="hidden name"><code>get_so2.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function that extract a time series of climate variables.</p>
+    <p>A function that extract a time series of ozone.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_climate</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span>, <span class='va'>by</span>, <span class='va'>band</span>, <span class='va'>region</span>, fun <span class='op'>=</span> <span class='st'>"count"</span>, scale <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_so2</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span>, <span class='va'>band</span>, <span class='va'>region</span>, fun <span class='op'>=</span> <span class='st'>"max"</span>, scale <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,10 +139,6 @@
     <tr>
       <th>to, from</th>
       <td><p>it's a string object,starting and final date.</p></td>
-    </tr>
-    <tr>
-      <th>by</th>
-      <td><p>two types of increment of the sequence by <b>month</b> and <b>year</b>.</p></td>
     </tr>
     <tr>
       <th>band</th>
@@ -168,20 +164,15 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Name of some bands.</p><ul>
-<li><p><b>aet (mm):</b> Actual evapotranspiration, derived using a one-dimensional soil water balance model.</p></li>
-<li><p><b>def (mm):</b> Climate water deficit, derived using a one-dimensional soil water balance model.</p></li>
-<li><p><b>pdsi :</b> Palmer Drought Severity Index.</p></li>
-<li><p><b>pet(mm):</b> Reference evapotranspiration (ASCE Penman-Montieth).</p></li>
-<li><p><b>pr (mm):</b> Precipitation accumulation.</p></li>
-<li><p><b>ro (mm):</b> Runoff, derived using a one-dimensional soil water balance model.</p></li>
-<li><p><b>soil (mm):</b> Soil moisture, derived using a one-dimensional soil water balance model.</p></li>
-<li><p><b>srad (W/m²):</b> Downward surface shortwave radiation.</p></li>
-<li><p><b>swe (mm):</b> Snow water equivalent, derived using a one-dimensional soil water balance model.</p></li>
-<li><p><b>tmmn (°C):</b> Minimum temperature.</p></li>
-<li><p><b>tmmx (°C):</b> Maximum temperature.</p></li>
-<li><p><b>vap (kPa):</b> Vapor pressure</p></li>
-<li><p><b>vpd (kPa):</b> Vapor pressure deficit.</p></li>
-<li><p><b>vs (m/s):</b> Wind-speed at 10m.</p></li>
+<li><p><b>SO2_column_number_density (mol/m²):</b> SO2 vertical column density at ground level, calculated using the DOAS technique.</p></li>
+<li><p><b>SO2_column_number_density_amf (mol/m²):</b> Weighted mean of cloudy and clear air mass factor (amf) weighted by intensity-weighted cloud fraction.</p></li>
+<li><p><b>SO2_slant_column_number_density (mol/m²):</b> SO2 ring corrected slant column number density.</p></li>
+<li><p><b>cloud_fraction:</b> Effective cloud fraction. See the Sentinel 5P L2 Input/Output Data Definition Spec, p.220.</p></li>
+<li><p><b>sensor_azimuth_angle (degree): </b> Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.</p></li>
+<li><p><b>sensor_zenith_angle (degree):</b> Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.</p></li>
+<li><p><b>solar_azimuth_angle (degree):</b> Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.</p></li>
+<li><p><b>solar_zenith_angle (degree):</b> Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.</p></li>
+<li><p><b>SO2_column_number_density_15km (mol/m²):</b> SO2 vertical column density at 15km, calculated using the DOAS technique.</p></li>
 </ul>
 
 
@@ -198,9 +189,9 @@
 <span class='va'>region</span> <span class='op'>&lt;-</span> <span class='fu'><a href='import_db.html'>import_db</a></span><span class='op'>(</span><span class='st'>"Peru_shp"</span><span class='op'>)</span>
 <span class='va'>region_ee</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pol_as_ee.html'>pol_as_ee</a></span><span class='op'>(</span><span class='va'>region</span> , id <span class='op'>=</span> <span class='st'>'distr'</span> , simplify <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
 <span class='co'># 2. Extracting climate information</span>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>region_ee</span> <span class='op'>%&gt;%</span> <span class='fu'>get_climate</span><span class='op'>(</span>
-  from <span class='op'>=</span> <span class='st'>"2001-02-01"</span>, to <span class='op'>=</span> <span class='st'>"2002-12-31"</span>,
-  by <span class='op'>=</span> <span class='st'>"month"</span>, band <span class='op'>=</span> <span class='st'>"tmmx"</span>, fun <span class='op'>=</span> <span class='st'>"max"</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>region_ee</span> <span class='op'>%&gt;%</span> <span class='fu'>get_so2</span><span class='op'>(</span>
+  from <span class='op'>=</span> <span class='st'>"2019-02-01"</span>, to <span class='op'>=</span> <span class='st'>"2019-12-31"</span>,
+  band <span class='op'>=</span> <span class='st'>"SO2_column_number_density"</span>, fun <span class='op'>=</span> <span class='st'>"max"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
