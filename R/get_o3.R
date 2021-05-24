@@ -3,7 +3,6 @@
 #' A function that extract a time series of ozone.
 #'
 #' @param to,from it's a string object,starting and final date.
-#' @param by  two types of increment of the sequence by \bold{month}.
 #' @param band name of band.
 #' @param region is a feature or feature collection.
 #' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
@@ -20,7 +19,7 @@
 #' \item \bold{sensor_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
 #' \item \bold{solar_azimuth_angle:} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
 #' \item \bold{solar_zenith_angle:} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
-#  }
+#'  }
 #'
 #' @return  a sf object with the new variables.
 #' @importFrom  sf st_transform st_simplify

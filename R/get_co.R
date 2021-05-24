@@ -3,7 +3,6 @@
 #' A function that extract a time series of carbon monoxide.
 #'
 #' @param to,from it's a string object,starting and final date.
-#' @param by  two types of increment of the sequence by \bold{month}.
 #' @param band name of band.
 #' @param region is a feature or feature collection.
 #' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).

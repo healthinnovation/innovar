@@ -16,8 +16,6 @@ get_no2(from, to, band, region, fun = "max", scale = 1000)
 \item{fun}{function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).}
 
 \item{scale}{A nominal scale in meters of the projection to work in.}
-
-\item{by}{two types of increment of the sequence by \bold{month}.}
 }
 \value{
 a sf object with the new variables.
