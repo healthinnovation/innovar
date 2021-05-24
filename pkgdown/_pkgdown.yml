@@ -35,7 +35,7 @@ reference:
    - '`get_uavi`'
    - '`get_vegetation`'
 
-- title: Human interventions
+- title: Human intervention
   contents:
   - '`get_ghm`'
   - '`get_pop`'
