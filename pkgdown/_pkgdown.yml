@@ -21,17 +21,29 @@ navbar:
         href: articles/vignette.html
 
 reference:
-- title: Climate functions
+- title: Climate
   contents:
   - '`get_climate`'
   - '`get_etp`'
+
+- title: Environment
+  contents:
+   - '`get_co`'
+   - '`get_no2`'
+   - '`get_o3`'
+   - '`get_so2`'
+   - '`get_uavi`'
+   - '`get_vegetation`'
+
+- title: Human interventions
+  contents:
   - '`get_ghm`'
   - '`get_pop`'
   - '`get_urban`'
-  - '`get_vegetation`'
   - '`get_nlv1`'
   - '`get_nlv2`'
   - '`get_def`'
+
 
 - title: Administrative limits
   contents:
