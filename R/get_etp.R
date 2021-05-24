@@ -156,8 +156,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -180,8 +180,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -205,8 +205,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -230,8 +230,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -254,8 +254,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -278,8 +278,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -302,8 +302,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -326,8 +326,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -350,8 +350,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -374,8 +374,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7
@@ -398,8 +398,8 @@ get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 month'
       ),
       1, 7

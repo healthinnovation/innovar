@@ -68,8 +68,8 @@ get_def <- function(from, to, region, scale = 100) {
 
   names_id <- substr(
     seq(
-      as.Date(to),
       as.Date(from),
+      as.Date(to),
       length.out = length(id_names)
     ),
     1,4
