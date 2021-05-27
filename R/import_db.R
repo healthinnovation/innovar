@@ -2,27 +2,26 @@
 #'
 #' Function 'import_db' the specified dataset.
 #'
-#' @param dataset is a character specifiying the dataset to request.
+#' @param dataset is a character specifying the dataset to request.
 #'
 #' Current datasets available are:
 #'
-#' - "Peru_names": Returns the name of the 1874 districts, 196 provinces and 25 regions of Perú as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
+#' - \bold{Peru_names}: Returns the name of the 1874 districts, 196 provinces and 25 regions of Peru as they are reported by the INEI in the REDATAM platform for the 2017 CENSUS.
 #'
-#' - "Peru_shp": Returns the shapefile for thethe 1874 districts, 196 provinces and 25 regions of Perú
+#' - \bold{Peru_shp}: Returns the shapefile for the 1874 districts, 196 provinces and 25 regions of Peru.
 #'
 #' @examples
-#' df <- data.frame(
-#'   reg = c(
-#'     "LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS", "SAN MARTIN", "HUANUCO",
-#'     "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC", "AYACUCHO",
-#'     "HUANCAVELICA", "TUMBES", "PIURA", "LAMBAYEQUE", "LA LIBERTAD",
-#'     "ANCASH", "ICA", "AREQUIPA", "TACNA", "MOQUEGUA", "LORETO", "UCAYALI",
-#'     "MADRE DE DIOS"
-#'   ),
-#'   stringsAsFactors = FALSE
-#' )
+#' # Import shapefiles of Peru
+#' peru_shp <- import_db('Peru_shp')
+#' head(peru_shp)
+#'
+#' # Import names of distritcts
+#' peru_names <- import_db('Peru_names')
+#' head(peru_names)
+#'
 #' @importFrom utils read.csv
 #' @import RCurl
+#' @importFrom  sf st_cast
 #' @export import_db
 
 import_db <- function(dataset) {
@@ -32,7 +31,7 @@ import_db <- function(dataset) {
   } else if (dataset == "Peru_shp") {
 
     x <- "https://github.com/healthinnovation/lis/blob/master/files/shp_PER_adm3.Rdata?raw=true"
-    x <- readRDS(url(x))
+    x <- suppressWarnings(st_cast(readRDS(url(x)),"POLYGON"))
   }
 
   return(x)
