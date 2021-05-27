@@ -85,8 +85,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_count), prefix = 'pop')
+      endsWith(
+        names(img_count), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -109,8 +109,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_kurtosis), prefix = 'pop')
+      endsWith(
+        names(img_kurtosis), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -133,8 +133,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_max), prefix = 'pop')
+      endsWith(
+        names(img_max), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -157,8 +157,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_mean), prefix = 'pop')
+      endsWith(
+        names(img_mean), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -181,8 +181,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_median), prefix = 'pop')
+      endsWith(
+        names(img_median), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -205,8 +205,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_min), prefix = 'pop')
+      endsWith(
+        names(img_min), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -229,8 +229,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_mode), prefix = 'pop')
+      endsWith(
+        names(img_mode), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -253,8 +253,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_percentile), prefix = 'pop')
+      endsWith(
+        names(img_percentile), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -277,8 +277,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_std), prefix = 'pop')
+      endsWith(
+        names(img_std), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -301,8 +301,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_sum), prefix = 'pop')
+      endsWith(
+        names(img_sum), suffix = 'pop')
     )
 
     names_id <- substr(
@@ -325,8 +325,8 @@ get_pop <- function(from, to, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_variance), prefix = 'pop')
+      endsWith(
+        names(img_variance), suffix = 'pop')
     )
 
     names_id <- substr(

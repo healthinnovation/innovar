@@ -43,7 +43,7 @@
 #' }
 #' @export
 
-get_uavi <- function(from, to, band, region, fun = "count", scale = 1000) {
+get_aero <- function(from, to, band, region, fun = "count", scale = 1000) {
 
   # Conditions about the times
   start_year <- substr(from, 1, 4) %>% as.numeric()
