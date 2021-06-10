@@ -1,5 +1,5 @@
-#'@nord
 #' Set of function to zonal statistic
+#' @name ee_count
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
@@ -50,8 +50,9 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_kurtosis
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture or featureCollection.
 #' @param by a limit of pass by polygon.
@@ -102,8 +103,9 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_max
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
@@ -153,8 +155,9 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_mean
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture o feature collection.
 #' @param by a limit of pass by polygon.
@@ -204,8 +207,9 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
   }
   return(dataset)
 }
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_median
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
@@ -255,8 +259,9 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_min
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
@@ -307,8 +312,9 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_mode
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
@@ -359,8 +365,9 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_percentile
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
@@ -411,8 +418,9 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_std
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture or feature collection.
 #' @param by a limit of pass by polygon.
@@ -463,8 +471,9 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_sum
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
@@ -516,8 +525,9 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_variance
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
@@ -568,8 +578,9 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_first
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
