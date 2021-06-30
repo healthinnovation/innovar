@@ -2,7 +2,7 @@
 
 export("%>%")
 export(allpautils_names)
-export(gen_admin.div)
+export(gen_admin_div)
 export(get_aero)
 export(get_climate)
 export(get_co)

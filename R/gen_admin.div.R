@@ -4,14 +4,17 @@
 #'   administrative division of Peru that includes the region, province or district
 #'   provided to the function.
 #'
-#' @param x x is a list/vector with one of the 25 regions/departments names of Peru (first-level administrative subdivisions)
-#' @param method defines the type of natural, geographical, or administrative division that should be returned
-#' Traditional: Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
-#' TC: (Lima no incluye Huarua/Cañete)\href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}
-#' Cardinal: North, South, Amazon Jungle, or Lima & Callao
-#' Traditional Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)
+#' @param x x is a list/vector with one of the 25 regions/departments names of
+#'   Peru (first-level administrative subdivisions).
+#' @param method defines the type of natural, geographical, or administrative
+#'   division that should be returned. Possible values are:
 #'
-#' @return Tabla con las divisiones resultantes del Peru
+#'   - Traditional: Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
+#'   - TC: (Lima no incluye Huarua/Cañete)\href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}
+#'   - Cardinal: North, South, Amazon Jungle, or Lima & Callao
+#'   - Trad_Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)
+#'
+#' @return Converts characters where it detects regions of Peru with the resulting divisions specified.
 #'
 #' @examples
 #' df_dep <- data.frame(
