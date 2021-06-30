@@ -1,6 +1,8 @@
-#' Create categories for adiministrative divisions (Perú)
+#' Create categories for adiministrative divisions (Peru)
 #'
-#'Function 'gen_admin.div' returns the natural, geographical, or administrative division of Peru that includes the region, province or district provided to the function.
+#' @description Function 'gen_admin.div' returns the natural, geographical, or
+#'   administrative division of Peru that includes the region, province or district
+#'   provided to the function.
 #'
 #' @param x x is a list/vector with one of the 25 regions/departments names of Peru (first-level administrative subdivisions)
 #' @param method defines the type of natural, geographical, or administrative division that should be returned
@@ -20,57 +22,61 @@
 #' }
 #'
 #' @export gen_admin.div
-gen_admin.div <- function(x,
+#'
+gen_admin_div <- function(x,
                           method="Traditional") {
-  reg.mountain.north <- c("CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO")
-  reg.mountain.south <- c("JUNIN","CUSCO","PUNO","APURIMAC","AYACUCHO","HUANCAVELICA")
-  reg.coastal.north <- c("TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD","ANCASH")
-  reg.coastal.south <- c("ICA","AREQUIPA","TACNA","MOQUEGUA")
+  reg_mountain_north <- c("CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO")
+  reg_mountain_south <- c("JUNIN","CUSCO","PUNO","APURIMAC","AYACUCHO","HUANCAVELICA")
+  reg_coastal_north <- c("TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD","ANCASH")
+  reg_coastal_south <- c("ICA","AREQUIPA","TACNA","MOQUEGUA")
 
-  reg.south <- c("JUNIN","HUANCAVELICA","ICA","AYACUCHO","APURIMAC",
+  reg_south <- c("JUNIN","HUANCAVELICA","ICA","AYACUCHO","APURIMAC",
                  "AREQUIPA","MOQUEGUA","TACNA","PUNO","CUSCO")
-  reg.north <- c("TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD","ANCASH",
+  reg_north <- c("TUMBES","PIURA","LAMBAYEQUE","LA LIBERTAD","ANCASH",
                  "CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO")
-  reg.jungle <- c("LORETO","UCAYALI","MADRE DE DIOS")
+  reg_jungle <- c("LORETO","UCAYALI","MADRE DE DIOS")
 
-  reg.tc.north <- c("ANCASH","CAJAMARCA","LA LIBERTAD",
+  reg_tc_north <- c("ANCASH","CAJAMARCA","LA LIBERTAD",
                     "LAMBAYEQUE","PIURA","TUMBES")
-  reg.tc.center <- c("APURIMAC","AYACUCHO","HUANCAVELICA",
+  reg_tc_center <- c("APURIMAC","AYACUCHO","HUANCAVELICA",
                      "HUANUCO","JUNIN","PASCO","ICA")
-  reg.tc.south <- c("AREQUIPA","CUSCO","MADRE DE DIOS",
+  reg_tc_south <- c("AREQUIPA","CUSCO","MADRE DE DIOS",
                     "MOQUEGUA","PUNO","TACNA")
-  reg.tc.east <- c("AMAZONAS","LORETO","SAN MARTIN","UCAYALI")
+  reg_tc_east <- c("AMAZONAS","LORETO","SAN MARTIN","UCAYALI")
 
-  if(method=="Traditional") {
+  x <- allpautils_names(x)
+  x <- toupper(x)
 
-    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x <- replace(x, x %in% reg.mountain.north | x %in% reg.mountain.south,"ANDES MOUNTAINS")
-    x <- replace(x, x %in% reg.coastal.north | x %in% reg.coastal.south,"COASTAL")
-    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+  if(method =="Traditional") {
 
-  } else if(method=="TC") {
+    x <- replace(x, x %in% reg_jungle, "AMAZON JUNGLE")
+    x <- replace(x, x %in% reg_mountain_north | x %in% reg_mountain_south, "ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg_coastal_north | x %in% reg_coastal_south, "COASTAL")
+    x <- replace(x, x == "CALLAO" | x == "LIMA", "LIMA & CALLAO")
 
-    x <- replace(x, x %in% reg.tc.north,"NORTH")
-    x <- replace(x, x %in% reg.tc.south,"SOUTH")
-    x <- replace(x, x %in% reg.tc.center,"CENTER")
-    x <- replace(x, x %in% reg.tc.east,"EAST")
-    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+  } else if(method =="TC") {
+
+    x <- replace(x, x %in% reg_tc_north, "NORTH")
+    x <- replace(x, x %in% reg_tc_south, "SOUTH")
+    x <- replace(x, x %in% reg_tc_center, "CENTER")
+    x <- replace(x, x %in% reg_tc_east, "EAST")
+    x <- replace(x, x == "CALLAO" | x == "LIMA", "LIMA & CALLAO")
     # Deberian ser solo los distritos de Lima, Callao, más Huarua/Cañete. Por ahora todo LIMA will do just fine
-  } else if(method=="Cardinal") {
+  } else if(method == "Cardinal") {
 
-    x <- replace(x, x %in% reg.north,"NORTH")
-    x <- replace(x, x %in% reg.south ,"SOUTH")
-    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg_north,"NORTH")
+    x <- replace(x, x %in% reg_south ,"SOUTH")
+    x <- replace(x, x %in% reg_jungle,"AMAZON JUNGLE")
+    x <- replace(x, x =="CALLAO" | x =="LIMA","LIMA & CALLAO")
 
-  } else if(method=="Traditional Cardinal") {
+  } else if(method == "Traditional Cardinal") {
 
-    x <- replace(x, x %in% reg.jungle,"AMAZON JUNGLE")
-    x <- replace(x, x %in% reg.mountain.south,"SOUTH ANDES MOUNTAINS")
-    x <- replace(x, x %in% reg.mountain.north,"NORTH ANDES MOUNTAINS")
-    x <- replace(x, x %in% reg.coastal.north,"NORTH COAST")
-    x <- replace(x, x %in% reg.coastal.south,"SOUTH COAST")
-    x <- replace(x, x=="CALLAO" | x=="LIMA","LIMA & CALLAO")
+    x <- replace(x, x %in% reg_jungle, "AMAZON JUNGLE")
+    x <- replace(x, x %in% reg_mountain_south, "SOUTH ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg_mountain_north, "NORTH ANDES MOUNTAINS")
+    x <- replace(x, x %in% reg_coastal_north, "NORTH COAST")
+    x <- replace(x, x %in% reg_coastal_south, "SOUTH COAST")
+    x <- replace(x, x == "CALLAO" | x == "LIMA", "LIMA & CALLAO")
   }
   return(x)
 }
