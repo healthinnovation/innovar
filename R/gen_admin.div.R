@@ -14,14 +14,23 @@
 #' @return Tabla con las divisiones resultantes del Peru
 #'
 #' @examples
-#' \dontrun{
-#' df <- data.frame(reg=c("LIMA","CALLAO","CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO",
-#' "PASCO","JUNIN","CUSCO","PUNO","APURIMAC","AYACUCHO","HUANCAVELICA","TUMBES","PIURA",
-#' "LAMBAYEQUE","LA LIBERTAD","ANCASH","ICA","AREQUIPA","TACNA","MOQUEGUA","LORETO",
-#' "UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE)
-#' }
+#' df_dep <- data.frame(
+#' Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
+#'            "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC",
+#'             AYACUCHO", "HUANCAVELICA", "TUMBES", "PIURA", "LAMBAYEQUE",
+#'             "LA LIBERTAD", "ANCASH", "ICA", "AREQUIPA", "TACNA", "MOQUEGUA",
+#'             "LORETO", "UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE
+#'           )
 #'
-#' @export gen_admin.div
+#' df_dep %>%
+#'   mutate(
+#'     Reg_traditional = gen_admin_div(Region, method = "Traditional"),
+#'     Reg_TC = gen_admin_div(Region, method = "TC"),
+#'     Reg_Cardinal = gen_admin_div(Region, method = "Cardinal"),
+#'     Reg_Trad_Cardinal = gen_admin_div(Region, method = "Trad_Cardinal")
+#'   )
+#'
+#' @export gen_admin_div
 #'
 gen_admin_div <- function(x,
                           method="Traditional") {
@@ -54,7 +63,7 @@ gen_admin_div <- function(x,
     x <- replace(x, x %in% reg_coastal_north | x %in% reg_coastal_south, "COASTAL")
     x <- replace(x, x == "CALLAO" | x == "LIMA", "LIMA & CALLAO")
 
-  } else if(method =="TC") {
+  } else if(method == "TC") {
 
     x <- replace(x, x %in% reg_tc_north, "NORTH")
     x <- replace(x, x %in% reg_tc_south, "SOUTH")
@@ -69,7 +78,7 @@ gen_admin_div <- function(x,
     x <- replace(x, x %in% reg_jungle,"AMAZON JUNGLE")
     x <- replace(x, x =="CALLAO" | x =="LIMA","LIMA & CALLAO")
 
-  } else if(method == "Traditional Cardinal") {
+  } else if(method == "Trad_Cardinal") {
 
     x <- replace(x, x %in% reg_jungle, "AMAZON JUNGLE")
     x <- replace(x, x %in% reg_mountain_south, "SOUTH ANDES MOUNTAINS")
