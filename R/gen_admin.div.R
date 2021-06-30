@@ -1,6 +1,6 @@
 #' Create categories for adiministrative divisions (Peru)
 #'
-#' @description Function 'gen_admin.div' returns the natural, geographical, or
+#' @description Function 'gen_admin_div' returns the natural, geographical, or
 #'   administrative division of Peru that includes the region, province or district
 #'   provided to the function.
 #'
