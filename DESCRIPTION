@@ -54,7 +54,8 @@ Imports:
     readr,
     rlang,
     tidyr,
-    broom
+    broom,
+    methods
 Suggests:
   knitr,
   rmarkdown
