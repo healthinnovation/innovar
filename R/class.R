@@ -5,6 +5,11 @@ setClass("indexFit",
            Fits = "list",
            Explained = "tbl_df",
            Loadings = "tbl_df"
+         ),
+         prototype = list(
+           Fits = list(),
+           Explained = NA_real_,
+           Loadings = NA_real_
          )
 )
 
