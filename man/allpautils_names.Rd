@@ -2,17 +2,21 @@
 % Please edit documentation in R/allpautils_names.R
 \name{allpautils_names}
 \alias{allpautils_names}
-\title{TIYLE}
+\title{Remove accents and hyphens in character vector}
 \usage{
-allpautils_names(x)
+allpautils_names(string)
 }
 \arguments{
-\item{x}{vector of characters}
+\item{string}{Characters vector}
 }
 \description{
-Function 'allpautils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
+This function will allow you to remove accents, hyphens and
+  any strange characters that come from the UTF-8 encoding, with the intention
+  of working with standardized names or texts.Review:
+  https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
 }
 \examples{
-df
+string <- c("Perú", "Estados Unidos")
+allpautils_names(string)
 
 }
