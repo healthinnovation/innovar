@@ -4,17 +4,17 @@
 #'
 #' @format A dataset with 1874 rows and 9 variables:
 #' \describe{
-#'   \item{ubigeo}{code of six numbers for each district}
-#'   \item{reg.code}{code to each region}
-#'   \item{reg}{name of each region}
-#'   \item{prov.code}{code to each province}
-#'   \item{prov}{name of each province}
-#'   \item{distr.code}{code to each district}
-#'   \item{distr}{name of each district}
-#'   \item{capital}{name of the capital main}
+#'   \item{\bold{ubigeo}}{Code of six numbers for each district}
+#'   \item{\bold{reg.code}}{Code to each region}
+#'   \item{\bold{reg}}{Name of each region}
+#'   \item{\bold{prov.code}}{Code to each province}
+#'   \item{\bold{prov}}{Name of each province}
+#'   \item{\bold{distr.code}}{Code to each district}
+#'   \item{\bold{distr}}{Name of each district}
+#'   \item{\bold{capital}}{Name of the capital main}
 #' }
+#'
 #' @name Peru
-#' @docType data
 #' @keywords data
 #' @source \url{https://www.inei.gob.pe/}
 NULL
