@@ -6,6 +6,7 @@
 \title{Peru names and spatial}
 \format{
 A dataset with 1874 rows and 9 variables:
+
 \describe{
   \item{\bold{ubigeo}}{Code of six numbers for each district}
   \item{\bold{reg.code}}{Code to each region}
@@ -21,9 +22,9 @@ A dataset with 1874 rows and 9 variables:
 \url{https://www.inei.gob.pe/}
 }
 \usage{
-Peru
+data(Peru)
 }
 \description{
 A dataset containing the names of the 1874 districts, 196 provinces and 25 regions of Peru according INEI - 2017, additionally also is the limits administrative level 3 in a spatial vector format.
 }
-\keyword{data}
+\keyword{datasets}
