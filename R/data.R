@@ -1,4 +1,4 @@
-#' Loads district data for Peru
+#' Peru names and spatial
 #'
 #' A dataset containing the names of the 1874 districts, 196 provinces and 25 regions of Peru according INEI - 2017, additionally also is the limits administrative level 3 in a spatial vector format.
 #'
@@ -14,7 +14,6 @@
 #'   \item{\bold{capital}}{Name of the capital main}
 #' }
 #'
-#' @name Peru
 #' @keywords data
 #' @source \url{https://www.inei.gob.pe/}
-NULL
+'Peru'
