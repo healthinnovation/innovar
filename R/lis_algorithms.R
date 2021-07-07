@@ -2,7 +2,7 @@
 #'
 #' A function that show all the available functions of lis package.
 #'
-#' @param category
+#' @param category type of algorithm
 #'
 #' @details category.
 #' \itemize{

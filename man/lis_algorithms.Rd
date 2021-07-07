@@ -7,7 +7,7 @@
 lis_algorithms(category = "all")
 }
 \arguments{
-\item{category}{}
+\item{category}{type of algorithm}
 }
 \value{
 a string vector
