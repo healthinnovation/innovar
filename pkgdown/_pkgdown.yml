@@ -32,7 +32,7 @@ reference:
    - '`get_no2`'
    - '`get_o3`'
    - '`get_so2`'
-   - '`get_uavi`'
+   - '`get_aero`'
    - '`get_vegetation`'
 
 - title: Human intervention
@@ -47,8 +47,7 @@ reference:
 
 - title: Administrative limits
   contents:
-  - '`import_db`'
-  - '`gen_admin.div`'
+  - '`gen_admin_div`'
 
 - title: Vulnerability
   contents:
@@ -68,3 +67,7 @@ reference:
   - '`allpautils_names`'
   - '`read_batch`'
   - '`pol_as_ee`'
+
+- title: Data
+  contents:
+  - '`Peru`'
