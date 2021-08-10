@@ -5,3 +5,9 @@
 WIP/*
 doc
 Meta
+renv/
+.Rprofile
+export/
+.Renviron
+data/test/*
+test.r
