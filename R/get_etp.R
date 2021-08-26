@@ -10,10 +10,10 @@
 #'
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{ET:} Total evapotranspiration.
-#' \item \bold{LE:}  Average latent heat flux.
-#' \item \bold{PET:} Total potential evapotranspiration.
-#' \item \bold{PLE:} Average potential latent heat flux.
+#' \item \bold{ET (kg/m²):} Total evapotranspiration.
+#' \item \bold{LE (J/m²):}  Average latent heat flux.
+#' \item \bold{PET (kg/m²):} Total potential evapotranspiration.
+#' \item \bold{PLE (j/m²):} Average potential latent heat flux.
 #' \item \bold{ET_QC:} Evapotranspiration quality control flags
 #' }
 #'
@@ -35,20 +35,20 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_as_ee(region,  id = 'distr' , simplify = 1000)
+#' region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>%
-#' get_etp(to = "2001-02-01", from = "2003-12-31", band = "ET", fun = "max")
+#'   get_etp(from = "2001-02-01", to = "2003-12-31", band = "ET", fun = "max")
 #' }
 #' @export
 
 
-get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
+get_etp <- function(from, to, band, region, fun = "count", scale = 1000) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
   # Factores by each bands
 
   multiply_factor <- c(
@@ -57,70 +57,86 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
 
   # Message of error
 
-    if (start_year <= 2000 | end_year >= 2022) {
+  if (start_year <= 2000 | end_year >= 2022) {
     stop(print(sprintf("No exist data")))
   }
 
   # The main functions
-  collection = ee$ImageCollection('MODIS/006/MOD16A2')$
-    select(c(band))
+  collection <- ee$ImageCollection("MODIS/006/MOD16A2")
+  # filter quality
+  bitwiseExtract <- function(value, fromBit, toBit = fromBit) {
+    maskSize <- ee$Number(1)$add(toBit)$subtract(fromBit)
+    mask <- ee$Number(1)$leftShift(maskSize)$subtract(1)
+    final <- value$rightShift(fromBit)$bitwiseAnd(mask)
+    return(final)
+    }
+
+  filteApply <- function(image) {
+      qa <- image$select("ET_QC")
+      etp <- image$select(c(band))
+      # build filter
+      filter1 <- bitwiseExtract(qa, 3, 4)
+      # build mask
+      mask <- filter1$neq(2)
+      # apply mas
+      etp$updateMask(mask) %>% return()
+    }
 
   # date of dataset
-  months = ee$List$sequence(1, 12)
-  years = ee$List$sequence(start_year,end_year)
+  months <- ee$List$sequence(1, 12)
+  years <- ee$List$sequence(start_year, end_year)
 
-  modis = ee$ImageCollection$
-    fromImages(
-      years$map(
-        ee_utils_pyfunc(
-          function (y)
-            months$map(
-              ee_utils_pyfunc(
-                function (m)
-                  collection$
-                  filter(ee$Filter$calendarRange(y, y, 'year'))$
-                  filter(ee$Filter$calendarRange(m, m, 'month'))$
-                  mean()$
-                  set('year',y)$
-                  set('month',m))
-            )
-        )
-      )$
-        flatten()
-    )
+  modis <- ee$
+    ImageCollection$
+    fromImages(years$map(
+      ee_utils_pyfunc(function(y) {
+        months$map(ee_utils_pyfunc(
+          function(m) {
+            collection$
+              filter(ee$Filter$calendarRange(y, y, "year"))$
+              filter(ee$Filter$calendarRange(m, m, "month"))$
+              map(filteApply)$
+              max()$
+              set("year", y)$
+              set("month", m)
+          }
+        ))
+      })
+    )$flatten())
+
 
   im_base <- modis$
-    filter(ee$Filter$inList('month',c(1:12)))
+    filter(ee$Filter$inList("month", c(1:12)))
 
-  if(start_year == end_year){
+  if (start_year == end_year) {
     new_base <- im_base$
       filter(
         ee$Filter$inList(
-          'year',
+          "year",
           list(
             c(
               start_year:end_year
-              )
             )
           )
-        )$toBands()$
+        )
+      )$toBands()$
       multiply(
         multiply_factor[[band]]
-        )
-  }else{
+      )
+  } else {
     new_base <- im_base$
       filter(
         ee$Filter$inList(
-        'year',
-        c(
-          start_year:end_year
+          "year",
+          c(
+            start_year:end_year
           )
         )
-        )$
+      )$
       toBands()$
       multiply(
         multiply_factor[[band]]
-        )
+      )
   }
 
 
@@ -132,23 +148,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_count),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_count)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_count)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_count)
-
   } else if (fun == "kurtosis") {
     img_kurtosis <- ee_kurstosis(
       new_base,
@@ -156,24 +172,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_kurtosis),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_kurtosis)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_kurtosis)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_kurtosis)
-
-
   } else if (fun == "max") {
     img_max <- ee_max(
       new_base,
@@ -182,24 +197,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_max),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_max)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_max)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_max)
-
-
   } else if (fun == "mean") {
     img_mean <- ee_mean(
       new_base,
@@ -208,24 +222,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mean),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_mean)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_mean)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_mean)
-
-
   } else if (fun == "median") {
     img_median <- ee_median(
       new_base,
@@ -233,24 +246,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_median),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_median)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_median)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_median)
-
-
   } else if (fun == "min") {
     img_min <- ee_min(
       new_base,
@@ -258,24 +270,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_min),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_min)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_min)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_min)
-
-
   } else if (fun == "mode") {
     img_mode <- ee_mode(
       new_base,
@@ -283,24 +294,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mode),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_mode)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_mode)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_mode)
-
-
   } else if (fun == "percentile") {
     img_percentile <- ee_percentile(
       new_base,
@@ -308,23 +318,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_percentile),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_percentile)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_percentile)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_percentile)
-
   } else if (fun == "std") {
     img_std <- ee_std(
       new_base,
@@ -332,23 +342,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_std),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_std)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_std)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_std)
-
   } else if (fun == "sum") {
     img_sum <- ee_sum(
       new_base,
@@ -356,23 +366,23 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_sum),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_sum)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_sum)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_sum)
-
   } else if (fun == "variance") {
     img_variance <- ee_variance(
       new_base,
@@ -380,22 +390,22 @@ get_etp <- function(to, from, band, region, fun = "count",scale = 1000) {
       scale = scale
     )
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_variance),
-        prefix = band)
+        suffix = band
+      )
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
       ),
-      1,7
+      1, 7
     )
 
-    names(img_variance)[id_names] <- sprintf('%s%s',band,names_id)
+    names(img_variance)[id_names] <- sprintf("%s%s", band, names_id)
     return(img_variance)
-
   }
 }

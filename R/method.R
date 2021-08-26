@@ -1,11 +1,13 @@
-#'@nord
 #' Set of function to zonal statistic
+#' @name ee_count
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the count values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_count <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -27,7 +29,8 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -38,7 +41,8 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -46,14 +50,17 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_kurtosis
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture or featureCollection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the kurtosis values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -75,7 +82,8 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -86,7 +94,8 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -94,14 +103,17 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_max
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the maximum values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_max <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -123,7 +135,8 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble()%>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -133,7 +146,8 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
         scale = scale,
         sf = T
       ) %>% st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -141,14 +155,17 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_mean
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture o feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the mean values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_mean <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -170,7 +187,8 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble()%>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -181,21 +199,25 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
   }
   return(dataset)
 }
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_median
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the count values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_median <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -217,8 +239,8 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
-
+        as_tibble() %>%
+        mutate_all(replace_na,0)
     } else {
       db_local <- ee_extract(
         x = x,
@@ -228,7 +250,8 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -236,15 +259,17 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_min
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the minimum values.
 #' @import rgee
-
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_min <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -266,7 +291,8 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -277,7 +303,8 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -285,15 +312,17 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_mode
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the minimum values.
 #' @import rgee
-
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_mode <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -315,7 +344,8 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -326,7 +356,8 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -334,15 +365,17 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_percentile
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the percentile values.
 #' @import rgee
-
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_percentile <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -364,7 +397,8 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -375,7 +409,8 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -383,15 +418,17 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_std
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feacture or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the standard deviation values.
 #' @import rgee
-
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_std <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -413,7 +450,8 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -424,7 +462,8 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -432,14 +471,18 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_sum
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the sum values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
+
 
 ee_sum <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -461,7 +504,8 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -472,7 +516,8 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -480,14 +525,17 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_variance
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature o feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the variance values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
 
 ee_variance <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -509,7 +557,8 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -520,7 +569,8 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
@@ -528,14 +578,18 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-#'@nord
+
 #' Set of function to zonal statistic
+#' @name ee_first
 #' @param x image of type Image o Image Collection.
 #' @param y region of type feature or feature collection.
 #' @param by a limit of pass by polygon.
 #' @param scale A nominal scale in meters of the projection to work in.
 #' @return a object sf with the first values.
 #' @import rgee
+#' @importFrom tidyr replace_na
+#' @importFrom dplyr mutate_all
+
 
 ee_first <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
@@ -557,7 +611,8 @@ ee_first <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
     } else {
       db_local <- ee_extract(
@@ -568,10 +623,12 @@ ee_first <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>%
         st_set_geometry(NULL) %>%
-        as_tibble()
+        as_tibble() %>%
+        mutate_all(replace_na,0)
 
       dataset <- rbind(dataset, db_local)
     }
   }
   return(dataset)
 }
+

@@ -31,7 +31,7 @@ read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE,
   if (isTRUE(env)) {
     list2env(data_objects,envir=.GlobalEnv)
   } else {
-    assign("data_list", data_objects, envir=as.environment())
+    assign("data_list", data_objects, envir = as.environment(-1))
   }
 
 }

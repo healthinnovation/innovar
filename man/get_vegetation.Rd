@@ -4,7 +4,7 @@
 \alias{get_vegetation}
 \title{Extract vegetation index of MODIS}
 \usage{
-get_vegetation(to, from, band, region, fun = "count", scale = 1000)
+get_vegetation(from, to, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{the starting and final range of date.}
@@ -28,6 +28,7 @@ Name of some bands.
 \itemize{
 \item \bold{NDVI:} Normalized Difference Vegetation Index.
 \item \bold{EVI:} Enhanced Vegetation Index.
+\item \bold{SAVI:} Soil Adjusted Vegetation Index.
 }
 }
 \examples{
@@ -41,10 +42,11 @@ ee_Initialize()
 
 # 1. Reading a sf object
 region <- import_db("Peru_shp")
-region_ee <- pol_to_ee(region, id = 'distr' , simplify = 1000)
+region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\% get_vegetation(
-  to = "2001-02-01", from = "2002-12-31", band = "NDVI", fun = "max")
+  from = "2001-02-01", to = "2002-12-31", band = "NDVI", fun = "max"
+)
 }
 }

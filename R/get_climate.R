@@ -11,20 +11,20 @@
 #'
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{aet:} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
-#' \item \bold{def:} Climate water deficit, derived using a one-dimensional soil water balance model.
-#' \item \bold{pdsi:} Palmer Drought Severity Index.
-#' \item \bold{pet:} Reference evapotranspiration (ASCE Penman-Montieth).
-#' \item \bold{pr:} Precipitation accumulation.
-#' \item \bold{ro:} Runoff, derived using a one-dimensional soil water balance model.
-#' \item \bold{soil:} Soil moisture, derived using a one-dimensional soil water balance model.
-#' \item \bold{srad:} Downward surface shortwave radiation.
-#' \item \bold{swe:} Snow water equivalent, derived using a one-dimensional soil water balance model.
-#' \item \bold{tmmn:} Minimum temperature.
-#' \item \bold{tmmx:} Maximum temperature.
-#' \item \bold{vap:} Vapor pressure
-#' \item \bold{vpd:} Vapor pressure deficit.
-#' \item \bold{vs:} Wind-speed at 10m.
+#' \item \bold{aet (mm):} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
+#' \item \bold{def (mm):} Climate water deficit, derived using a one-dimensional soil water balance model.
+#' \item \bold{pdsi :} Palmer Drought Severity Index.
+#' \item \bold{pet(mm):} Reference evapotranspiration (ASCE Penman-Montieth).
+#' \item \bold{pr (mm):} Precipitation accumulation.
+#' \item \bold{ro (mm):} Runoff, derived using a one-dimensional soil water balance model.
+#' \item \bold{soil (mm):} Soil moisture, derived using a one-dimensional soil water balance model.
+#' \item \bold{srad (W/m²):} Downward surface shortwave radiation.
+#' \item \bold{swe (mm):} Snow water equivalent, derived using a one-dimensional soil water balance model.
+#' \item \bold{tmmn (°C):} Minimum temperature.
+#' \item \bold{tmmx (°C):} Maximum temperature.
+#' \item \bold{vap (kPa):} Vapor pressure
+#' \item \bold{vpd (kPa):} Vapor pressure deficit.
+#' \item \bold{vs (m/s):} Wind-speed at 10m.
 #' }
 #'
 #' @return  a sf object with the new variables.
@@ -47,17 +47,17 @@
 #' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_climate(
-#'   to = "2001-02-01", from = "2002-12-31",
+#'   from = "2001-02-01", to = "2002-12-31",
 #'   by = "month", band = "tmmx", fun = "max")
 #' }
 #' @export
 
-get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) {
+get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) {
 
   # Conditions about the times
 
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(
@@ -93,7 +93,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
 
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -104,16 +104,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_count),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+        by = '1 month'
         ),
       1,7
       )
@@ -124,7 +124,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "kurtosis") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -135,16 +135,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_kurstosis),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -155,7 +155,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "max") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -166,16 +166,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_max),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -186,7 +186,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "mean") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -197,16 +197,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mean),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -217,7 +217,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "median") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -228,16 +228,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_median),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -248,7 +248,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "min") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -259,16 +259,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_min),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -279,7 +279,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "mode") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -290,16 +290,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mode),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -310,7 +310,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "percentile") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -321,16 +321,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_percentile),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -341,7 +341,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "std") {
      img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -352,16 +352,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_std),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -372,7 +372,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "sum") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -383,16 +383,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_sum),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -403,7 +403,7 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
   } else if (by == "month" & fun == "variance") {
     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
       select(c(band))$
-      filterDate(to, from)$
+      filterDate(from, to)$
       toBands()$
       multiply(multiply_factor[[band]])
 
@@ -414,16 +414,16 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
     )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_variance),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
-        length.out = length(id_names)
+        as.Date(to),
+         by = '1 month'
       ),
       1,7
     )
@@ -459,15 +459,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_count),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year',
       ),
       1,4
@@ -504,15 +504,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_kurtosis),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -548,15 +548,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_max),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -591,15 +591,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       scale = scale)
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mean),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -635,15 +635,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_median),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -679,15 +679,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_min),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -723,15 +723,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_mode),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -767,15 +767,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_percentile),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -811,15 +811,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_std),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -855,15 +855,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_sum),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4
@@ -899,15 +899,15 @@ get_climate <- function(to, from, by, band, region, fun = "count",scale = 1000) 
       )
 
     id_names <- which(
-      startsWith(
+      endsWith(
         names(img_variance),
-        prefix = band)
+        suffix = band)
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         by = '1 year'
       ),
       1,4

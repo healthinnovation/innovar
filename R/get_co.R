@@ -1,18 +1,23 @@
-#' Extract vegetation index of MODIS
+#' Extract Carbon Monoxide data of Sentinel5
 #'
-#' A function that extract the values of vegetation by \bold{month}.
+#' A function that extract a time series of carbon monoxide.
 #'
-#' @param to,from the starting and final range of date.
-#' @param band name of bands.
+#' @param to,from it's a string object,starting and final date.
+#' @param band name of band.
 #' @param region is a feature or feature collection.
-#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median , min, mode , percentile , std, sum, variance, first).
+#' @param fun function for extract statistic zonal (count, kurtosis, max, mean, median, min, mode, percentile, std, sum, variance, first).
 #' @param scale A nominal scale in meters of the projection to work in.
 #'
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{NDVI:} Normalized Difference Vegetation Index.
-#' \item \bold{EVI:} Enhanced Vegetation Index.
-#' \item \bold{SAVI:} Soil Adjusted Vegetation Index.
+#' \item \bold{CO_column_number_density (mol/m²):} Vertically integrated CO column density.
+#' \item \bold{H2O_column_number_density (mol/m²):} Water vapor column.
+#' \item \bold{cloud_height (m):} Scattering layer height.
+#' \item \bold{sensor_altitude (m):} Altitude of the satellite with respect to the geodetic sub-satellite point (WGS84).
+#' \item \bold{sensor_azimuth_angle (degrees):} Azimuth angle of the satellite at the ground pixel location (WGS84); angle measured East-of-North.
+#' \item \bold{sensor_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
+#' \item \bold{solar_azimuth_angle (degrees)} Azimuth angle of the Sun at the ground pixel location (WGS84); angle measured East-of-North.
+#' \item \bold{solar_zenith_angle (degrees):} Zenith angle of the satellite at the ground pixel location (WGS84); angle measured away from the vertical.
 #' }
 #'
 #' @return  a sf object with the new variables.
@@ -32,134 +37,51 @@
 #'
 #' # 1. Reading a sf object
 #' region <- import_db("Peru_shp")
-#' region_ee <- pol_as_ee(region, id = "distr", simplify = 1000)
-#'
+#' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_vegetation(
-#'   from = "2001-02-01", to = "2002-12-31", band = "NDVI", fun = "max"
-#' )
+#' data <- region_ee %>% get_co(
+#'   from = "2019-02-01", to = "2019-12-31",
+#'   band = "CO_column_number_density", fun = "max")
 #' }
 #' @export
 
-get_vegetation <- function(from, to, band, region, fun = "count", scale = 1000) {
+get_co <- function(from, to, band , region, fun = "max", scale = 1000) {
 
   # Conditions about the times
   start_year <- substr(from, 1, 4) %>% as.numeric()
   end_year <- substr(to, 1, 4) %>% as.numeric()
 
-  # Factors by each bands
-
-  multiply_factor <- c(
-    NDVI = 0.0001, EVI = 0.0001, SAVI = 1
-  )
-
   # Message of error
 
-  if (end_year < 1999 | start_year >= 2021) {
+  if (end_year < 2018) {
     print(sprintf("No exist data"))
   }
 
-  # NDVI - EVI
-
-  if (band == "SAVI") {
-    collection <- ee$ImageCollection("MODIS/006/MOD13A1")$
-      select(c("sur_refl_b01", "sur_refl_b02", "DetailedQA"))
-  } else {
-    collection <- ee$ImageCollection("MODIS/006/MOD13A1")$
-      select(c(band, "DetailedQA"))
-  }
-
-  # filter quality
-  bitwiseExtract <- function(value, fromBit, toBit = fromBit) {
-    maskSize <- ee$Number(1)$add(toBit)$subtract(fromBit)
-    mask <- ee$Number(1)$leftShift(maskSize)$subtract(1)
-    final <- value$rightShift(fromBit)$bitwiseAnd(mask)
-    return(final)
-  }
-
-  if (band == "SAVI") {
-    filteApply <- function(image) {
-      qa <- image$select("DetailedQA")
-      ndvi <- image$select(c("sur_refl_b01", "sur_refl_b02"))
-      # build filter
-      filter1 <- bitwiseExtract(qa, 0, 1)
-      filter2 <- bitwiseExtract(qa, 15)
-      filter3 <- bitwiseExtract(qa, 14)
-      # build mask
-      mask <- filter1$neq(2)$And(filter2$neq(1))$And(filter3$neq(1))
-      # apply mas
-      ndvi$updateMask(mask) %>% return()
-    }
-  } else {
-    filteApply <- function(image) {
-      qa <- image$select("DetailedQA")
-      ndvi <- image$select(c(band))
-      # build filter
-      filter1 <- bitwiseExtract(qa, 0, 1)
-      filter2 <- bitwiseExtract(qa, 15)
-      filter3 <- bitwiseExtract(qa, 14)
-      # build mask
-      mask <- filter1$neq(2)$And(filter2$neq(1))$And(filter3$neq(1))
-      # apply mas
-      ndvi$updateMask(mask) %>% return()
-    }
-  }
-
-  # savi index
-  savi <- function(img) {
-    index <- img$
-      expression(
-      "(1 + L) * float(nir - red)/ (nir + red + L)",
-      list(
-        "nir" = img$select("sur_refl_b02"),
-        "red" = img$select("sur_refl_b01"),
-        "L" = 0.5
-      )
-    )$rename("SAVI")
-  }
+  # Dataset
+  collection <- ee$ImageCollection("COPERNICUS/S5P/NRTI/L3_CO")$
+    select(c(band))
 
   # date of dataset
   months <- ee$List$sequence(1, 12)
   years <- ee$List$sequence(start_year, end_year)
 
-  if (band == "SAVI") {
-    modis <- ee$
-      ImageCollection$
-      fromImages(years$map(
+  modis <- ee$
+    ImageCollection$
+    fromImages(years$map(
       ee_utils_pyfunc(function(y) {
         months$map(ee_utils_pyfunc(
           function(m) {
             collection$
               filter(ee$Filter$calendarRange(y, y, "year"))$
               filter(ee$Filter$calendarRange(m, m, "month"))$
-              map(filteApply)$
-              map(savi)$
               max()$
+              rename("co")$
               set("year", y)$
               set("month", m)
           }
         ))
       })
     )$flatten())
-  } else {
-    modis <- ee$
-      ImageCollection$
-      fromImages(years$map(
-      ee_utils_pyfunc(function(y) {
-        months$map(ee_utils_pyfunc(
-          function(m) {
-            collection$
-              filter(ee$Filter$calendarRange(y, y, "year"))$
-              filter(ee$Filter$calendarRange(m, m, "month"))$
-              map(filteApply)$
-              max()$
-              set("year", y)$
-              set("month", m)
-          }
-        ))
-      })
-    )$flatten())
-  }
 
   im_base <- modis$
     filter(ee$Filter$inList("month", c(1:12)))
@@ -167,32 +89,26 @@ get_vegetation <- function(from, to, band, region, fun = "count", scale = 1000) 
   if (start_year == end_year) {
     new_base <- im_base$
       filter(
-      ee$Filter$inList(
-        "year",
-        list(
+        ee$Filter$inList(
+          "year",
+          list(
+            c(
+              start_year:end_year
+            )
+          )
+        )
+      )$toBands()
+  } else {
+    new_base <- im_base$
+      filter(
+        ee$Filter$inList(
+          "year",
           c(
             start_year:end_year
           )
         )
-      )
-    )$toBands()$
-      multiply(
-      multiply_factor[[band]]
-    )
-  } else {
-    new_base <- im_base$
-      filter(
-      ee$Filter$inList(
-        "year",
-        c(
-          start_year:end_year
-        )
-      )
-    )$
-      toBands()$
-      multiply(
-      multiply_factor[[band]]
-    )
+      )$
+      toBands()
   }
 
   # The main functions

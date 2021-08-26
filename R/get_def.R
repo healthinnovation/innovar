@@ -6,8 +6,9 @@
 #' @param region region and object sf.
 #' @return  a tibble object with the new variables.
 #' @param scale A nominal scale in meters of the projection to work in.
-#' @importFrom  sf st_transform st_simplify
-#' @importFrom  rgee sf_as_ee
+#'
+#' @importFrom sf st_transform st_simplify
+#' @importFrom rgee sf_as_ee
 #' @importFrom dplyr select filter contains
 #'
 #' @examples
@@ -26,19 +27,19 @@
 #' # 2. Extracting deforestation area data
 #' data <- region_ee %>%
 #' get_def(
-#'  to = '2001-01-01',
-#'  from = '2005-12-31',
+#'  from = '2001-01-01',
+#'  to = '2005-12-31',
 #'  region = region_ee,
 #'  scale = 30
 #' )
 #' }
 #' @export
 
-get_def <- function(to, from, region, scale = 100) {
+get_def <- function(from, to, region, scale = 100) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
   rango <- c(1:19)
@@ -67,8 +68,8 @@ get_def <- function(to, from, region, scale = 100) {
 
   names_id <- substr(
     seq(
-      as.Date(to),
       as.Date(from),
+      as.Date(to),
       length.out = length(id_names)
     ),
     1,4
