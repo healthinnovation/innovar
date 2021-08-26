@@ -21,11 +21,17 @@ Color scale constructor for lis colors
 }
 \examples{
 \dontrun{
-library(unikn)
-library(tidyverse)
-names(lis_palettes) \%>\%
-map(.f = ~lis_pal(., reverse = T)(10)) \%>\%
-seecol(pal_names = names(lis_palettes))
+library(ggplot2)
+
+# Default discrete palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+geom_point(size = 4) +
+scale_color_lis()
+
+# Default continuous palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+geom_point(size = 4, alpha = .6) +
+scale_color_lis(discrete = FALSE)
 }
 
 }

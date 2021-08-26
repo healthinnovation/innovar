@@ -16,3 +16,11 @@ lis_pal(palette = "ccvi", reverse = FALSE, ...)
 \description{
 Return function to interpolate a lis color palette
 }
+\examples{
+\dontrun{
+library(scales)
+pal <- lis_pal("ccvi")(9)
+show_col(pal)
+}
+
+}

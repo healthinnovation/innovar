@@ -5,3 +5,5 @@
 WIP/*
 doc
 Meta
+renv/
+renv.lock
