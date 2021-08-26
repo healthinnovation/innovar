@@ -55,7 +55,8 @@ Imports:
     readr,
     rlang,
     tidyr,
-    broom
+    broom,
+    reticulate
 Suggests:
   knitr,
   rmarkdown
