@@ -6,6 +6,7 @@ WIP/*
 doc
 Meta
 renv/
+renv.lock
 .Rprofile
 export/
 .Renviron
