@@ -18,7 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.6', platform: windows-x86_64}
           - {os: windows-latest, r: 'release', platform: windows-x86_64}
           - {os: macOS-latest, r: '3.6', platform: osx-x86_64-clang}
           - {os: macOS-latest, r: 'release', platform: osx-x86_64-clang}
