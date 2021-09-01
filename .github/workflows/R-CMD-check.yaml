@@ -18,10 +18,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          # - {os: macOS-latest,r: 'devel'}
-          - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: '3.6'}
-            # We explicitly set the user agent for R devel to the current release version of R so RSPM serves the release binaries.
+          - {os: windows-latest, r: '3.6', platform: windows-x86_64}
+          - {os: windows-latest, r: 'release', platform: windows-x86_64}
+          - {os: macOS-latest, r: '3.6', platform: osx-x86_64-clang}
+          - {os: macOS-latest, r: 'release', platform: osx-x86_64-clang}
           - {os: ubuntu-latest, r: '3.6', platform: linux-x86_64-ubuntu-gcc}
           - {os: ubuntu-latest, r: 'release', platform: linux-x86_64-ubuntu-gcc}
     env:
@@ -37,7 +37,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
         run: |
@@ -48,7 +48,7 @@ jobs:
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v2
+        uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
