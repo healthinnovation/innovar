@@ -4,14 +4,14 @@
 
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "lis: Librería de funciones del laboratorio de Innovación en Salud"
+title: "lis: Paquete con un conjunto de funciones del laboratorio de Innovación en Salud"
 authors:
 - family-names: Carrasco
   given-names: Gabriel
   orcid: https://orcid.org/0000-0002-6945-0419
 - family-names: Cava  
   given-names: Renato
-  orcid: https://orcid.org/0000-0003-3523-8687
+  orcid: https://orcid.org/0000-0002-4456-7450
 - family-names: Ruiz
   given-names: Jorge
   orcid: https://orcid.org/0000-0003-3523-8687

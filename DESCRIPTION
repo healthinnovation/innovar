@@ -13,7 +13,7 @@ Authors@R:
            family = "Cava",
            role = c("cre","aut"),
            email = "renato.cava@upch.edu.pe",
-           comment = c(ORCID = "0000-0001-8049-7069")),
+           comment = c(ORCID = "0000-0002-4456-7450")),
     person(given = "Jorge",
            family = "Ruiz-Cabrejos",
            role = "aut",
