@@ -1,4 +1,4 @@
-# [**Laboratorio de Innovación en Salud**](https://www.innovalab.info/) <img src="man/figures/lis_icon.png" align="right" width="18%">
+# [**Laboratorio de Innovación en Salud**](https://www.innovalab.info/) <img src="man/figures/new_img.png" align="right" width="30%">
 
 
 <!-- badges: start -->
