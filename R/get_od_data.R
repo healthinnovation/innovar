@@ -1,31 +1,71 @@
 #' Get census-like data in a origin-destination format
 #'
-#' @param x dataframe resulting from reading raw census data.
-#' @param matrix logical. Should the output be in matrix form? Defaults to 'FALSE'.
+#' Process a data frame resulting from reading a raw query on the
+#' Peru census of 2017 data containing origin and destination locations in a
+#' tidy long format or in a (sparse) matrix form.
 #'
-#' @return dataframe (or matrix) with origin-destination format.
+#' @param x A data frame resulting from reading a raw query on the
+#' Peru census of 2017 data containing origin and destination locations.
+#' More information on the Details section.
+#' @param wide logical. Should the output be in wide format? If 'TRUE', a matrix
+#' is returned with the origins in rows and the destinations in columns.
+#' Defaults to 'FALSE'.
+#' @param sparse logical. When the output is in wide format (i.e. \code{wide = TRUE}),
+#' should a sparse matrix be returned? Defaults to 'TRUE'.
+#'
+#' @return Data frame (or matrix) with origin-destination format.
 #' @export
 #' @import dplyr
 #' @importFrom zoo na.locf
-#' @importFrom stringr str_remove_all str_trim
+#' @importFrom stringr str_remove_all str_trim str_replace
 #' @importFrom tidyr separate pivot_wider
 #' @importFrom stringi stri_trans_general
+#' @importFrom Matrix Matrix
 #'
+#' @details
+#' The Institute of Statistics and Informatics (INEI, by its acronym in Spanish)
+#' of Peru carried out the last census on 2017. This census data can be
+#' queried in the \href{https://censos2017.inei.gob.pe/redatam/}{2017 Census RADATAM platform}.
+#' A query result can be downloaded as a Excel workbook (.xlsx).
+#'
+#' The \code{get_od_data} function aids to process the raw query results on the
+#' 2017 census data involving an origin and a destination location (district
+#' or province level). For example, when querying the question \emph{Distrito o país
+#' donde vivía hace 5 años} (District or country where you used to live 5 years
+#' ago) at a district level, one gets for every district a list with all the districts
+#' or countries given as a answer for this question and their frequencies (number
+#' of people living in district A that used to live in district B 5 years ago).
+#'
+#' The raw report obtained by querying the question \emph{Distrito o país
+#' donde vivía hace 5 años} is provided in this package as an example dataset
+#' under the name \code{\link{migration17raw}}. In the examples section below, we
+#' show how to use the \code{get_od_data} function to process this raw dataset to
+#' get different types of outputs to analyze its origin-destination information.
+#'
+#' @seealso \code{\link{migration17raw}}
 #' @examples
 #' \dontrun{
-#' library(readxl)
-#' library(fs)
-#' raw_path <- path("data", "test")
-#' report_path <- path(raw_path, "reporte.xlsx")
-#' report_raw <- read_excel(report_path, col_names = FALSE)
+#' data("migration17raw")
 #'
-#' od <- get_od_data(report_raw)
-#' head(od)
+#' # Check that this raw data set is the result of reading an Excel file without
+#' # column names
+#' head(migration17raw)
 #'
-#' od_matrix <- get_od_data(report_path, matrix = TRUE)
-#' dim(od_matrix)
+#' # Origin-destination data in long format (data frame)
+#' od_long <- get_od_data(migration17raw)
+#' head(od_long)
+#'
+#' # Origin-destination data in wide format (sparse matrix)
+#' od_wide_sparse <- get_od_data(migration17raw, wide = TRUE)
+#' od_wide_sparse[1:5, 1:5]
+#' print(object.size(od_wide_sparse), units = "auto") # This is lighter
+#'
+#' # Origin-destination data in wide format (regular matrix)
+#' od_wide <- get_od_data(migration17raw, wide = TRUE, sparse = FALSE)
+#' od_wide[1:5, 1:5]
+#' print(object.size(od_wide), units = "auto") # This is heavier
 #' }
-get_od_data <- function(x, matrix = FALSE) {
+get_od_data <- function(x, wide = FALSE, sparse = TRUE) {
   dat_raw <- x[, -1]
   last_row <- which(dat_raw[, 1] == "RESUMEN") - 1
   dat_raw <- dat_raw[1:last_row, 1:2]
@@ -34,13 +74,13 @@ get_od_data <- function(x, matrix = FALSE) {
   dat <- dat_raw[rowSums(is.na(dat_raw)) != ncol(dat_raw), ]
   colnames(dat) <- c("origin", "cases")
 
-  # Create destiny location column
+  # Create destination location column
   dat$nchar <- nchar(dat$cases)
-  dat$destiny <- ifelse(dat$nchar >= 10, as.character(dat$cases), NA)
-  dat$destiny <- na.locf(dat$destiny)
+  dat$destination <- ifelse(dat$nchar >= 10, as.character(dat$cases), NA)
+  dat$destination <- na.locf(dat$destination)
   dat$nchar <- NULL
 
-  # Create destiny location code column
+  # Create destination location code column
   dat$ubigeo_des <- ifelse(
     grepl("AREA # ", dat$origin) == TRUE,
     str_remove_all(dat$origin, "AREA # "),
@@ -71,7 +111,7 @@ get_od_data <- function(x, matrix = FALSE) {
       fill = "right"
     ) %>%
     separate(
-      destiny, into = c("reg_des", "prov_des", "distr_des"), sep = ",",
+      destination, into = c("reg_des", "prov_des", "distr_des"), sep = ",",
       fill = "right"
     ) %>%
     mutate(
@@ -117,16 +157,22 @@ get_od_data <- function(x, matrix = FALSE) {
   # Arrange rows
   od <- arrange(od, ubigeo_ori, ubigeo_des)
 
-  if (matrix) {
-    od_long <-
+  if (wide) {
+    od_wide <-
       od %>%
       select(ubigeo_ori, ubigeo_des, cases) %>%
       pivot_wider(names_from = ubigeo_des, values_from = cases, values_fill = 0)
 
-    od_matrix <- as.matrix(od_long[, -1])
-    rownames(od_matrix) <- od_long$ubigeo_ori
+    od_wide_matrix <- as.matrix(od_wide[, -1])
+    rownames(od_wide_matrix) <- od_wide$ubigeo_ori
 
-    od_matrix
+    if (sparse) {
+      od_wide_matrix_sparse <- Matrix(od_wide_matrix, sparse = TRUE)
+      od_wide_matrix_sparse
+    } else {
+      od_wide_matrix
+    }
+
   } else {
     od
   }
