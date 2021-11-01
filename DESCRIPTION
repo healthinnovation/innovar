@@ -43,7 +43,6 @@ VignetteBuilder:
   knitr
 Imports:
     RCurl,
-    fs,
     sf,
     unikn,
     magrittr,
@@ -56,7 +55,11 @@ Imports:
     rlang,
     tidyr,
     broom,
-    reticulate
+    reticulate,
+    zoo,
+    stringi,
+    fs,
+    Matrix
 Suggests:
   knitr,
   rmarkdown

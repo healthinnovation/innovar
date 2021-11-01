@@ -16,7 +16,7 @@ This function will allow you to remove accents, hyphens and
   https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
 }
 \examples{
-string <- c("Perú", "Estados Unidos")
+string <- c("PerÃº", "Estados Unidos")
 allpautils_names(string)
 
 }
