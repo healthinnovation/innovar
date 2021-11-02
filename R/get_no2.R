@@ -57,8 +57,10 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
 
   # Message of error
 
-  if (end_year < 2018) {
-    print(sprintf("No exist data"))
+  if (start_year < 2018) {
+    from = "2018-07-01"
+    start_year = substr(from, 1, 4) %>% as.numeric()
+    print(sprintf("No exist data, NO2 is available from > 2018"))
   }
 
   # Dataset
@@ -79,7 +81,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
               filter(ee$Filter$calendarRange(y, y, "year"))$
               filter(ee$Filter$calendarRange(m, m, "month"))$
               max()$
-              rename("no2")$
+              rename("NO2")$
               set("year", y)$
               set("month", m)
           }
@@ -125,7 +127,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_count),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -138,7 +140,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_count)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_count)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_count)
   } else if (fun == "kurtosis") {
     img_kurtosis <- ee_kurstosis(
@@ -149,7 +151,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_kurtosis),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -162,7 +164,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_kurtosis)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_kurtosis)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_kurtosis)
   } else if (fun == "max") {
     img_max <- ee_max(
@@ -173,7 +175,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_max),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -186,7 +188,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_max)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_max)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_max)
   } else if (fun == "mean") {
     img_mean <- ee_mean(
@@ -194,10 +196,11 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       region,
       scale = scale
     )
+
     id_names <- which(
       endsWith(
         names(img_mean),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -210,7 +213,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_mean)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_mean)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_mean)
   } else if (fun == "median") {
     img_median <- ee_median(
@@ -221,7 +224,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_median),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -234,7 +237,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_median)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_median)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_median)
   } else if (fun == "min") {
     img_min <- ee_min(
@@ -245,7 +248,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_min),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -258,7 +261,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_min)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_min)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_min)
   } else if (fun == "mode") {
     img_mode <- ee_mode(
@@ -269,7 +272,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_mode),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -282,7 +285,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_mode)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_mode)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_mode)
   } else if (fun == "percentile") {
     img_percentile <- ee_percentile(
@@ -293,7 +296,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_percentile),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -306,7 +309,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_percentile)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_percentile)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_percentile)
   } else if (fun == "std") {
     img_std <- ee_std(
@@ -317,7 +320,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_std),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -330,7 +333,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_std)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_std)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_std)
   } else if (fun == "sum") {
     img_sum <- ee_sum(
@@ -341,7 +344,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_sum),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -354,7 +357,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_sum)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_sum)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_sum)
   } else if (fun == "variance") {
     img_variance <- ee_variance(
@@ -365,7 +368,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
     id_names <- which(
       endsWith(
         names(img_variance),
-        suffix = band
+        suffix = "NO2"
       )
     )
 
@@ -378,7 +381,7 @@ get_no2 <- function(from, to, band, region, fun = "max", scale = 1000) {
       1, 7
     )
 
-    names(img_variance)[id_names] <- sprintf("%s%s", band, names_id)
+    names(img_variance)[id_names] <- sprintf("%s%s", "NO2_", names_id)
     return(img_variance)
   }
 }

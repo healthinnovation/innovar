@@ -53,7 +53,11 @@ get_nlv2 <- function(from, to, region, fun = "mean", scale = 100) {
   }
 
   # Message of error
-  if (to < 2012  | from > 2020) {
+  if (to < 2014  | from > 2021) {
+    to = "2014-01-01"
+    from = "2021-05-01"
+    start_year = substr(from, 1, 4) %>% as.numeric()
+    end_year <- substr(to, 1, 4) %>% as.numeric()
     print(sprintf("No exist data"))
   }
 
