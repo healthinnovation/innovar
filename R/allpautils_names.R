@@ -1,17 +1,28 @@
-#' TIYLE
+#' Remove accents and hyphens in character vector
 #'
-#' Function 'allpautils_names' revisar: https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
+#' @description This function will allow you to remove accents, hyphens and
+#'   any strange characters that come from the UTF-8 encoding, with the intention
+#'   of working with standardized names or texts.Review:
+#'   https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
 #'
-#' @param x vector of characters
+#' @param string Characters vector
 #'
-#' @examples df
+#' @examples
+#' string <- c("Perú", "Estados Unidos")
+#' allpautils_names(string)
 #'
 #' @export allpautils_names
-allpautils_names <- function(x) {
+allpautils_names <- function(string) {
 
-  x <- gsub("_", " ",gsub("-", " ", iconv(x,
-                                         from="UTF-8",
-                                         to="ASCII//TRANSLIT"), fixed=TRUE), fixed=TRUE)
+  string <- gsub(pattern = "_",
+                 replacement = " ",
+                 x = gsub(pattern = "-",
+                          replacement = " ",
+                          x = iconv(string,
+                                    from="UTF-8",
+                                    to="ASCII//TRANSLIT"),
+                          fixed=TRUE),
+                 fixed=TRUE)
 
-  return(x)
+  return(string)
 }

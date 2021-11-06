@@ -6,7 +6,7 @@
 #' @param region it's a feature or feature collection
 #' @param scale A nominal scale in meters of the projection to work in.
 #'
-#' @return  a tibble object with the new variables
+#' @return  a tibble object with the new variable in km2
 #' @export
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
@@ -20,16 +20,16 @@
 #' ee_Initialize()
 #' region <- import_db("Peru_shp")
 #' region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-#' data <- get_climate(to = '2008-01-01', from = '2010-01-01', region = region)
+#' data <- get_climate(from = '2008-01-01', to = '2010-01-01', region = region)
 #'
 #' }
 # Function for extract urban areas
 
-get_urban <- function(to, from , region, scale = 1000) {
+get_urban <- function(from, to, region, scale = 1000) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(

@@ -28,15 +28,15 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_pop(
-#'   to = "2001-01-01", from = "2003-01-01",fun = "max",scale = 100)
+#'   from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 100)
 #' }
 #' @export
 
-get_pop <- function(to, from, region, fun = "count", scale = 100) {
+get_pop <- function(from, to, region, fun = "count", scale = 100) {
 
   # Conditions about the times
-  start_year <- substr(to, 1, 4) %>% as.numeric()
-  end_year <- substr(from, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) %>% as.numeric()
+  end_year <- substr(to, 1, 4) %>% as.numeric()
 
   if(start_year == end_year){
     year <- unique(
@@ -82,17 +82,17 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
       img_by_year,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
-       startsWith(
-         names(img_count), prefix = 'pop')
-       )
+      endsWith(
+        names(img_count), suffix = 'pop')
+    )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -106,17 +106,17 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
       img_by_year,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
-      startsWith(
-        names(img_kurtosis), prefix = 'pop')
+      endsWith(
+        names(img_kurtosis), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -133,14 +133,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_max), prefix = 'pop')
+      endsWith(
+        names(img_max), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -157,14 +157,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_mean), prefix = 'pop')
+      endsWith(
+        names(img_mean), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -181,14 +181,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_median), prefix = 'pop')
+      endsWith(
+        names(img_median), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -205,14 +205,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_min), prefix = 'pop')
+      endsWith(
+        names(img_min), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -229,14 +229,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_mode), prefix = 'pop')
+      endsWith(
+        names(img_mode), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -253,14 +253,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_percentile), prefix = 'pop')
+      endsWith(
+        names(img_percentile), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -277,14 +277,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_std), prefix = 'pop')
+      endsWith(
+        names(img_std), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -301,14 +301,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_sum), prefix = 'pop')
+      endsWith(
+        names(img_sum), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4
@@ -325,14 +325,14 @@ get_pop <- function(to, from, region, fun = "count", scale = 100) {
     )
 
     id_names <- which(
-      startsWith(
-        names(img_variance), prefix = 'pop')
+      endsWith(
+        names(img_variance), suffix = 'pop')
     )
 
     names_id <- substr(
       seq(
-        as.Date(to),
         as.Date(from),
+        as.Date(to),
         length.out = length(id_names)
       ),
       1,4

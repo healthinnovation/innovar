@@ -1,0 +1,27 @@
+# This CITATION.cff file was created by ruby-cff (v 0.9.0).
+# Gem: https://rubygems.org/gems/cff
+# CFF: https://citation-file-format.github.io/
+
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "lis: Paquete con un conjunto de funciones del laboratorio de Innovación en Salud"
+authors:
+- family-names: Carrasco
+  given-names: Gabriel
+  orcid: https://orcid.org/0000-0002-6945-0419
+- family-names: Cava  
+  given-names: Renato
+  orcid: https://orcid.org/0000-0002-4456-7450
+- family-names: Ruiz
+  given-names: Jorge
+  orcid: https://orcid.org/0000-0003-3523-8687
+- family-names: Peña
+  given-names: Brian
+  orcid: https://orcid.org/0000-0002-1073-9306
+- family-names: Barja
+  given-names: Antony
+  orcid: https://orcid.org/0000-0001-5921-2858
+version: 0.1.2
+date-released: 2019-07-27
+url: "https://github.com/healthinnovation/lis"
+

@@ -5,7 +5,7 @@
 #' @param region region and object sf.
 #' @param fun function for extract statistic zonal (\bold{count, kurtosis, max, mean, median, min, mod, percentile, std, sum, variance, first}).
 #' @param scale A nominal scale in meters of the projection to work in.
-#' @return  a tibble object with the new variables.
+#' @return  a tibble object with the new variable in km².
 #'
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee

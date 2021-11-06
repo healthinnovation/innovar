@@ -4,7 +4,7 @@
 \alias{get_climate}
 \title{Extract climate data of TerraClimate}
 \usage{
-get_climate(to, from, by, band, region, fun = "count", scale = 1000)
+get_climate(from, to, by, band, region, fun = "count", scale = 1000)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}
@@ -28,20 +28,20 @@ A function that extract a time series of climate variables.
 \details{
 Name of some bands.
 \itemize{
-\item \bold{aet:} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
-\item \bold{def:} Climate water deficit, derived using a one-dimensional soil water balance model.
-\item \bold{pdsi:} Palmer Drought Severity Index.
-\item \bold{pet:} Reference evapotranspiration (ASCE Penman-Montieth).
-\item \bold{pr:} Precipitation accumulation.
-\item \bold{ro:} Runoff, derived using a one-dimensional soil water balance model.
-\item \bold{soil:} Soil moisture, derived using a one-dimensional soil water balance model.
-\item \bold{srad:} Downward surface shortwave radiation.
-\item \bold{swe:} Snow water equivalent, derived using a one-dimensional soil water balance model.
-\item \bold{tmmn:} Minimum temperature.
-\item \bold{tmmx:} Maximum temperature.
-\item \bold{vap:} Vapor pressure
-\item \bold{vpd:} Vapor pressure deficit.
-\item \bold{vs:} Wind-speed at 10m.
+\item \bold{aet (mm):} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
+\item \bold{def (mm):} Climate water deficit, derived using a one-dimensional soil water balance model.
+\item \bold{pdsi :} Palmer Drought Severity Index.
+\item \bold{pet(mm):} Reference evapotranspiration (ASCE Penman-Montieth).
+\item \bold{pr (mm):} Precipitation accumulation.
+\item \bold{ro (mm):} Runoff, derived using a one-dimensional soil water balance model.
+\item \bold{soil (mm):} Soil moisture, derived using a one-dimensional soil water balance model.
+\item \bold{srad (W/m²):} Downward surface shortwave radiation.
+\item \bold{swe (mm):} Snow water equivalent, derived using a one-dimensional soil water balance model.
+\item \bold{tmmn (°C):} Minimum temperature.
+\item \bold{tmmx (°C):} Maximum temperature.
+\item \bold{vap (kPa):} Vapor pressure
+\item \bold{vpd (kPa):} Vapor pressure deficit.
+\item \bold{vs (m/s):} Wind-speed at 10m.
 }
 }
 \examples{
@@ -58,7 +58,7 @@ region <- import_db("Peru_shp")
 region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 # 2. Extracting climate information
 data <- region_ee \%>\% get_climate(
-  to = "2001-02-01", from = "2002-12-31",
+  from = "2001-02-01", to = "2002-12-31",
   by = "month", band = "tmmx", fun = "max")
 }
 }
