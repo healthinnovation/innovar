@@ -1,4 +1,4 @@
-Package: lis
+Package: innovar
 Type: Package
 Title: InnovaLab Toolkit
 Version: 0.1.2
@@ -31,14 +31,14 @@ Authors@R:
            comment = c(ORCID = "0000-0001-5921-2858"))
            )
 Maintainer: Renato Cava <renato.cava@upch.edu.pe>
-Description: Libreria de funciones del Laboratorio de Innovacion en Salud (InnovaLab) del Insituto de Medicina Tropical "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
-License: GPL-3
+Description: Library of functions of the Laboratory of Innovation in Health (InnovaLab) of the Institute of Tropical Medicine "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Depends: R (>= 3.6)
 RoxygenNote: 7.1.2
-URL: https://github.com/healthinnovation/lis
-BugReports: https://github.com/healthinnovation/lis/issues
+URL: https://github.com/healthinnovation/innovar
+BugReports: https://github.com/healthinnovation/innovar/issues
 VignetteBuilder:
   knitr
 Imports:

@@ -4,7 +4,7 @@
 
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "lis: Paquete con un conjunto de funciones del laboratorio de Innovación en Salud"
+title: "innovar: Package with a set of Health Innovation Lab functions"
 authors:
 - family-names: Carrasco
   given-names: Gabriel
@@ -23,5 +23,5 @@ authors:
   orcid: https://orcid.org/0000-0001-5921-2858
 version: 0.1.2
 date-released: 2019-07-27
-url: "https://github.com/healthinnovation/lis"
+url: "https://github.com/healthinnovation/innovar"
 
