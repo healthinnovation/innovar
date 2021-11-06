@@ -56,12 +56,13 @@ Imports:
     tidyr,
     broom,
     methods,
-    MASS
+    MASS,
     reticulate,
     zoo,
     stringi,
     fs,
-    Matrix
+    Matrix,
+    psych
 Suggests:
   knitr,
   rmarkdown
