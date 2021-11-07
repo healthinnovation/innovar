@@ -196,4 +196,4 @@ show_pal <- function(name = "all",n = 5,rev = TRUE,...){
     stop("Color palette is incorrect,please use show_pal() and choose a color")
   }
 
-  }
+}
