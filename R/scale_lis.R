@@ -143,3 +143,57 @@ scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
     scale_fill_gradientn(colours = pal(256), ...)
   }
 }
+
+
+#' Show a set of palette color Lab
+#' @param name Character name of palette in lis_palettes
+#' @param rev  Boolean indicating whether the palette should be reversed
+#' @param n    Integer, number of colors
+#' @param ...  Additional arguments passed to seecol()
+#'
+#' @details Name of color palette available
+#' \itemize{
+#' \item \bold{ccvi}
+#' \item \bold{npr}
+#' \item \bold{blmbrg}
+#' \item \bold{ctp}
+#' \item \bold{jama}
+#' \item \bold{mlobo}
+#' \item \bold{btran}
+#' \item \bold{nasa}
+#' }
+#' @examples
+#'\dontrun{
+#' library(innovar)
+#' show_pa(name = "nasa",rev = TRUE, n = 5)
+#' show_pal()
+#'
+#'}
+#'@export show_pal
+
+show_pal <- function(name = "all",n = 5,rev = TRUE,...){
+  if(name %in% names(lis_palettes)){
+    lis_names <- name
+    lis_panel <- lis_names %>%
+      map(.f = ~lis_pal(.,reverse = rev)(n=n)) %>%
+      unikn::seecol(
+        pal_names = names(lis_names),
+        title = sprintf(
+          "%s%s",'Name of the color palette : ',
+          toupper(lis_names))
+        ,...
+      )
+  } else if (name == "all"){
+    lis_names <- names(lis_palettes)
+    lis_panel <- lis_names %>%
+      map(.f = ~lis_pal(.,reverse = rev)(n=n)) %>%
+      unikn::seecol(
+        pal_names = lis_names,
+        title = "Name of all innovar colour palettes",
+        ...
+      )
+  } else{
+    stop("Color palette is incorrect,please use show_pal() and choose a color")
+  }
+
+  }
