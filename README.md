@@ -22,11 +22,11 @@ Puedes instalar la version de prueba desde
 
 ``` r
 if(!require("remotes")) install.packages("remotes")
-remotes::install_github("healthinnovation/lis")
+remotes::install_github("healthinnovation/innovar")
 ```
 
 ``` r
-library(lis)
+library(innovar)
 ```
 
 # Redes sociales 
