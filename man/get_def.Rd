@@ -14,10 +14,10 @@ get_def(from, to, region, scale = 100)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a tibble object with the new variables.
+a tibble object with the new variable in km2
 }
 \description{
-A function that extract deforestation area data of the year \bold{2001-2019}
+A function that extract deforestation area data of the year \bold{2001-2020}
 }
 \examples{
 \dontrun{

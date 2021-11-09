@@ -1,10 +1,10 @@
 #' Extract deforestation area data from Hansen
 #'
-#' A function that extract deforestation area data of the year \bold{2001-2019}
+#' A function that extract deforestation area data of the year \bold{2001-2020}
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param region region and object sf.
-#' @return  a tibble object with the new variables.
+#' @return  a tibble object with the new variable in km2
 #' @param scale A nominal scale in meters of the projection to work in.
 #'
 #' @importFrom sf st_transform st_simplify
@@ -42,12 +42,12 @@ get_def <- function(from, to, region, scale = 100) {
   end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
-  rango <- c(1:19)
-  names(rango) <- 2001:2019
+  rango <- c(1:20)
+  names(rango) <- 2001:2020
   anio <- rango[c(as.character(start_year:end_year))]
 
   # The base image collection
-  img_base <- ee$Image("UMD/hansen/global_forest_change_2019_v1_7")$
+  img_base <- ee$Image("UMD/hansen/global_forest_change_2020_v1_8")$
     select(c('lossyear'))$
     gte(anio)
 
