@@ -8,6 +8,7 @@
 #' @param string Characters vector
 #'
 #' @examples
+#' library(innovar)
 #' string <- c("Perú", "Estados Unidos")
 #' allpautils_names(string)
 #'

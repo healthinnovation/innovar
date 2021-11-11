@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(lis)
+#' library(innovar)
 #' data("cars")
 #' write.csv(cars, "cars.csv", row.names = FALSE)
 #' dbname = <database-name>

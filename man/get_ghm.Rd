@@ -24,12 +24,13 @@ A function that extract Global Human Modification data of the year \bold{2016}
 
 library(tidyverse)
 library(rgee)
-library(lis)
+library(innovar)
 library(sf)
 ee_Initialize()
 
 # 1. Reading a sf object
-region <- import_db("Peru_shp")
+data("Peru")
+region <- Peru
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 
 # 2. Extracting climate information

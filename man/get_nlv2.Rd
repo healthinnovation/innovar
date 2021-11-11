@@ -26,12 +26,13 @@ A function that extract a time series of night time light by \bold{year} from \b
 
 library(tidyverse)
 library(rgee)
-library(lis)
+library(innovar)
 library(sf)
 ee_Initialize()
 
 # 1. Reading a sf object
-region <- import_db("Peru_shp")
+data("Peru")
+region <- Peru
 region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 
 # 2. Extracting climate information

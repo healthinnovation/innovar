@@ -29,15 +29,16 @@
 #'
 #' library(tidyverse)
 #' library(rgee)
-#' library(lis)
+#' library(innovar)
 #' library(sf)
 #' ee_Initialize()
 #'
 #' # 1. Reading a sf object
-#' region <- import_db("Peru_shp")
+#' data("Peru")
+#' region <- Peru
 #' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_uavi(
+#' data <- region_ee %>% get_aero(
 #'   from = "2019-02-01", to = "2019-12-31",
 #'   band = "absorbing_aerosol_index", fun = "max")
 #' }

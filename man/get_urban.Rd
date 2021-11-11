@@ -22,11 +22,12 @@ A function that extract a time series of the urban area of MODIS Landcover
 \examples{
 \dontrun{
 
-library(lis)
+library(innovar)
 library(rgee)
 library(sf)
 ee_Initialize()
-region <- import_db("Peru_shp")
+data("Peru")
+region <- Peru
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 data <- get_climate(from = '2008-01-01', to = '2010-01-01', region = region)
 

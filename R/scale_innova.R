@@ -51,7 +51,7 @@ nasa <- c(
 
 # List of palettes
 
-lis_palettes <- list(
+innova_palettes <- list(
   `ccvi` = ccvi, `npr` = npr, `blmbrg` = blmbrg, `ecomst` = ecomst, `ctp` = ctp,
   `jama` = jama, `mlobo` = mlobo, `btran` = btran, `nasa` = nasa
 )
@@ -63,18 +63,19 @@ lis_palettes <- list(
 #' @param ... Additional arguments to pass to colorRampPalette()
 #' @examples
 #'\dontrun{
+#' library(innovar)
 #' library(scales)
-#' pal <- lis_pal("ccvi")(9)
+#' pal <- innova_pal("ccvi")(9)
 #' show_col(pal)
 #'}
 #'
 #' @importFrom grDevices colorRampPalette
-#' @export lis_pal
+#' @export innova_pal
 
-lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
-  pal <- lis_palettes[[palette]]
+innova_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
+  pal <- innova_palettes[[palette]]
   if (reverse) pal <- rev(pal)
-  colorRampPalette(pal, ...)
+  colorRampPalette(pal,...)
 }
 
 #' Color scale constructor for lis colors
@@ -87,24 +88,24 @@ lis_pal <- function(palette = "ccvi", reverse = FALSE, ...) {
 #' @examples
 #'\dontrun{
 #' library(ggplot2)
-#'
+#' library(innovar)
 #' # Default discrete palette
 #' ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
 #' geom_point(size = 4) +
-#' scale_color_lis()
+#' scale_color_innova()
 #'
 #' # Default continuous palette
 #' ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
 #' geom_point(size = 4, alpha = .6) +
-#' scale_color_lis(discrete = FALSE)
+#' scale_color_innova(discrete = FALSE)
 #'}
 #'
 #' @importFrom ggplot2 discrete_scale scale_color_gradientn
-#' @export scale_color_lis
+#' @export scale_color_innova
 
-scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
+scale_color_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
                             ...) {
-  pal <- lis_pal(palette = palette, reverse = reverse)
+  pal <- innova_pal(palette = palette, reverse = reverse)
   if (discrete) {
     discrete_scale("colour", paste0("lis_", palette), palette = pal, ...)
   }
@@ -123,19 +124,19 @@ scale_color_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
 #' @examples
 #'\dontrun{
 #' library(ggplot2)
-#'
+#' library(innovar)
 #' ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
 #' geom_bar() +
 #' theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-#' scale_fill_lis()
+#' scale_fill_innova()
 #'}
 #'
 #' @importFrom ggplot2 discrete_scale scale_fill_gradientn
-#' @export scale_fill_lis
+#' @export scale_fill_innova
 
-scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
+scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
                            ...) {
-  pal <- lis_pal(palette = palette, reverse = reverse)
+  pal <- innova_pal(palette = palette, reverse = reverse)
 
   if (discrete) {
     discrete_scale("fill", paste0("lis_", palette), palette = pal, ...)
@@ -165,35 +166,48 @@ scale_fill_lis <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE,
 #' @examples
 #'\dontrun{
 #' library(innovar)
-#' show_pa(name = "nasa",rev = TRUE, n = 5)
+#' show_pal(name = "nasa",rev = TRUE, n = 5)
 #' show_pal()
 #'
 #'}
 #'@export show_pal
 
 show_pal <- function(name = "all",n = 5,rev = TRUE,...){
-  if(name %in% names(lis_palettes)){
-    lis_names <- name
-    lis_panel <- lis_names %>%
-      map(.f = ~lis_pal(.,reverse = rev)(n=n)) %>%
-      unikn::seecol(
-        pal_names = names(lis_names),
-        title = sprintf(
-          "%s%s",'Name of the color palette : ',
-          toupper(lis_names))
-        ,...
-      )
+
+  if(sum(unique(name %in% names(innova_palettes))) == 1) {
+    list_names <- innova_palettes[name]
+    range_color <- sapply(X = list_names,FUN = function(x){list(x[1:n])})
+
+    if(rev == 1){
+      list_panel <- rev(range_color) %>%
+        map(.f = ~.) %>%
+        unikn::seecol(
+          pal_names = names(list_names),
+          title = "Name of specific innovar colour palettes"
+          ,...
+        )
+    }else{
+      list_panel <- range_color %>%
+        map(.f = ~.) %>%
+        unikn::seecol(
+          pal_names = names(list_names),
+          title = "Name of specific innovar colour palettes"
+          ,...
+        )
+    }
+
   } else if (name == "all"){
-    lis_names <- names(lis_palettes)
-    lis_panel <- lis_names %>%
-      map(.f = ~lis_pal(.,reverse = rev)(n=n)) %>%
+    list_names <- names(innova_palettes)
+    list_panel <- list_names %>%
+      map(.f = ~innova_pal(.,reverse = rev)(n=n)) %>%
       unikn::seecol(
-        pal_names = lis_names,
+        pal_names = list_names,
         title = "Name of all innovar colour palettes",
         ...
       )
-  } else{
+    } else {
     stop("Color palette is incorrect,please use show_pal() and choose a color")
   }
 
 }
+

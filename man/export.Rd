@@ -25,7 +25,7 @@ This a Python wrapper of the \code{insert_many()} method of package pymongo to i
 }
 \examples{
 \dontrun{
-library(lis)
+library(innovar)
 data("cars")
 write.csv(cars, "cars.csv", row.names = FALSE)
 dbname = <database-name>

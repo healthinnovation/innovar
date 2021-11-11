@@ -17,6 +17,7 @@
 #' @return Converts characters where it detects regions of Peru with the resulting divisions specified.
 #'
 #' @examples
+#' library(innovar)
 #' df_dep <- data.frame(
 #' Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
 #'            "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC",
