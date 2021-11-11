@@ -20,14 +20,16 @@ Our main lines of research include the development of diagnostic and detection s
 You can install the trial version from
 [GitHub](https://github.com/):
 
-``` r
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("healthinnovation/innovar")
-```
 
-``` r
-library(innovar)
-```
+| **Package** |                                                    
+| ----- |
+| if(!require("remotes")) install.packages("remotes")|
+remotes::install_github("healthinnovation/innovar")  |
+
+| **Library** |
+| ----- |
+| library(innovar)|
+
 
 # Our social networks 
 <p align="left">
