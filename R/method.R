@@ -8,6 +8,7 @@
 #' @import rgee
 #' @importFrom tidyr replace_na
 #' @importFrom dplyr mutate_all
+#' @keyword internal
 
 ee_count <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
