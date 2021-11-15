@@ -26,14 +26,14 @@ A function that extract a time series of the number of population by \bold{year}
 
 library(tidyverse)
 library(rgee)
-library(lis)
+library(innovar)
 library(sf)
 ee_Initialize()
 
 # 1. Reading a sf object
-region <- import_db("Peru_shp")
-region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
-
+data("Peru")
+region <- Peru
+region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 # 2. Extracting climate information
 data <- region_ee \%>\% get_pop(
   from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 100)

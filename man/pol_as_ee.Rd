@@ -13,6 +13,23 @@ pol_as_ee(x, id, simplify = 500)
 
 \item{simplify}{number to simplify the sf polygon  keeping its topology}
 }
+\value{
+feature collection
+}
 \description{
 A function that transform polygon to featurecollection.
+}
+\examples{
+\dontrun{
+library(tidyverse)
+library(rgee)
+library(innovar)
+library(sf)
+ee_Initialize()
+# 1. Reading a sf object
+data("Peru")
+region <- Peru \%>\% filter(reg == 'LIMA')
+region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
+class(region_ee)
+}
 }
