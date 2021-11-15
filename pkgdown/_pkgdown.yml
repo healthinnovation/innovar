@@ -34,6 +34,7 @@ reference:
     - get_nlv2
     - get_def
   - title: "Graphics"
+    contents:
     - show_pal
     - scale_color_innova
     - scale_fill_innova
