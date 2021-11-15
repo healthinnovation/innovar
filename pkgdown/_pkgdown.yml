@@ -9,7 +9,7 @@ template:
   opengraph:
     image:
       src: man/figures/lis_icon.png
-      # alt: "innovar: Set of functions"
+      alt: "innovar: Set of functions"
 
 reference:
   - title: "Climate"
@@ -39,12 +39,6 @@ reference:
   - title: "Vulnerability"
     contents:
     - vulnerability_index
-  - title: "Graphics"
-    contents:
-    - lis_pal
-    - scale_color_lis
-    - scale_fill_lis
-    - show_pal
   - title: "Utils"
     contents:
     - allpautils_names
