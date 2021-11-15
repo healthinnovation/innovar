@@ -1,4 +1,4 @@
-# [**Laboratorio de Innovación en Salud**](https://www.innovalab.info/) <img src="man/figures/new_lis_icon.png" align="right" width="30%">
+# [**Health Innovation Lab**](https://www.innovalab.info/) <img src="man/figures/new_hil_icon.png" align="right" width="30%">
 
 
 <!-- badges: start -->
@@ -9,27 +9,29 @@
 
 <!-- badges: end -->
 
-## ¿Quiénes somos?
+## Who we are
 
-Somos un equipo multidisciplinario enfocado en **diseñar y evaluar tecnologías innovadoras y accesibles para mejorar la salud de las personas.** Promovemos el **uso de tecnologías y datos abiertos** con el propósito de disminuir las barreras de la implementación, la reproducibilidad e incrementar el impacto de las propuestas de innovación. 
+We are a multidisciplinary team focused on **designing and evaluating innovative and accessible technologies to improve people's health**. We promote the **use of technologies and open data** in order to lower implementation barriers, reproducibility and increase the impact of innovation proposals. 
 
-Nuestras principales líneas de investigación comprenden el desarrollo de sistemas de diagnóstico y detección, desarrollo de herramientas para detección parámetros ambientales, ciencia de datos y ‘big data’ aplicados a enfermedades tropicales, y análisis geoespaciales de patrones de movilidad y migratorios
+Our main lines of research include the development of diagnostic and detection systems, development of tools for environmental parameter detection, data science and big data applied to tropical diseases, and geospatial analysis of mobility and migration patterns.
 
-## Instalación
+## Package installation
 
-Puedes instalar la version de prueba desde
+You can install the trial version from
 [GitHub](https://github.com/):
 
-``` r
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("healthinnovation/innovar")
-```
 
-``` r
-library(innovar)
-```
+| **Package** |                                                    
+| ----- |
+| if(!require("remotes")) install.packages("remotes")|
+remotes::install_github("healthinnovation/innovar")  |
 
-# Redes sociales 
+| **Library** |
+| ----- |
+| library(innovar)|
+
+
+# Our social networks 
 <p align="left">
  <a href = "https://www.facebook.com/imt.innovlab">
  <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" width="10.5%">
