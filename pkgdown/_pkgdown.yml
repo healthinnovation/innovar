@@ -17,7 +17,6 @@ reference:
     contents:
     - get_climate
     - get_etp
-
   - title: "Enviroment"
     contents:
     - get_co
@@ -26,7 +25,6 @@ reference:
     - get_so2
     - get_aero
     - get_vegetation
-
   - title: "Human intervention"
     contents:
     - get_ghm
@@ -35,29 +33,23 @@ reference:
     - get_nlv1
     - get_nlv2
     - get_def
-
   - title: "Administrative limit"
     contents:
     - gen_admin_div
-
-
   - title: "Vulnerability"
     contents:
     - vulnerability_index
-
   - title: "Graphics"
     contents:
     - lis_pal
     - scale_color_lis
     - scale_fill_lis
     - show_pal
-
   - title: "Utils"
     contents:
     - allpautils_names
     - read_bach
     - pol_as_ee
-
   - title: "Dataset"
     contents:
     - Peru
