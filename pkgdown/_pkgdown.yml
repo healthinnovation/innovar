@@ -48,7 +48,7 @@ reference:
   - title: "Utils"
     contents:
     - allpautils_names
-    - read_bach
+    - read_batch
     - pol_as_ee
   - title: "Dataset"
     contents:

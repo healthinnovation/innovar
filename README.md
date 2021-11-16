@@ -28,26 +28,6 @@ remotes::install_github("healthinnovation/innovar")
 ```
 ```
 library(innovar)
-data("Peru")
-head(Peru)
-```
-```
-Simple feature collection with 6 features and 8 fields
-geometry type:  MULTIPOLYGON
-dimension:      XY
-bbox:           xmin: -78.03582 ymin: -6.986709 xmax: -77.61757 ymax: -5.94494
-geographic CRS: WGS 84
-# A tibble: 6 × 9
-  ubigeo                       geometry reg.code reg   prov.code prov 
-  <chr>              <MULTIPOLYGON [°]> <chr>    <chr> <chr>     <chr>
-1 010101 (((-77.84657 -6.205922, -77.8… 01       AMAZ… 01        CHAC…
-2 010102 (((-77.71853 -6.01407, -77.72… 01       AMAZ… 01        CHAC…
-3 010103 (((-77.8963 -6.730613, -77.89… 01       AMAZ… 01        CHAC…
-4 010104 (((-77.61908 -6.274398, -77.6… 01       AMAZ… 01        CHAC…
-5 010105 (((-77.7232 -6.038754, -77.72… 01       AMAZ… 01        CHAC…
-6 010106 (((-77.78106 -6.926629, -77.7… 01       AMAZ… 01        CHAC…
-# … with 3 more variables: distr.code <chr>, distr <chr>,
-#   capital <chr>
 ```
 
 # 🔵 **Our social networks** 
