@@ -107,34 +107,34 @@ get_od_data <- function(x, wide = FALSE, sparse = TRUE) {
   od_raw <-
     dat %>%
     separate(
-      origin, into = c("reg_ori", "prov_ori", "distr_ori"), sep = ",",
+      origin, into = c("dept_ori", "prov_ori", "distr_ori"), sep = ",",
       fill = "right"
     ) %>%
     separate(
-      destination, into = c("reg_des", "prov_des", "distr_des"), sep = ",",
+      destination, into = c("dept_des", "prov_des", "distr_des"), sep = ",",
       fill = "right"
     ) %>%
     mutate(
-      reg_ori = str_remove_all(reg_ori, "Provincia Constitucional del "),
-      reg_des = str_remove_all(reg_des, "Prov. Constitucional del ")
+      dept_ori = str_remove_all(dept_ori, "Provincia Constitucional del "),
+      dept_des = str_remove_all(dept_des, "Prov. Constitucional del ")
     ) %>%
     mutate(
-      distr_ori = ifelse(reg_ori == "Callao", prov_ori, distr_ori),
-      prov_ori = ifelse(reg_ori == "Callao", "Callao", prov_ori),
-      distr_des = ifelse(reg_des == "Callao", prov_des, distr_des),
-      prov_des = ifelse(reg_des == "Callao", "Callao", prov_des)
+      distr_ori = ifelse(dept_ori == "Callao", prov_ori, distr_ori),
+      prov_ori = ifelse(dept_ori == "Callao", "Callao", prov_ori),
+      distr_des = ifelse(dept_des == "Callao", prov_des, distr_des),
+      prov_des = ifelse(dept_des == "Callao", "Callao", prov_des)
     ) %>%
     mutate_at(vars(distr_ori, distr_des), ~ str_remove_all(., "distrito: ")) %>%
     mutate_at(
-      vars(distr_ori, prov_ori, reg_ori, distr_des, prov_des, reg_des),
+      vars(distr_ori, prov_ori, dept_ori, distr_des, prov_des, dept_des),
       ~ str_trim(toupper(stri_trans_general(. , id = "Latin-ASCII")))
     ) %>%
     mutate_at(
-      vars(distr_ori, prov_ori, reg_ori, distr_des, prov_des, reg_des),
+      vars(distr_ori, prov_ori, dept_ori, distr_des, prov_des, dept_des),
       ~ str_remove_all(., "['~]")
     ) %>%
     mutate_at(
-      vars(distr_ori, prov_ori, reg_ori, distr_des, prov_des, reg_des),
+      vars(distr_ori, prov_ori, dept_ori, distr_des, prov_des, dept_des),
       ~ str_replace(., "[_-]", " ")
     ) %>%
     mutate(cases = as.numeric(cases))
@@ -142,16 +142,16 @@ get_od_data <- function(x, wide = FALSE, sparse = TRUE) {
   # Create data frame with code and names of the locations
 
   distr_ubigeo <-
-    unique(od_raw[, c("reg_des", "prov_des", "distr_des", "ubigeo_des")])
-  colnames(distr_ubigeo) <- c("reg_ori", "prov_ori", "distr_ori", "ubigeo_ori")
+    unique(od_raw[, c("dept_des", "prov_des", "distr_des", "ubigeo_des")])
+  colnames(distr_ubigeo) <- c("dept_ori", "prov_ori", "distr_ori", "ubigeo_ori")
 
   # Merge to obtain the origin location codes
-  od <- merge(od_raw, distr_ubigeo, by = c("reg_ori", "prov_ori", "distr_ori"))
+  od <- merge(od_raw, distr_ubigeo, by = c("dept_ori", "prov_ori", "distr_ori"))
 
   # Arrange columns
   od <- od[, c(
-    "ubigeo_ori", "ubigeo_des", "cases", "reg_ori", "prov_ori",
-    "distr_ori", "reg_des", "prov_des", "distr_des"
+    "ubigeo_ori", "ubigeo_des", "cases", "dept_ori", "prov_ori",
+    "distr_ori", "dept_des", "prov_des", "distr_des"
   )]
 
   # Arrange rows
