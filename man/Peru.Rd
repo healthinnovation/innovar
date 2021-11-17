@@ -9,8 +9,8 @@ A dataset with 1874 rows and 9 variables:
 
 \describe{
   \item{\bold{ubigeo}}{Code of six numbers for each district}
-  \item{\bold{reg.code}}{Code to each region}
-  \item{\bold{reg}}{Name of each region}
+  \item{\bold{dep.code}}{Code to each departament}
+  \item{\bold{dep}}{Name of each departament}
   \item{\bold{prov.code}}{Code to each province}
   \item{\bold{prov}}{Name of each province}
   \item{\bold{distr.code}}{Code to each district}
@@ -25,6 +25,6 @@ A dataset with 1874 rows and 9 variables:
 data(Peru)
 }
 \description{
-A dataset containing the names of the 1874 districts, 196 provinces and 25 regions of Peru according INEI - 2017, additionally also is the limits administrative level 3 in a spatial vector format.
+A dataset containing the names of the 1874 districts, 196 provinces and 25 departments of Peru according INEI - 2017, additionally also is the limits administrative level 3 in a spatial vector format.
 }
 \keyword{datasets}
