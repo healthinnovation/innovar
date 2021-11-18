@@ -26,12 +26,12 @@ Authors@R:
            comment = c(ORCID = "0000-0002-1073-9306")),
     person(given = "Antony",
            family = "Barja-Ingaruca",
-           role = c("aut","cre")
+           role = c("cre","aut"),
            email = "antonymarcosbarja@gmail.com",
            comment = c(ORCID = "0000-0001-5921-2858"))
            )
 Maintainer: Renato Cava <renato.cava@upch.edu.pe>
-Description: Library of functions of the Laboratory of Innovation in Health (InnovaLab) of the Institute of Tropical Medicine "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
+Description: Package of functions of the Laboratory of Innovation in Health (InnovaLab) of the Institute of Tropical Medicine "Alexander von Humboldt", Universdiad Peruana Cayetano Heredia.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
