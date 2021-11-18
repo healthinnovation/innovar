@@ -11,7 +11,7 @@ Authors@R:
                         webpage = "http://gcarrasco.rbind.io/")),
     person(given = "Renato",
            family = "Cava",
-           role = c("cre","aut"),
+           role = c("aut"),
            email = "renato.cava@upch.edu.pe",
            comment = c(ORCID = "0000-0002-4456-7450")),
     person(given = "Jorge",
@@ -26,7 +26,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-1073-9306")),
     person(given = "Antony",
            family = "Barja-Ingaruca",
-           role = "aut",
+           role = c("aut","cre")
            email = "antonymarcosbarja@gmail.com",
            comment = c(ORCID = "0000-0001-5921-2858"))
            )
