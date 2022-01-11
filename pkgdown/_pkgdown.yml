@@ -35,6 +35,7 @@ reference:
     - get_def
 
   - title: "Census data"
+    contents:
     - get_od_data
 
   - title: "Graphics"
