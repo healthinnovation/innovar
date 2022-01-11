@@ -1,4 +1,4 @@
-# **Health Innovation Lab** <img src="man/figures/new_hil_icon.png" align="right" width="26%">
+# **Health Innovation Lab** <img src="https://raw.githubusercontent.com/healthinnovation/innovar/master/man/figures/new_hil_icon.png" align="right" width="26%">
 
 
 <!-- badges: start -->
