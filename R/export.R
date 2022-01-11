@@ -9,7 +9,6 @@
 #' @param interpreter Path of the Python interpreter (optional)
 #'
 #' @return Confirmation message if exporting was successful. Else an error.
-#' @export
 #' @importFrom reticulate use_python source_python
 #'
 #' @examples
@@ -17,11 +16,12 @@
 #' library(innovar)
 #' data("cars")
 #' write.csv(cars, "cars.csv", row.names = FALSE)
-#' dbname = <database-name>
+#' dbname = "<database-name>"
 #' user <- Sys.getenv("USER")
 #' password <- Sys.getenv("PASSWORD")
 #' export("cars.csv", dbname, user, password)
 #' }
+#' @export
 export <- function(filepath, dbname, user, password, interpreter = NULL) {
   if (is.null(filepath)) stop("File path (filepath) is required.")
 

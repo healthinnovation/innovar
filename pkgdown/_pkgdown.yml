@@ -33,11 +33,9 @@ reference:
     - get_nlv1
     - get_nlv2
     - get_def
-
   - title: "Census data"
     contents:
     - get_od_data
-
   - title: "Graphics"
     contents:
     - show_pal
@@ -55,6 +53,7 @@ reference:
     - allpautils_names
     - read_batch
     - pol_as_ee
+    - export
   - title: "Dataset"
     contents:
     - Peru
