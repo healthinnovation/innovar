@@ -1,4 +1,4 @@
-# **Health Innovation Lab** <img src="man/figures/logo.png" align="right" width="40%">
+# **Health Innovation Lab** <img src="man/figures/logo.png" align="right" width="30%">
 
 
 <!-- badges: start -->
