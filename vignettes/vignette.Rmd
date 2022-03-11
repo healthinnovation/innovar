@@ -27,7 +27,7 @@ Package of functions of the Laboratory of Innovation in Health (InnovaLab) of th
 
 ### 🟣 1. Requeriments
 
-```{r ,eval=TRUE, warning=FALSE,message=FALSE}
+```{r ,eval=FALSE, warning=FALSE,message=FALSE}
 library(innovar)
 library(sf)
 library(rgee)
@@ -38,7 +38,22 @@ library(mapview)
 ee_Initialize() # edit
 ```
 
+```
+── rgee 1.1.2.9000 ──────────────────────── earthengine-api 0.1.297 ── 
+ ✓ user: not_defined
+ ✓ Initializing Google Earth Engine:  DONE!
+ ✓ Earth Engine account: users/antonybarja8 
+────────────────────────────────────────────────────────────────────── 
+```
+
 ### 🟣 2. Vector layer reading of Peru
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+library(innovar)
+library(tidyverse)
+library(mapview)
+library(cowplot)
+```
+
 
 ```{r ,message=F,warning=F,eval = TRUE}
 data("Peru")
@@ -57,7 +72,7 @@ mapview(peru.region,legend = NULL)
 
 ### 🟣 4. Transformation of sf object to a feature collection
 
-```{r ,message=F,warning=F,eval=TRUE}
+```{r ,message=F,warning=F,eval=FALSE}
 peru.ee <- peru.region %>%
   pol_as_ee(
     id = c("dep"),
@@ -180,6 +195,10 @@ def.plot <-  peru.def.sf %>%
 
 ### 🟣 12. Final plot
 
-```{r, fig.height=10,fig.width=15}
-plot_grid(pr.plot,ndvi.plot,def.plot,nrow = 1,align = "hv")
+```{r,fig.width=7,fig.height=5}
+plot_grid(
+  pr.plot,
+  ndvi.plot,
+  def.plot,
+  ncol = 3)
 ```
