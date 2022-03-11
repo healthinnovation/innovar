@@ -19,7 +19,7 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -31,7 +31,7 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -61,7 +61,7 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -73,7 +73,7 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -103,7 +103,7 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble()%>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -114,7 +114,7 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
         sf = T
       ) %>% st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -144,7 +144,7 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble()%>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -156,7 +156,7 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -185,7 +185,7 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
     } else {
       db_local <- ee_extract(
         x = x,
@@ -196,7 +196,7 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -226,7 +226,7 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -238,7 +238,7 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -268,7 +268,7 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -280,7 +280,7 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -310,7 +310,7 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -322,7 +322,7 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -351,7 +351,7 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -363,7 +363,7 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -392,7 +392,7 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -404,7 +404,7 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -433,7 +433,7 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -445,7 +445,7 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }
@@ -475,7 +475,7 @@ ee_first <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
       db_local <- ee_extract(
@@ -487,7 +487,7 @@ ee_first <- function(x, y, by = 1000,scale = 1000) {
       ) %>%
         st_set_geometry(NULL) %>%
         as_tibble() %>%
-        mutate_all(replace_na,0)
+        mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
       dataset <- rbind(dataset, db_local)
     }

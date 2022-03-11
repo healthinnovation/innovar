@@ -1,13 +1,16 @@
 ---
-title: "InnovaLab Toolkit"
-author: "Renato Cava"
+title: "Innovar Toolkit"
+author: "Innovalab team"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{InnovaLab Toolkit}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: html_document
 ---
+
+<script>
+   $(document).ready(function() {
+     $head = $('#header');
+     $head.prepend('<img src=\"https://user-images.githubusercontent.com/23284899/157940984-80c8e9ff-cd5a-4207-b5fd-5be95b0f920f.png\" style=\"float: right;width: 150px;\"/>')
+   });
+</script>
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -16,50 +19,115 @@ knitr::opts_chunk$set(
 )
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+Package of functions of the Laboratory of Innovation in Health (InnovaLab) of the Institute of Tropical Medicine "Alexander von Humboldt", Universidad Peruana Cayetano Heredia.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+### 1. Requeriments
 
-## Vignette Info
+```{r ,eval=TRUE, warning=FALSE,message=FALSE}
+library(innovar)
+library(sf)
+library(rgee)
+library(tidyverse)
+library(viridis)
+library(cowplot)
+library(mapview)
+ee_Initialize() # edit
+```
+### 2. Vector layer reading of Peru
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+```{r ,message=F,warning=F,eval = TRUE}
+data("Peru")
+peru.region <- Peru %>%
+  dplyr::group_by(dep) %>%
+  summarise()
 
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+glimpse(peru.region)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+### 4. Exploration Peru map
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r,out.width="100%"}
+mapview(peru.region,legend = NULL)
 ```
 
-Also a quote using `>`:
+### 3. Transformation of sf object to a feature collection
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r ,message=F,warning=F,eval=TRUE}
+peru.ee <- peru.region %>% 
+  pol_as_ee(
+    id = c("dep"),
+    simplify = 100
+    )
+```
+
+### 4. Processing data with innovar
+
+```{r ,message=F,warning=F,eval=FALSE}
+peru.ndvi <- peru.ee %>%
+  get_vegetation(
+    from = "2018-01-01",
+    to = "2019-12-31",
+    band = "NDVI",
+    fun = "mean")
+
+peru.def <- peru.ee %>%
+  get_def(
+    from = "2018-02-01",
+    to = "2019-12-31"
+    )
+
+peru.pr <- peru.ee %>%
+  get_climate(
+    from = "2018-02-01",
+    to = "2019-12-31",
+    by = "month",
+    band = "pr",
+    fun = "mean"
+    )
+```
+
+### 5. Processing data for mapping
+
+```{r ,message=F,warning=F,eval=FALSE}
+peru.ndvi.sf <- inner_join(peru.region,peru.ndvi,"dep")
+peru.pr.sf <- inner_join(peru.region,peru.pr ,"dep")
+peru.def.sf <- inner_join(peru.region,peru.def,"dep")
+```
+
+
+### 6. Exploration peru.ndvi.sf
+
+
+### 7. Exploration peru.pr.sf
+
+
+### 8. Exploration peru.def.sf
+
+
+### 9. Mapping climate variables with the innovar theme
+
+```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
+pr.plot<-   peru.pr.sf %>%
+            ggplot() +
+            geom_sf(aes(fill=`pr2019-01`)) +
+            scale_fill_lis(discrete = FALSE,name="Precipitation") +
+            theme_bw()
+```
+
+```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
+ndvi.plot<- peru.ndvi.sf %>%
+            ggplot() +
+            geom_sf(aes(fill=`NDVI2019-01`)) +
+            scale_fill_lis(discrete = FALSE,name="NDVI") +
+            theme_bw()
+```
+
+
+```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
+def.plot <-  peru.def.sf %>%
+             ggplot() +
+             geom_sf(aes(fill=Adef_2019)) +
+             scale_fill_lis(discrete = FALSE,name="Deforestation") +
+             theme_bw()
+plot_grid(pr.plot,ndvi.plot,def.plot,nrow = 1)
+````
