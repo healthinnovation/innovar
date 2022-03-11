@@ -8,7 +8,7 @@ output: html_document
 <script>
    $(document).ready(function() {
      $head = $('#header');
-     $head.prepend('<img src=\"https://user-images.githubusercontent.com/23284899/157940984-80c8e9ff-cd5a-4207-b5fd-5be95b0f920f.png\" style=\"float: right;width: 150px;\"/>')
+     $head.prepend('<img src=\"https://user-images.githubusercontent.com/23284899/157940984-80c8e9ff-cd5a-4207-b5fd-5be95b0f920f.png\" style=\"float: right;width: 200px;\"/>')
    });
 </script>
 
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 Package of functions of the Laboratory of Innovation in Health (InnovaLab) of the Institute of Tropical Medicine "Alexander von Humboldt", Universidad Peruana Cayetano Heredia.
 
-### 1. Requeriments
+### 🟣 1. Requeriments
 
 ```{r ,eval=TRUE, warning=FALSE,message=FALSE}
 library(innovar)
@@ -33,7 +33,7 @@ library(cowplot)
 library(mapview)
 ee_Initialize() # edit
 ```
-### 2. Vector layer reading of Peru
+### 🟣 2. Vector layer reading of Peru
 
 ```{r ,message=F,warning=F,eval = TRUE}
 data("Peru")
@@ -44,13 +44,13 @@ peru.region <- Peru %>%
 glimpse(peru.region)
 ```
 
-### 4. Exploration Peru map
+### 🟣 3. Exploration Peru map
 
 ```{r,out.width="100%"}
 mapview(peru.region,legend = NULL)
 ```
 
-### 3. Transformation of sf object to a feature collection
+### 🟣 4. Transformation of sf object to a feature collection
 
 ```{r ,message=F,warning=F,eval=TRUE}
 peru.ee <- peru.region %>% 
@@ -60,7 +60,7 @@ peru.ee <- peru.region %>%
     )
 ```
 
-### 4. Processing data with innovar
+### 🟣 5. Processing data with innovar
 
 ```{r ,message=F,warning=F,eval=FALSE}
 peru.ndvi <- peru.ee %>%
@@ -86,48 +86,97 @@ peru.pr <- peru.ee %>%
     )
 ```
 
-### 5. Processing data for mapping
+```
+[1] "Extracting information [0/25]..."
+[1] "Extracting information [0/25]..."
+[1] "Extracting information [0/25]..."
+```
 
-```{r ,message=F,warning=F,eval=FALSE}
+### 🟣 6. Processing data for mapping
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+peru.def <- read_rds("data")[[1]]
+peru.ndvi <- read_rds("data")[[2]]
+peru.pr <- read_rds("data")[[3]]
+```
+
+```{r ,message=F,warning=F}
 peru.ndvi.sf <- inner_join(peru.region,peru.ndvi,"dep")
 peru.pr.sf <- inner_join(peru.region,peru.pr ,"dep")
 peru.def.sf <- inner_join(peru.region,peru.def,"dep")
 ```
 
+### 🟣 7. Exploration data 
 
-### 6. Exploration peru.ndvi.sf
-
-
-### 7. Exploration peru.pr.sf
-
-
-### 8. Exploration peru.def.sf
-
-
-### 9. Mapping climate variables with the innovar theme
-
-```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
-pr.plot<-   peru.pr.sf %>%
-            ggplot() +
-            geom_sf(aes(fill=`pr2019-01`)) +
-            scale_fill_lis(discrete = FALSE,name="Precipitation") +
-            theme_bw()
+```{r}
+# peru.ndvi.sf
+glimpse(peru.ndvi.sf)
+# peru.pr.sf
+glimpse(peru.pr.sf)
+# peru.def.sf
+glimpse(peru.def.sf)
 ```
 
-```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
+### 🟣 8. Exploration peru.ndvi.sf map
+
+```{r, out.width="100%"}
+mapview(
+  peru.ndvi.sf,
+  zcol="NDVI2018-01",
+  layer.name = "NDVI-2018-01"
+  )
+```
+
+### 🟣 9. Exploration peru.pr.sf map
+
+```{r, out.width="100%"}
+mapview(
+  peru.pr.sf,
+  zcol="pr2018-02",
+  layer.name = "pr-2018-02"
+  )
+```
+
+### 🟣 10. Exploration peru.def.sf map
+
+```{r, out.width="100%"}
+mapview(
+  peru.def.sf,
+  zcol="Adef_2018",
+  layer.name = "def-2018"
+  )
+```
+
+### 🟣 11. Mapping climate variables with the innovar theme
+
+```{r,message=F,warning=F,fig.height=10,fig.width=15}
+pr.plot <- peru.pr.sf %>%
+  ggplot() +
+  geom_sf(aes(fill=`pr2019-01`)) +
+  scale_fill_innova(discrete = FALSE,name="Precipitation") +
+  theme_bw()
+```
+
+```{r,message=F,warning=F,fig.height=10,fig.width=15}
 ndvi.plot<- peru.ndvi.sf %>%
-            ggplot() +
-            geom_sf(aes(fill=`NDVI2019-01`)) +
-            scale_fill_lis(discrete = FALSE,name="NDVI") +
-            theme_bw()
+  ggplot() +
+  geom_sf(aes(fill=`NDVI2019-01`)) + 
+  scale_fill_innova(discrete = FALSE,name="NDVI") +
+  theme_bw()
 ```
 
 
-```{r,message=F,warning=F,fig.height=10,fig.width=15,eval=FALSE}
+```{r, message=F,warning=F,fig.height=10,fig.width=15}
 def.plot <-  peru.def.sf %>%
-             ggplot() +
-             geom_sf(aes(fill=Adef_2019)) +
-             scale_fill_lis(discrete = FALSE,name="Deforestation") +
-             theme_bw()
-plot_grid(pr.plot,ndvi.plot,def.plot,nrow = 1)
-````
+  ggplot() +
+  geom_sf(aes(fill=Adef_2019)) +
+  scale_fill_innova(discrete = FALSE,name="Deforestation") +
+  theme_bw()
+```
+
+### 🟣 12. Final plot
+
+```{r, fig.height=10,fig.width=15}
+plot_grid(pr.plot,ndvi.plot,def.plot,nrow = 1,align = "hv")
+```
+
