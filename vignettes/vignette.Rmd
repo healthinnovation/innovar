@@ -2,7 +2,11 @@
 title: "Innovar Toolkit"
 author: "Innovalab team"
 date: "`r Sys.Date()`"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{InnovaLab Toolkit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 <script>
@@ -33,6 +37,7 @@ library(cowplot)
 library(mapview)
 ee_Initialize() # edit
 ```
+
 ### 🟣 2. Vector layer reading of Peru
 
 ```{r ,message=F,warning=F,eval = TRUE}
@@ -53,7 +58,7 @@ mapview(peru.region,legend = NULL)
 ### 🟣 4. Transformation of sf object to a feature collection
 
 ```{r ,message=F,warning=F,eval=TRUE}
-peru.ee <- peru.region %>% 
+peru.ee <- peru.region %>%
   pol_as_ee(
     id = c("dep"),
     simplify = 100
@@ -106,7 +111,7 @@ peru.pr.sf <- inner_join(peru.region,peru.pr ,"dep")
 peru.def.sf <- inner_join(peru.region,peru.def,"dep")
 ```
 
-### 🟣 7. Exploration data 
+### 🟣 7. Exploration data
 
 ```{r}
 # peru.ndvi.sf
@@ -160,11 +165,10 @@ pr.plot <- peru.pr.sf %>%
 ```{r,message=F,warning=F,fig.height=10,fig.width=15}
 ndvi.plot<- peru.ndvi.sf %>%
   ggplot() +
-  geom_sf(aes(fill=`NDVI2019-01`)) + 
+  geom_sf(aes(fill=`NDVI2019-01`)) +
   scale_fill_innova(discrete = FALSE,name="NDVI") +
   theme_bw()
 ```
-
 
 ```{r, message=F,warning=F,fig.height=10,fig.width=15}
 def.plot <-  peru.def.sf %>%
@@ -179,4 +183,3 @@ def.plot <-  peru.def.sf %>%
 ```{r, fig.height=10,fig.width=15}
 plot_grid(pr.plot,ndvi.plot,def.plot,nrow = 1,align = "hv")
 ```
-
