@@ -9,13 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<script>
-   $(document).ready(function() {
-     $head = $('#header');
-     $head.prepend('<img src=\"https://user-images.githubusercontent.com/23284899/157940984-80c8e9ff-cd5a-4207-b5fd-5be95b0f920f.png\" style=\"float: right;width: 200px;\"/>')
-   });
-</script>
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -49,9 +42,8 @@ ee_Initialize() # edit
 ### 🟣 2. Vector layer reading of Peru
 ```{r echo=FALSE, message=FALSE,warning=FALSE}
 library(innovar)
-library(tidyverse)
 library(mapview)
-library(cowplot)
+library(tidyverse)
 ```
 
 
@@ -196,9 +188,13 @@ def.plot <-  peru.def.sf %>%
 ### 🟣 12. Final plot
 
 ```{r,fig.width=7,fig.height=5}
-plot_grid(
-  pr.plot,
-  ndvi.plot,
-  def.plot,
-  ncol = 3)
+pr.plot
+```
+
+```{r,fig.width=7,fig.height=5}
+ndvi.plot
+```
+
+```{r,fig.width=7,fig.height=5}
+def.plot
 ```

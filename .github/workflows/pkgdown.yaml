@@ -28,6 +28,10 @@ jobs:
           extra-packages: pkgdown
           needs: website
 
+      - name: dependencies
+        run: |
+          install.packages('mapview','tidyverse')
+
       - name: Deploy package
         run: |
           git config --local user.name "$GITHUB_ACTOR"
