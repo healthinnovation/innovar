@@ -30,7 +30,7 @@ jobs:
 
       - name: dependencies
         run: |
-          install.packages('mapview','tidyverse')
+           Rscript -e "install.packages(c('mapview','tidyverse'))"
 
       - name: Deploy package
         run: |
