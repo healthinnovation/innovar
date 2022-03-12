@@ -13,3 +13,4 @@ export/
 data/test/*
 test.R
 docs
+.directory
