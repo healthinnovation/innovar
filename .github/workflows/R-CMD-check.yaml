@@ -60,6 +60,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt install libudunits2-dev
+          sudo apt install pkg-config
           sudo apt install libgdal-dev
           while read -r cmd
           do
@@ -70,6 +71,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits
+          brew install pkg-config
           brew install gdal
 
       - name: Install dependencies
