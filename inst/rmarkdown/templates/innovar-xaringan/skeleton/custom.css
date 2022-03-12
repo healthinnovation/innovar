@@ -1,0 +1,306 @@
+/* Extra CSS */
+li {
+  line-height: 1.4em;
+}
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+.xaringanextra-clipboard-button {
+	font-size: 1em;
+}
+
+.code10 .remark-code, .code10 .remark-inline-code {
+  font-size: 10%;
+}
+
+.code20 .remark-code, .code20 .remark-inline-code {
+  font-size: 20%;
+}
+
+.code30 .remark-code, .code30 .remark-inline-code {
+  font-size: 30%;
+}
+
+.code40 .remark-code, .code40 .remark-inline-code {
+  font-size: 40%;
+}
+
+.code50 .remark-code, .code50 .remark-inline-code {
+  font-size: 50%;
+}
+
+.code60 .remark-code, .code60 .remark-inline-code {
+  font-size: 60%;
+}
+
+.code70 .remark-code, .code70 .remark-inline-code {
+  font-size: 70%;
+}
+
+.code80 .remark-code, .code80 .remark-inline-code {
+  font-size: 80%;
+}
+
+.code90 .remark-code, .code90 .remark-inline-code {
+  font-size: 90%;
+}
+
+.code100 .remark-code, .code100 .remark-inline-code {
+  font-size: 100%;
+}
+
+.code110 .remark-code, .code110 .remark-inline-code {
+  font-size: 110%;
+}
+
+.code120 .remark-code, .code120 .remark-inline-code {
+  font-size: 120%;
+}
+
+.code130 .remark-code, .code130 .remark-inline-code {
+  font-size: 130%;
+}
+
+.code140 .remark-code, .code140 .remark-inline-code {
+  font-size: 140%;
+}
+
+.code150 .remark-code, .code150 .remark-inline-code {
+  font-size: 150%;
+}
+
+.code160 .remark-code, .code160 .remark-inline-code {
+  font-size: 160%;
+}
+
+.code170 .remark-code, .code170 .remark-inline-code {
+  font-size: 170%;
+}
+
+.code180 .remark-code, .code180 .remark-inline-code {
+  font-size: 180%;
+}
+
+.code190 .remark-code, .code190 .remark-inline-code {
+  font-size: 190%;
+}
+
+.code200 .remark-code, .code200 .remark-inline-code {
+  font-size: 200%;
+}
+
+.font10 {
+  font-size: 10%;
+}
+
+.font20 {
+  font-size: 20%;
+}
+
+.font30 {
+  font-size: 30%;
+}
+
+.font40 {
+  font-size: 40%;
+}
+
+.font50 {
+  font-size: 50%;
+}
+
+.font60 {
+  font-size: 60%;
+}
+
+.font70 {
+  font-size: 70%;
+}
+
+.font80 {
+  font-size: 80%;
+}
+
+.font90 {
+  font-size: 90%;
+}
+
+.font100 {
+  font-size: 100%;
+}
+
+.font110{
+  font-size: 110%;
+}
+
+.font120 {
+  font-size: 120%;
+}
+
+.font130 {
+  font-size: 130%;
+}
+
+.font140 {
+  font-size: 140%;
+}
+
+.font150 {
+  font-size: 150%;
+}
+
+.font160 {
+  font-size: 160%;
+}
+
+.font170 {
+  font-size: 170%;
+}
+
+.font180 {
+  font-size: 180%;
+}
+
+.font190 {
+  font-size: 190%;
+}
+
+.font200 {
+  font-size: 200%;
+}
+
+.line-space1-2 {
+  line-height: 1.2em;
+}
+
+.line-space1-5 {
+  line-height: 1.5em;
+}
+
+.line-space1-7 {
+  line-height: 1.7em;
+}
+
+.line-space2-0 {
+  line-height: 2em;
+}
+
+.line-space2-2 {
+  line-height: 2.2em;
+}
+
+.line-space2-5 {
+  line-height: 2.5em;
+}
+
+.line-space3-0 {
+  line-height: 3.0em;
+}
+
+div.line-space1-7 li {
+  line-height: 1.7em;
+}
+
+div.line-space2-0 li {
+  line-height: 2em;
+}
+
+div.line-space2-2 li {
+  line-height: 2.2em;
+}
+
+div.line-space2-5 li {
+  line-height: 2.5em;
+}
+
+div.line-space3-0 li {
+  line-height: 3.0em;
+}
+
+.scroll-output150 {
+    height: 150px;
+    overflow-y: auto !important;
+}
+
+.scroll-output175 {
+    height: 175px;
+    overflow-y: auto !important;
+}
+
+.scroll-output200 {
+    height: 200px;
+    overflow-y: auto !important;
+}
+
+.scroll-output225 {
+    height: 225px;
+    overflow-y: auto !important;
+}
+
+.scroll-output250 {
+    height: 250px;
+    overflow-y: auto !important;
+}
+
+.scroll-output275 {
+    height: 275px;
+    overflow-y: auto !important;
+}
+
+.scroll-output300 {
+    height: 300px;
+    overflow-y: auto !important;
+}
+
+.scroll-output325 {
+    height: 325px;
+    overflow-y: auto !important;
+}
+
+.scroll-output350 {
+    height: 350px;
+    overflow-y: auto !important;
+}
+
+.scroll-output375 {
+    height: 375px;
+    overflow-y: auto !important;
+}
+
+.scroll-output400 {
+    height: 400px;
+    overflow-y: auto !important;
+}
+
+.scroll-output425 {
+    height: 425px;
+    overflow-y: auto !important;
+}
+
+.scroll-output450 {
+    height: 450px;
+    overflow-y: auto !important;
+}
+
+.scroll-output475 {
+    height: 575px;
+    overflow-y: auto !important;
+}
+
+.scroll-output500 {
+    height: 500px;
+    overflow-y: auto !important;
+}
+
+.scroll-output {
+    height: 500px;
+    overflow-y: auto !important;
+}
