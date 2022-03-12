@@ -69,11 +69,10 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits proj gdal
-          export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE, build = FALSE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
