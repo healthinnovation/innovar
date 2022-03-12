@@ -64,5 +64,7 @@ Imports:
     Matrix,
     psych
 Suggests:
-  knitr,
-  rmarkdown
+    knitr,
+    mapview,
+    rmarkdown,
+    tidyverse
