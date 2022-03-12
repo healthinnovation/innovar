@@ -68,7 +68,6 @@ jobs:
       - name: Install system dependencies on macOS
         if: runner.os == 'macOS'
         run: |
-          brew install gdal --HEAD
           brew install udunits proj gdal
           export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
