@@ -71,9 +71,9 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits
+          brew install sqlite3
           brew install proj
           brew install gdal
-          brew install geos
 
       - name: Install dependencies
         run: |
