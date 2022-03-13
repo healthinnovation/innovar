@@ -72,11 +72,12 @@ jobs:
           brew install udunits proj gdal geos
           export LDFLAGS="-L/usr/local/opt/libpq/lib"
           export CPPFLAGS="-I/usr/local/opt/libpq/include"
-          Rscript -e "options(configure.args = c('sf' = '--with-proj-lib=/usr/local/lib/', 'terra' = '--with-proj-lib=/usr/local/lib/'))"
 
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
+          install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
+          install.packages("terra", configure.args = "--with-proj-lib=/usr/local/lib/")
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
