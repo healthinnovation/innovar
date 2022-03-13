@@ -76,8 +76,6 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
-          install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
-          install.packages("terra", configure.args = "--with-proj-lib=/usr/local/lib/")
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
