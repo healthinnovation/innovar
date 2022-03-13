@@ -59,9 +59,7 @@ jobs:
       - name: Install system dependencies on linux
         if: runner.os == 'Linux'
         run: |
-          sudo apt install libudunits2-dev
-          sudo apt install pkg-config
-          sudo apt install libgdal-dev
+          sudo apt install libudunits2-dev pkg-config libgdal-dev
           while read -r cmd
           do
             eval sudo $cmd
@@ -70,9 +68,7 @@ jobs:
       - name: Install system dependencies on macOS
         if: runner.os == 'macOS'
         run: |
-          brew install udunits
-          brew install pkg-config
-          brew install gdal
+          brew install udunits proj gdal geos
 
       - name: Install dependencies
         run: |
