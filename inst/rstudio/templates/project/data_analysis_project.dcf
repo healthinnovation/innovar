@@ -1,0 +1,22 @@
+Binding: data_analysis_project
+Title: Data analysis project using innovar
+Icon: InnovaLab_logo_blue.png
+
+
+Parameter: project_type
+Widget: SelectInput
+Label: Select the type of project you want.
+Fields: A, B
+Default: A
+Position: left
+
+Parameter: git_activate
+Widget: CheckboxInput
+Label: Create a git repository
+Position: left
+
+Parameter: renv_activate
+Widget: CheckboxInput
+Label: Use renv with this project
+Position: bottom
+
