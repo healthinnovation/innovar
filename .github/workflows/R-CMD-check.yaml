@@ -69,13 +69,8 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits proj gdal geos
-
-      - name: Fix installation of some packages on macos r3_6
-        if: runner.os == 'macOS' && matrix.config.r == '3.6'
-        run: |
-          install.packages("terra", configure.args = "--with-proj-lib=/usr/local/lib/")
-          install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
-        shell: Rscript {0}
+          export LDFLAGS="-L/usr/local/opt/libpq/lib"
+          export CPPFLAGS="-I/usr/local/opt/libpq/include"
 
       - name: Install dependencies
         run: |
