@@ -82,6 +82,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, type = "binary")
           remotes::install_cran("rcmdcheck")
+          install.packages("systemfonts")
         shell: Rscript {0}
 
       - name: Session info
