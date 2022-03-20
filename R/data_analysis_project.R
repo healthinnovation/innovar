@@ -1,9 +1,7 @@
 data_analysis_project <- function(path,
-                                  project_type = project_types(),
+                                  project_type = "A",
                                   git_activate = FALSE,
                                   renv_activate = FALSE) {
-
-  project_type = match.arg(project_type)
 
   # ensure directory exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
@@ -26,11 +24,18 @@ data_analysis_project <- function(path,
   }
 
   if (renv_activate) {
-    renv::init(fs::path(path))
+    renv::init(fs::path(path), restart = FALSE)
+    path_innovar <- fs::path_package("innovar")
+    message_install <- paste0("\nIf you want to install innovar package, use:\n",
+                              "renv::use('", path_innovar, "')\n\n",
+                              "Or if you want the latest version available:\n",
+                              "renv::use('healthinnovation/innovar')")
+
+    writeLines(paste0("source('renv/activate.R')\n\n",
+                      "message(cat(\"", message_install, "\"))"),
+               ".Rprofile",
+               useBytes = TRUE)
   }
 
 }
 
-project_types <- function() {
-  c("A", "B")
-}
