@@ -69,13 +69,18 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits proj gdal geos
-          export LDFLAGS="-L/usr/local/opt/libpq/lib"
-          export CPPFLAGS="-I/usr/local/opt/libpq/include"
 
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Fix installation of some packages on macos
+        if: runner.os == 'macOS'
+        run: |
+          install.packages("terra", type = "binary")
+          install.packages("sf", type = "binary")
         shell: Rscript {0}
 
       - name: Session info
