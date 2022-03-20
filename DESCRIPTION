@@ -62,7 +62,9 @@ Imports:
     stringi,
     fs,
     Matrix,
-    psych
+    psych,
+    gert,
+    renv
 Suggests:
     knitr,
     mapview,

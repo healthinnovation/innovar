@@ -410,6 +410,27 @@ references:
   year: '2022'
   url: https://CRAN.R-project.org/package=psych
 - type: software
+  title: gert
+  abstract: 'gert: Simple Git Client for R'
+  notes: Imports
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2022'
+  url: https://CRAN.R-project.org/package=gert
+- type: software
+  title: renv
+  abstract: 'renv: Project Environments'
+  notes: Imports
+  authors:
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=renv
+- type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
