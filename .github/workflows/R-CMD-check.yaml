@@ -83,6 +83,9 @@ jobs:
           remotes::install_deps(dependencies = TRUE, type = "binary")
           remotes::install_cran("rcmdcheck")
           install.packages("systemfonts")
+          info_pkgs <- as.data.frame(sessioninfo::session_info(installed.packages()[, "Package"], info = "packages")$packages)
+          na_pkgs <- subset(info_pkgs, is.na(ondiskversion))$package
+          if (length(na_pkgs) != 0) remotes::install_cran(na_pkgs)
         shell: Rscript {0}
 
       - name: Session info
