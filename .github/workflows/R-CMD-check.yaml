@@ -71,16 +71,17 @@ jobs:
           brew install udunits proj gdal geos
 
       - name: Install dependencies
+        if: runner.os == 'Linux'
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - name: Fix installation of some packages on macos
-        if: runner.os == 'macOS'
+      - name: Install dependencies
+        if: runner.os != 'Linux'
         run: |
-          install.packages("terra", type = "binary")
-          install.packages("sf", type = "binary")
+          remotes::install_deps(dependencies = TRUE, type = "binary")
+          remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
       - name: Session info
