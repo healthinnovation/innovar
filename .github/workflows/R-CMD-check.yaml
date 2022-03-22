@@ -76,6 +76,14 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+      - name: Fix installation of some packages on macos
+        if: runner.os == 'macOS' && matrix.config.r == '3.6'
+        run: |
+          install.packages("terra", configure.args = "--with-proj-lib=/usr/local/lib/")
+          install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
+          install.packages("rgee")
+        shell: Rscript {0}
+
       - name: Session info
         run: |
           options(width = 100)
