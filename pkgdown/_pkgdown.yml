@@ -6,10 +6,30 @@ home:
     Universdiad Peruana Cayetano Heredia.
 
 template:
-  opengraph:
-    image:
-      src: man/figures/lis_icon.png
-      alt: "innovar: Set of functions"
+  bootstrap: 5
+  bslib:
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
+  lang: en
+
+navbar:
+  bg: dark
+  fg: "#444"
+  left:
+    - icon: fa-home
+      href: index.html
+    - icon: fa fa-file-code-o
+      text: "functions"
+      href: reference/index.html
+  right:
+
+    - icon: fa fa-newspaper-o
+      text: "news"
+      href: news/index.html
+    - icon: fa fa-github fa-lg
+      text: "github"
+      href: https://github.com/healthinnovation/innovar
 
 reference:
   - title: "Climate"

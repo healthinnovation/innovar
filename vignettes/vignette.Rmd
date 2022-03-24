@@ -3,10 +3,6 @@ title: "Innovar Toolkit"
 author: "Innovalab team"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{InnovaLab Toolkit}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
