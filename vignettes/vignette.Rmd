@@ -1,8 +1,16 @@
 ---
-title: "Innovar Toolkit"
-author: "Innovalab team"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+title: "Introduction to innovar"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{1. Introduction}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}    
 ---
 
 ```{r setup, include = FALSE}
@@ -28,20 +36,20 @@ ee_Initialize() # edit
 ```
 
 ```
-── rgee 1.1.2.9000 ──────────────────────── earthengine-api 0.1.297 ── 
+── rgee 1.1.2.9000 ──────────────────────── earthengine-api 0.1.297 ──
  ✓ user: not_defined
  ✓ Initializing Google Earth Engine:  DONE!
- ✓ Earth Engine account: users/antonybarja8 
-────────────────────────────────────────────────────────────────────── 
+ ✓ Earth Engine account: users/antonybarja8
+──────────────────────────────────────────────────────────────────────
 ```
 
 ### 🟣 2. Vector layer reading of Peru
+
 ```{r echo=FALSE, message=FALSE,warning=FALSE}
 library(innovar)
 library(mapview)
 library(tidyverse)
 ```
-
 
 ```{r ,message=F,warning=F,eval = TRUE}
 data("Peru")
