@@ -65,10 +65,10 @@ vignette: >
 
 🔵 Implement of <img src="https://user-images.githubusercontent.com/23284899/160271942-73aac747-d44b-4074-b30e-1821fa69ccf1.png" width="20px" align="center"> GitHub Actions to test package on multiple Operative System and deployment webpage.
 
-🔵 <img src="https://user-images.githubusercontent.com/23284899/160271942-73aac747-d44b-4074-b30e-1821fa69ccf1.png" width="20px" align="center"> GitHubAction for citation.
+🔵 <img src="https://user-images.githubusercontent.com/23284899/160271942-73aac747-d44b-4074-b30e-1821fa69ccf1.png" width="20px" align="center"> GitHub Actions for citation.
 
 🔵 Add new shields and logo for package.
 
-🔵 New vignette with examples reproducibles.
-
+🔵 New vignette.
+ 
 🔵 Incorporation of <img src="https://user-images.githubusercontent.com/23284899/160272004-ecbc3777-ec56-432e-8c0d-1743f6a8ae51.png" width="20px" align="center"> **MIT licence** .
