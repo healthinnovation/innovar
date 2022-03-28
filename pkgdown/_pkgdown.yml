@@ -22,6 +22,11 @@ navbar:
     - icon: fa fa-file-code-o
       text: "functions"
       href: reference/index.html
+    - icon: fas fa-book
+      text: "Articles"
+      menu:
+       - text: Introduction
+         href: articles/vignette.html
   right:
 
     - icon: fa fa-newspaper-o
