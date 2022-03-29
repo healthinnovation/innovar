@@ -27,6 +27,8 @@ navbar:
       menu:
        - text: Introduction
          href: articles/vignette.html
+       - text: innovar-xaringan
+         href: https://healthinnovation.github.io/innovar-xaringan
   right:
 
     - icon: fa fa-newspaper-o
