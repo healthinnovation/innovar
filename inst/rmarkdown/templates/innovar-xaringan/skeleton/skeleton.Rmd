@@ -1,7 +1,7 @@
 ---
 title: "Plantilla Innovar Xaringan"
-subtitle: ""  
-author: 
+subtitle: ""
+author:
   - "Laboratorio de Innovación en Salud"
 date: '`r Sys.Date()`'
 output:
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   cache = FALSE,
   echo = TRUE,
-  message = FALSE, 
+  message = FALSE,
   warning = FALSE,
   hiline = TRUE
 )
@@ -86,8 +86,8 @@ xaringanExtra::use_logo(
 
 ```{r xaringan-extra-styles, echo=FALSE}
 xaringanExtra::use_extra_styles(
-  hover_code_line = TRUE,         
-  mute_unhighlighted_code = TRUE  
+  hover_code_line = TRUE,
+  mute_unhighlighted_code = TRUE
 )
 ```
 
@@ -98,7 +98,7 @@ xaringanExtra::use_progress_bar(color = "#0051BA",
 
 ```{r metathis, echo=FALSE}
 meta() %>%
-  meta_name("github-repo" = "healthinnovation/xaringan-innovar") %>% 
+  meta_name("github-repo" = "healthinnovation/xaringan-innovar") %>%
   meta_social(
     title = "Plantilla Innovar Xaringan",
     description = "Innovar theme of R package xaringan",
@@ -121,15 +121,15 @@ meta() %>%
 
 ## `r rmarkdown::metadata$subtitle`
 
-## `r rmarkdown::metadata$author`  
+## `r rmarkdown::metadata$author`
 
 ### `r Sys.Date()`
 
 <br>
 
-[`r fontawesome::fa(name = "github")` @healthinnovation](https://github.com/healthinnovation)  
-[`r fontawesome::fa(name = "twitter")` @innovalab_imt](https://twitter.com/innovalab_imt)  
-[`r fontawesome::fa(name = "link")` innovalab.info](https://www.innovalab.info/)  
+[`r fontawesome::fa(name = "github")` @healthinnovation](https://github.com/healthinnovation)
+[`r fontawesome::fa(name = "twitter")` @innovalab_imt](https://twitter.com/innovalab_imt)
+[`r fontawesome::fa(name = "link")` innovalab.info](https://www.innovalab.info/)
 
 
 ---
@@ -142,8 +142,8 @@ Text can be **bold**, _italic_, ~~strikethrough~~, or `inline code`.
 
 ### Lorem Ipsum
 
-Dolor imperdiet nostra sapien scelerisque praesent curae metus facilisis dignissim tortor. 
-Lacinia neque mollis nascetur neque urna velit bibendum. 
+Dolor imperdiet nostra sapien scelerisque praesent curae metus facilisis dignissim tortor.
+Lacinia neque mollis nascetur neque urna velit bibendum.
 Himenaeos suspendisse leo varius mus risus sagittis aliquet venenatis duis nec.
 
 - Dolor cubilia nostra nunc sodales
@@ -170,14 +170,14 @@ _Italic Color_
 ]
 
 .right-column[
-Lorem ipsum dolor sit amet, [consectetur adipiscing elit (link)](#3), 
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+Lorem ipsum dolor sit amet, [consectetur adipiscing elit (link)](#3),
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Erat nam at lectus urna.
-Pellentesque elit ullamcorper **dignissim cras tincidunt (bold)** lobortis feugiat. 
-_Eros donec ac odio tempor_ orci dapibus ultrices. 
+Pellentesque elit ullamcorper **dignissim cras tincidunt (bold)** lobortis feugiat.
+_Eros donec ac odio tempor_ orci dapibus ultrices.
 Id porta nibh venenatis cras sed felis eget velit aliquet.
 Aliquam id diam maecenas ultricies mi.
-Enim sit amet 
+Enim sit amet
 `code_color("inline")`
 venenatis urna cursus eget nunc scelerisque viverra.
 ]
@@ -254,7 +254,7 @@ ggplot(gapminder) + #<<
   geom_point() +
   facet_wrap(~year)
 ```
- 
+
 #### JavaScript
 
 ```js
@@ -417,7 +417,7 @@ layout: false
 
 ### Wide image
 
-![](https://guides.github.com/activities/hello-world/branching.png)
+![](https://docs.github.com/assets/cb-23923/images/help/repository/branching.png)
 
 .footnote[Wide images scale to 100% slide width]
 
