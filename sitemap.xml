@@ -31,6 +31,9 @@
     <loc>/reference/allpautils_names.html</loc>
   </url>
   <url>
+    <loc>/reference/create_dap.html</loc>
+  </url>
+  <url>
     <loc>/reference/export.html</loc>
   </url>
   <url>
@@ -107,6 +110,9 @@
   </url>
   <url>
     <loc>/reference/show_pal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_xaringan.html</loc>
   </url>
   <url>
     <loc>/reference/vulnerability_index.html</loc>
