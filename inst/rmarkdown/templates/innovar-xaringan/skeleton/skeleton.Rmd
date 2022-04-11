@@ -19,7 +19,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(
-  fig.width=9, fig.height=3.5, fig.retina=3,
+  fig.width = 9, fig.height = 3.5, fig.retina = 3,
   out.width = "100%",
   cache = FALSE,
   echo = TRUE,
@@ -41,10 +41,14 @@ style_duo_accent(
   header_color = "#106075",
   background_color = "#e9ebee",
   header_font_google = google_font("Oswald", "700", "700i"),
-  text_font_google = google_font("Spartan", "400", "400i",
-                                 "700", "700i"),
-  code_font_google = google_font("Fira Code", "400",
-                                 "700"),
+  text_font_google = google_font(
+    "Spartan", "400", "400i",
+    "700", "700i"
+  ),
+  code_font_google = google_font(
+    "Fira Code", "400",
+    "700"
+  ),
   outfile = "xaringan-lis.css"
 )
 ```
@@ -92,24 +96,32 @@ xaringanExtra::use_extra_styles(
 ```
 
 ```{r xaringanExtra, echo = FALSE}
-xaringanExtra::use_progress_bar(color = "#0051BA",
-                                location = "bottom")
+xaringanExtra::use_progress_bar(
+  color = "#0051BA",
+  location = "bottom"
+)
 ```
 
 ```{r metathis, echo=FALSE}
 meta() %>%
-  meta_name("github-repo" = "healthinnovation/xaringan-innovar") %>%
+  meta_general(
+    description = "Innovar theme of R package xaringan",
+    robots = "index,follow",
+    generator = "xaringan and remark.js"
+  ) %>%
+  meta_viewport(
+    orientation = "landscape"
+  ) %>%
+  meta_name("github-repo" = "healthinnovation/innovar-xaringan") %>%
   meta_social(
     title = "Plantilla Innovar Xaringan",
-    description = "Innovar theme of R package xaringan",
-    url = "https://healthinnovation.github.io/xaringan-innovar/",
-    image = "https://healthinnovation.github.io/xaringan-innovar/img/cover-plantilla.png",
+    url = "https://healthinnovation.github.io/innovar-xaringan/",
+    image = "https://raw.githubusercontent.com/healthinnovation/innovar-xaringan/main/img/cover-plantilla.png",
     image_alt = "Innovar theme of R package xaringan",
     og_type = "website",
     og_author = "Laboratorio de Innovación en Salud",
     twitter_card_type = "summary_large_image",
-    twitter_creator = "@innovalab_imt",
-    twitter_site = "@innovalab_imt"
+    twitter_creator = "@innovalab_imt"
   )
 ```
 
@@ -312,7 +324,7 @@ tibble::as_tibble(mtcars)
 ---
 
 ```{r}
-knitr::kable(head(mtcars), format = 'html')
+knitr::kable(head(mtcars), format = "html")
 ```
 
 ---
@@ -394,7 +406,9 @@ layout: true
 
 ```{r plot-example, eval=requireNamespace("ggplot2", quietly=TRUE)}
 library(ggplot2)
-(g <- ggplot(mpg) + aes(hwy, cty, color = class) + geom_point())
+(g <- ggplot(mpg) +
+  aes(hwy, cty, color = class) +
+  geom_point())
 ```
 
 ---
