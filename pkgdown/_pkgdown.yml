@@ -81,6 +81,9 @@ reference:
     - read_batch
     - pol_as_ee
     - export
+    - create_dap
+    - use_xaringan
+
   - title: "Dataset"
     contents:
     - Peru
