@@ -101,7 +101,7 @@ use_xaringan <- function(file) {
     if (interactive()) {
       file <- readline("Enter a name for the file .Rmd: ")
     } else {
-      stop("dir argument must be specified", call. = FALSE)
+      stop("file argument must be specified", call. = FALSE)
     }
   }
 
