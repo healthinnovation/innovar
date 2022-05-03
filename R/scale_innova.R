@@ -55,10 +55,9 @@ politico <- c(
 )
 
 mortality <- c(
-  `verylow` = "#4C194A",`low` = "#006495", `middle` ="#7BDBD5",
-  `high` = "#FF4D00", `veryhigh` ="#6E0900"
+  `veryhigh` ="#6E0900",`high` = "#FF4D00",`middle` ="#7BDBD5",
+  `low` = "#006495",`verylow` = "#4C194A"
   )
-
 
 # List of palettes
 
