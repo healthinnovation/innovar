@@ -82,6 +82,7 @@ jobs:
           install.packages("terra", configure.args = "--with-proj-lib=/usr/local/lib/")
           install.packages("sf", configure.args = "--with-proj-lib=/usr/local/lib/")
           install.packages("rgee")
+          install.packages("mapview")
         shell: Rscript {0}
 
       - name: Session info
