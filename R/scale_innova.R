@@ -174,14 +174,14 @@ scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE
 #' \item \bold{mlobo}
 #' \item \bold{btran}
 #' \item \bold{nasa}
+#' \item \bold{politico}
+#' \item \bold{mortality}
 #' }
 #' @examples
-#'\dontrun{
 #' library(innovar)
-#' show_pal(name = "nasa",rev = TRUE, n = 5)
+#' # show_pal(name = "nasa",rev = TRUE, n = 5)
 #' show_pal()
 #'
-#'}
 #'@export show_pal
 
 show_pal <- function(name = "all",n = 5,rev = TRUE,...){

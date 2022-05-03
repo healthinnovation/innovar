@@ -29,13 +29,13 @@ Name of color palette available
 \item \bold{mlobo}
 \item \bold{btran}
 \item \bold{nasa}
+\item \bold{politico}
+\item \bold{mortality}
 }
 }
 \examples{
-\dontrun{
 library(innovar)
-show_pal(name = "nasa",rev = TRUE, n = 5)
+# show_pal(name = "nasa",rev = TRUE, n = 5)
 show_pal()
 
-}
 }
