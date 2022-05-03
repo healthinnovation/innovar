@@ -54,12 +54,18 @@ politico <- c(
   `nosupporting` = "#C67399",`opposing` = "#9C4482"
 )
 
+mortality <- c(
+  `verylow` = "#4C194A",`low` = "#006495", `middle` ="#7BDBD5",
+  `high` = "#FF4D00", `veryhigh` ="#6E0900"
+  )
+
 
 # List of palettes
 
 innova_palettes <- list(
   `ccvi` = ccvi, `npr` = npr, `blmbrg` = blmbrg, `ecomst` = ecomst, `ctp` = ctp,
-  `jama` = jama, `mlobo` = mlobo, `btran` = btran, `nasa` = nasa, `politico` = politico
+  `jama` = jama, `mlobo` = mlobo, `btran` = btran, `nasa` = nasa,
+  `politico` = politico, `mortality` = mortality
 )
 
 #' Return function to interpolate a lis color palette
