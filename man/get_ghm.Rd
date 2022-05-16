@@ -35,7 +35,7 @@ region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
 
 # 2. Extracting climate information
 data <- region_ee \%>\%
-get_gHM(
+get_ghm(
  fun = "max"
 )
 }

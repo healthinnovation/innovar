@@ -1,6 +1,6 @@
 #' Extract climate data of TerraClimate
 #'
-#' A function that extract a time series of climate variables.
+#' A function that extract a time series of climate variables (1958-01-01T00:00:00Z - 2021-12-01T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.

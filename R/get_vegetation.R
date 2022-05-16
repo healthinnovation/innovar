@@ -1,6 +1,6 @@
 #' Extract vegetation index of MODIS
 #'
-#' A function that extract the values of vegetation by \bold{month}.
+#' A function that extract the values of vegetation by \bold{month} (2000-02-18T00:00:00Z - 2022-04-07T00:00:00).
 #'
 #' @param to,from the starting and final range of date.
 #' @param band name of bands.

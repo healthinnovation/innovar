@@ -15,9 +15,10 @@
 #'   - Trad_Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)
 #'
 #' @return Converts characters where it detects regions of Peru with the resulting divisions specified.
-#'
+#' @importFrom dplyr mutate
 #' @examples
 #' library(innovar)
+#' library(dplyr)
 #' df_dep <- data.frame(
 #' Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
 #'            "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC",

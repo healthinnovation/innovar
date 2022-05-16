@@ -27,7 +27,7 @@
 #'
 #' # 2. Extracting climate information
 #' data <- region_ee %>%
-#' get_gHM(
+#' get_ghm(
 #'  fun = "max"
 #' )
 #' }

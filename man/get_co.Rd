@@ -21,7 +21,7 @@ get_co(from, to, band, region, fun = "max", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of carbon monoxide.
+A function that extract a time series of carbon monoxide (2018-11-22T12:00:13Z - 2022-05-15T00:00:00).
 }
 \details{
 Name of some bands.

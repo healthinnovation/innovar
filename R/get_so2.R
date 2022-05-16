@@ -1,6 +1,6 @@
-#' Extract Ozone data of Sentinel5
+#' Extract Sulphur Dioxide data of Sentinel5
 #'
-#' A function that extract a time series of ozone.
+#' A function that extract a time series of Sulphur Dioxide (2018-07-10T11:17:44Z - 2022-05-15T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param band name of band.

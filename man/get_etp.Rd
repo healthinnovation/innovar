@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_etp.R
 \name{get_etp}
 \alias{get_etp}
-\title{Extract evapotranspiration data of Modis}
+\title{Extract evapotranspiration data of Modis (2001-01-01T00:00:00Z - 2022-04-23T00:00:00)}
 \usage{
 get_etp(from, to, band, region, fun = "count", scale = 1000)
 }

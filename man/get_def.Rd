@@ -17,7 +17,7 @@ get_def(from, to, region, scale = 100)
 a tibble object with the new variable in km2
 }
 \description{
-A function that extract deforestation area data of the year \bold{2001-2020}
+A function that extract deforestation area data of the year \bold{2000-2021}
 }
 \examples{
 \dontrun{

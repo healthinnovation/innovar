@@ -1,4 +1,4 @@
-#' Extract evapotranspiration data of Modis
+#' Extract evapotranspiration data of Modis (2001-01-01T00:00:00Z - 2022-04-23T00:00:00)
 #'
 #' A function that extract a ETP time series of MODIS by \bold{month}.
 #'

@@ -21,7 +21,7 @@ get_vegetation(from, to, band, region, fun = "count", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract the values of vegetation by \bold{month}.
+A function that extract the values of vegetation by \bold{month} (2000-02-18T00:00:00Z - 2022-04-07T00:00:00).
 }
 \details{
 Name of some bands.

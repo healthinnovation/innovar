@@ -1,6 +1,6 @@
 #' Extract population data of WorldPop
 #'
-#' A function that extract a time series of the number of population by \bold{year}.
+#' A function that extract a time series of the number of population by \bold{year} (2000-01-01T00:00:00Z - 2021-01-01T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param region it's a feature collection.

@@ -21,7 +21,7 @@ get_no2(from, to, band, region, fun = "max", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of nitrogen dioxide.
+A function that extract a time series of nitrogen dioxide (2018-07-10T10:05:44Z - 2022-05-15T00:00:00).
 }
 \details{
 Name of some bands.
@@ -56,6 +56,6 @@ region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 # 2. Extracting climate information
 data <- region_ee \%>\% get_no2(
   from = "2019-02-01", to = "2019-12-31",
-  band = "CO_column_number_density", fun = "max")
+  band = "NO2_column_number_density", fun = "max")
 }
 }

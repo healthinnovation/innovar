@@ -1,6 +1,6 @@
 #' Extract Nitrogen Dioxide data of Sentinel5
 #'
-#' A function that extract a time series of nitrogen dioxide.
+#' A function that extract a time series of nitrogen dioxide (2018-07-10T10:05:44Z - 2022-05-15T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param band name of band.
@@ -46,7 +46,7 @@
 #' # 2. Extracting climate information
 #' data <- region_ee %>% get_no2(
 #'   from = "2019-02-01", to = "2019-12-31",
-#'   band = "CO_column_number_density", fun = "max")
+#'   band = "NO2_column_number_density", fun = "max")
 #' }
 #' @export
 

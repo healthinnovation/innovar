@@ -21,7 +21,7 @@ get_o3(from, to, band, region, fun = "max", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of ozone.
+A function that extract a time series of ozone (2018-07-10T11:02:44Z - 2022-05-15T00:00:00).
 }
 \details{
 Name of some bands.

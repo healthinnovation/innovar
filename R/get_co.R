@@ -1,6 +1,6 @@
 #' Extract Carbon Monoxide data of Sentinel5
 #'
-#' A function that extract a time series of carbon monoxide.
+#' A function that extract a time series of carbon monoxide (2018-11-22T12:00:13Z - 2022-05-15T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param band name of band.

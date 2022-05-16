@@ -23,7 +23,7 @@ get_climate(from, to, by, band, region, fun = "count", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of climate variables.
+A function that extract a time series of climate variables (1958-01-01T00:00:00Z - 2021-12-01T00:00:00).
 }
 \details{
 Name of some bands.

@@ -17,7 +17,7 @@ get_urban(from, to, region, scale = 1000)
 a tibble object with the new variable in km2
 }
 \description{
-A function that extract a time series of the urban area of MODIS Landcover
+A function that extract a time series of the urban area of MODIS Landcover (2001-01-01T00:00:00Z - 2020-01-01T00:00:00)
 }
 \examples{
 \dontrun{
@@ -29,7 +29,7 @@ ee_Initialize()
 data("Peru")
 region <- Peru
 region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-data <- get_climate(from = '2008-01-01', to = '2010-01-01', region = region)
+data <- get_urban(from = '2008-01-01', to = '2010-01-01', region = region)
 
 }
 }

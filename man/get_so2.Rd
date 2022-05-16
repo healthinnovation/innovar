@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_so2.R
 \name{get_so2}
 \alias{get_so2}
-\title{Extract Ozone data of Sentinel5}
+\title{Extract Sulphur Dioxide data of Sentinel5}
 \usage{
 get_so2(from, to, band, region, fun = "max", scale = 1000)
 }
@@ -21,7 +21,7 @@ get_so2(from, to, band, region, fun = "max", scale = 1000)
 a sf object with the new variables.
 }
 \description{
-A function that extract a time series of ozone.
+A function that extract a time series of Sulphur Dioxide (2018-07-10T11:17:44Z - 2022-05-15T00:00:00).
 }
 \details{
 Name of some bands.

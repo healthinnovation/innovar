@@ -1,6 +1,6 @@
 #' Extract urban area data of MODIS Landcover
 #'
-#' A function that extract a time series of the urban area of MODIS Landcover
+#' A function that extract a time series of the urban area of MODIS Landcover (2001-01-01T00:00:00Z - 2020-01-01T00:00:00)
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param region it's a feature or feature collection
@@ -21,7 +21,7 @@
 #' data("Peru")
 #' region <- Peru
 #' region_ee <- pol_as_ee(region, id = 'distr' ,simplify = 1000)
-#' data <- get_climate(from = '2008-01-01', to = '2010-01-01', region = region)
+#' data <- get_urban(from = '2008-01-01', to = '2010-01-01', region = region)
 #'
 #' }
 # Function for extract urban areas
