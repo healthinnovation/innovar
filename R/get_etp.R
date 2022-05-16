@@ -1,6 +1,6 @@
-#' Extract evapotranspiration data of Modis (2001-01-01T00:00:00Z - 2022-04-23T00:00:00)
+#' Extract evapotranspiration data of Modis
 #'
-#' A function that extract a ETP time series of MODIS by \bold{month}.
+#' A function that extract a ETP time series of MODIS by \bold{month} (2001-01-01T00:00:00Z - 2022-04-23T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param band name of band.
