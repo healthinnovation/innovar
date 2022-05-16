@@ -104,6 +104,88 @@ Peru (first-level administrative subdivisions).</p></dd>
     <p>Converts characters where it detects regions of Peru with the resulting divisions specified.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/healthinnovation/innovar" class="external-link">innovar</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     filter, lag</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
+<span class="r-in"><span class="va">df_dep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">Region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LIMA"</span>, <span class="st">"CALLAO"</span>, <span class="st">"CAJAMARCA"</span>, <span class="st">"AMAZONAS"</span>,</span>
+<span class="r-in">           <span class="st">"SAN MARTIN"</span>, <span class="st">"HUANUCO"</span>, <span class="st">"PASCO"</span>, <span class="st">"JUNIN"</span>, <span class="st">"CUSCO"</span>, <span class="st">"PUNO"</span>, <span class="st">"APURIMAC"</span>,</span>
+<span class="r-in">            <span class="st">"AYACUCHO"</span>, <span class="st">"HUANCAVELICA"</span>, <span class="st">"TUMBES"</span>, <span class="st">"PIURA"</span>, <span class="st">"LAMBAYEQUE"</span>,</span>
+<span class="r-in">            <span class="st">"LA LIBERTAD"</span>, <span class="st">"ANCASH"</span>, <span class="st">"ICA"</span>, <span class="st">"AREQUIPA"</span>, <span class="st">"TACNA"</span>, <span class="st">"MOQUEGUA"</span>,</span>
+<span class="r-in">            <span class="st">"LORETO"</span>, <span class="st">"UCAYALI"</span>, <span class="st">"MADRE DE DIOS"</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span class="r-in">          <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">df_dep</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span class="r-in">    Reg_traditional <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Traditional"</span><span class="op">)</span>,</span>
+<span class="r-in">    Reg_TC <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"TC"</span><span class="op">)</span>,</span>
+<span class="r-in">    Reg_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Cardinal"</span><span class="op">)</span>,</span>
+<span class="r-in">    Reg_Trad_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Trad_Cardinal"</span><span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Region Reg_traditional        Reg_TC  Reg_Cardinal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1           LIMA   LIMA &amp; CALLAO LIMA &amp; CALLAO LIMA &amp; CALLAO</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         CALLAO   LIMA &amp; CALLAO LIMA &amp; CALLAO LIMA &amp; CALLAO</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      CAJAMARCA ANDES MOUNTAINS         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       AMAZONAS ANDES MOUNTAINS          EAST         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     SAN MARTIN ANDES MOUNTAINS          EAST         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        HUANUCO ANDES MOUNTAINS        CENTER         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7          PASCO ANDES MOUNTAINS        CENTER         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8          JUNIN ANDES MOUNTAINS        CENTER         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9          CUSCO ANDES MOUNTAINS         SOUTH         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10          PUNO ANDES MOUNTAINS         SOUTH         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11      APURIMAC ANDES MOUNTAINS        CENTER         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12      AYACUCHO ANDES MOUNTAINS        CENTER         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  HUANCAVELICA ANDES MOUNTAINS        CENTER         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14        TUMBES         COASTAL         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15         PIURA         COASTAL         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16    LAMBAYEQUE         COASTAL         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   LA LIBERTAD         COASTAL         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18        ANCASH         COASTAL         NORTH         NORTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19           ICA         COASTAL        CENTER         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20      AREQUIPA         COASTAL         SOUTH         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21         TACNA         COASTAL         SOUTH         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22      MOQUEGUA         COASTAL         SOUTH         SOUTH</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23        LORETO   AMAZON JUNGLE          EAST AMAZON JUNGLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24       UCAYALI   AMAZON JUNGLE          EAST AMAZON JUNGLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25 MADRE DE DIOS   AMAZON JUNGLE         SOUTH AMAZON JUNGLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Reg_Trad_Cardinal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          LIMA &amp; CALLAO</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2          LIMA &amp; CALLAO</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  NORTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  NORTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  NORTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  NORTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  NORTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 SOUTH ANDES MOUNTAINS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14           NORTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15           NORTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16           NORTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17           NORTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18           NORTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19           SOUTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20           SOUTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21           SOUTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22           SOUTH COAST</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23         AMAZON JUNGLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24         AMAZON JUNGLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25         AMAZON JUNGLE</span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
