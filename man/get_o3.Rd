@@ -18,7 +18,7 @@ get_o3(from, to, band, region, fun = "max", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract a time series of ozone (2018-07-10T11:02:44Z - 2022-05-15T00:00:00).

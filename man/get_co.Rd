@@ -18,7 +18,7 @@ get_co(from, to, band, region, fun = "max", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract a time series of carbon monoxide (2018-11-22T12:00:13Z - 2022-05-15T00:00:00).

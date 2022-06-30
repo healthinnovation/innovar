@@ -20,7 +20,7 @@ get_climate(from, to, by, band, region, fun = "count", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract a time series of climate variables (1958-01-01T00:00:00Z - 2021-12-01T00:00:00).

@@ -18,7 +18,7 @@ get_aero(from, to, band, region, fun = "count", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract a time series of Aerosol index variables.

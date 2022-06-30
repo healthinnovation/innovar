@@ -18,7 +18,7 @@ get_vegetation(from, to, band, region, fun = "count", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract the values of vegetation by \bold{month} (2000-02-18T00:00:00Z - 2022-04-07T00:00:00).

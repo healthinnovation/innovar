@@ -18,7 +18,7 @@ get_no2(from, to, band, region, fun = "max", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
 A function that extract a time series of nitrogen dioxide (2018-07-10T10:05:44Z - 2022-05-15T00:00:00).

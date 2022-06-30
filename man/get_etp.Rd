@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_etp.R
 \name{get_etp}
 \alias{get_etp}
-\title{Extract evapotranspiration data of Modis (2001-01-01T00:00:00Z - 2022-04-23T00:00:00)}
+\title{Extract evapotranspiration data of Modis}
 \usage{
 get_etp(from, to, band, region, fun = "count", scale = 1000)
 }
@@ -18,10 +18,10 @@ get_etp(from, to, band, region, fun = "count", scale = 1000)
 \item{scale}{A nominal scale in meters of the projection to work in.}
 }
 \value{
-a sf object with the new variables.
+a tibble object with the new variables.
 }
 \description{
-A function that extract a ETP time series of MODIS by \bold{month}.
+A function that extract a ETP time series of MODIS by \bold{month} (2001-01-01T00:00:00Z - 2022-04-23T00:00:00).
 }
 \details{
 Name of some bands.
