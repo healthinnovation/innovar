@@ -1,6 +1,6 @@
-#' Extract climate data of TerraClimate
+#' Extract climate data of Famine Early Warning Systems Network (FEWS NET) Land Data Assimilation System ()
 #'
-#' A function that extract a time series of climate variables (1958-01-01T00:00:00Z - 2021-12-01T00:00:00).
+#' A function that extract a time series of climate variables (1982-01-01T00:00:00Z–2022-04-01T00:00:00).
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param by  two types of increment of the sequence by \bold{month} and \bold{year}.
@@ -11,20 +11,37 @@
 #'
 #' @details Name of some bands.
 #' \itemize{
-#' \item \bold{aet (mm):} Actual evapotranspiration, derived using a one-dimensional soil water balance model.
-#' \item \bold{def (mm):} Climate water deficit, derived using a one-dimensional soil water balance model.
-#' \item \bold{pdsi :} Palmer Drought Severity Index.
-#' \item \bold{pet(mm):} Reference evapotranspiration (ASCE Penman-Montieth).
-#' \item \bold{pr (mm):} Precipitation accumulation.
-#' \item \bold{ro (mm):} Runoff, derived using a one-dimensional soil water balance model.
-#' \item \bold{soil (mm):} Soil moisture, derived using a one-dimensional soil water balance model.
-#' \item \bold{srad (W/m²):} Downward surface shortwave radiation.
-#' \item \bold{swe (mm):} Snow water equivalent, derived using a one-dimensional soil water balance model.
-#' \item \bold{tmmn (°C):} Minimum temperature.
-#' \item \bold{tmmx (°C):} Maximum temperature.
-#' \item \bold{vap (kPa):} Vapor pressure
-#' \item \bold{vpd (kPa):} Vapor pressure deficit.
-#' \item \bold{vs (m/s):} Wind-speed at 10m.
+#' \item \bold{Evap_tavg (kg m-2 s-1):} Evapotranspiration.
+#' \item \bold{LWdown_f_tavg (W m-2):} Downward longwave radiation flux .
+#' \item \bold{Lwnet_tavg (W m-2):} Net longwave radiation flux.
+#' \item \bold{Psurf_f_tavg (Pa):} Surface pressure.
+#' \item \bold{Qair_f_tavg (kg kg-1):} Specific humidity.
+#' \item \bold{Qg_tavg (W m-2):} Soil heat flux.
+#' \item \bold{Qh_tavg (W m-2):} Sensible heat net flux.
+#' \item \bold{Qle_tavg (W m-2):} Latent heat net flux.
+#' \item \bold{Qs_tavg (kg m-2 s-1):} Storm surface runoff.
+#' \item \bold{Qsb_tavg (kg m-2 s-1):} Baseflow-groundwater runoff.
+#' \item \bold{RadT_tavg (K):} Surface radiative temperature.
+#' \item \bold{Rainf_f_tavg (kg m-2 s-1):} Total precipitation rate.
+#' \item \bold{SnowCover_inst :} Snow cover fraction.
+#' \item \bold{SnowDepth_inst (m):} Snow depth.
+#' \item \bold{Snowf_tavg (kg m-2 s-1):} Snowfall rate.
+#' \item \bold{SoilMoi00_10cm_tavg (m^3 m-3):}Soil moisture (0 - 10 cm underground).
+#' \item \bold{SoilMoi10_40cm_tavg (m^3 m-3):} Soil moisture (10 - 40 cm underground).
+#' \item \bold{SoilMoi100_200cm_tavg (m^3 m-3):} Soil moisture (100 - 200 cm underground).
+#' \item \bold{SoilMoi40_100cm_tavg (m^3 m-3):} Soil moisture (40 - 100 cm underground).
+#' \item \bold{SoilTemp00_10cm_tavg (K):} Soil temperature (0 - 10 cm underground).
+#' \item \bold{SoilTemp10_40cm_tavg	(K):} Soil temperature (10 - 40 cm underground).
+#' \item \bold{SoilTemp100_200cm_tavg (K):} Soil temperature (100 - 200 cm underground).
+#' \item \bold{SoilTemp40_100cm_tavg (K):} Soil temperature (40 - 100 cm underground).
+#' \item \bold{SWdown_f_tavg (W m-2):} Surface downward shortwave radiation.
+#' \item \bold{SWE_inst (kg m-2):} Snow water equivalent.
+#' \item \bold{Swnet_tavg	(W m-2):} Net shortwave radiation flux.
+#' \item \bold{Tair_f_tavg (K):} Near surface air temperature.
+#' \item \bold{Wind_f_tavg (m s-1):} Near surface wind speed.
+#'
+#'
+#'
 #' }
 #'
 #' @return  a tibble object with the new variables.
@@ -47,13 +64,13 @@
 #' region <- Peru
 #' region_ee <- pol_as_ee(region , id = 'distr' , simplify = 1000)
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_climate(
+#' data <- region_ee %>% get_fldas(
 #'   from = "2001-02-01", to = "2002-12-31",
-#'   by = "month", band = "tmmx", fun = "max")
+#'   by = "month", band = "Qair_f_tavg", fun = "mean")
 #' }
 #' @export
 
-get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) {
+get_fldas <- function(from, to, by, band, region, fun = "mean",scale = 1000) {
 
   # Conditions about the times
 
@@ -63,46 +80,36 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
   if(start_year == end_year){
     year <- unique(
       c(start_year:end_year)
-      ) %>%
+    ) %>%
       list()
 
     year_list <- ee$List(year)
   } else {
     year <- unique(
       c(start_year:end_year)
-      )
+    )
     year_list <- ee$List(year)
   }
 
-  # Factores by each bands
-
-  multiply_factor <- c(
-    aet = 0.1, def = 0.1, pdsi = 0.01, pet = 0.1,
-    pr = 1, ro = 1, soil = 0.1, srad = 0.1, swe = 1,
-    tmmn = 0.1, tmmx = 0.1, vap = 0.001, vpd = 0.01,
-    vs = 0.01
-  )
-
   # Message of error
 
-  if (end_year > 2019 | start_year < 1958) {
+  if (end_year > 2023 | start_year < 1982) {
     print(sprintf("No exist data"))
   }
 
   # The main functions
   if (by == "month" & fun == "count") {
 
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_count <- ee_count(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -115,19 +122,18 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
         as.Date(from),
         as.Date(to),
         by = '1 month'
-        ),
+      ),
       1,7
-      )
+    )
 
     names(img_count)[id_names] <- sprintf('%s%s',band,names_id)
     return(img_count)
 
   } else if (by == "month" & fun == "kurtosis") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_kurstosis <- ee_kurstosis(
       img_base,
@@ -145,7 +151,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -154,11 +160,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_kurtosis)
 
   } else if (by == "month" & fun == "max") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_max <- ee_max(
       img_base,
@@ -176,7 +181,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -185,11 +190,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_max)
 
   } else if (by == "month" & fun == "mean") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_mean <- ee_mean(
       img_base,
@@ -207,7 +211,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -216,11 +220,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_mean)
 
   } else if (by == "month" & fun == "median") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_median <- ee_median(
       img_base,
@@ -238,7 +241,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -247,11 +250,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_median)
 
   } else if (by == "month" & fun == "min") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_min <- ee_min(
       img_base,
@@ -269,7 +271,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -278,11 +280,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_min)
 
   } else if (by == "month" & fun == "mode") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_mode <- ee_mode(
       img_base,
@@ -300,7 +301,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -309,11 +310,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_mode)
 
   } else if (by == "month" & fun == "percentile") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_percentile <- ee_percentile(
       img_base,
@@ -331,7 +331,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -340,11 +340,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_percentile)
 
   } else if (by == "month" & fun == "std") {
-     img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_std <- ee_std(
       img_base,
@@ -362,7 +361,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -371,11 +370,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_std)
 
   } else if (by == "month" & fun == "sum") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_sum <- ee_sum(
       img_base,
@@ -393,7 +391,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -402,11 +400,10 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     return(img_sum)
 
   } else if (by == "month" & fun == "variance") {
-    img_base <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+    img_base <- ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
       select(c(band))$
       filterDate(from, to)$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_variance <- ee_variance(
       img_base,
@@ -424,7 +421,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       seq(
         as.Date(from),
         as.Date(to),
-         by = '1 month'
+        by = '1 month'
       ),
       1,7
     )
@@ -437,27 +434,26 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
-              )$
+            )$
             sum() }
-          )
         )
+      )
 
     img_base <- ee$ImageCollection$
       fromImages(
         list_img
-        )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      )$
+      toBands()
 
     img_count <- ee_count(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -482,7 +478,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -495,14 +491,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_kurtosis <- ee_kurstosis(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -526,7 +521,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -539,14 +534,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_max <- ee_max(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -570,7 +564,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -583,8 +577,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_mean <- ee_mean(
       img_base,
@@ -613,7 +606,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -626,14 +619,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_median <- ee_median(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -657,7 +649,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -670,14 +662,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_min <- ee_min(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -701,7 +692,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -714,14 +705,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_mode <- ee_mode(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -745,7 +735,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -758,14 +748,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_percentile <- ee_percentile(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -789,7 +778,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -802,14 +791,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_std <- ee_std(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -833,7 +821,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -846,14 +834,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_sum <- ee_sum(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(
@@ -877,7 +864,7 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
     list_img <- year_list$
       map(
         ee_utils_pyfunc(function(x) {
-          ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")$
+          ee$ImageCollection("NASA/FLDAS/NOAH01/C/GL/M/V001")$
             select(c(band))$
             filter(
               ee$Filter$calendarRange(x, x, "year")
@@ -890,14 +877,13 @@ get_climate <- function(from, to, by, band, region, fun = "count",scale = 1000) 
       fromImages(
         list_img
       )$
-      toBands()$
-      multiply(multiply_factor[[band]])
+      toBands()
 
     img_variance <- ee_variance(
       img_base,
       region,
       scale = scale
-      )
+    )
 
     id_names <- which(
       endsWith(

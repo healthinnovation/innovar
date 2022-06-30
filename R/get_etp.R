@@ -17,7 +17,7 @@
 #' \item \bold{ET_QC:} Evapotranspiration quality control flags
 #' }
 #'
-#' @return  a sf object with the new variables.
+#' @return  a tibble object with the new variables.
 #'
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee

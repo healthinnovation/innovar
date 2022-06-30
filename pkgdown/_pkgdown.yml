@@ -44,6 +44,7 @@ reference:
     contents:
     - get_climate
     - get_etp
+    - get_fldas
   - title: "Enviroment"
     contents:
     - get_co

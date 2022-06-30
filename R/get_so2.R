@@ -21,7 +21,7 @@
 #' \item \bold{SO2_column_number_density_15km (mol/m²):} SO2 vertical column density at 15km, calculated using the DOAS technique.
 #'  }
 #'
-#' @return  a sf object with the new variables.
+#' @return  a tibble object with the new variables.
 #' @importFrom  sf st_transform st_simplify
 #' @importFrom  rgee sf_as_ee
 #' @importFrom dplyr select filter contains
