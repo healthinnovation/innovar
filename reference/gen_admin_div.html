@@ -83,7 +83,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"Traditional"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"Traditional"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -91,6 +91,8 @@
     <dl><dt>x</dt>
 <dd><p>x is a list/vector with one of the 25 regions/departments names of
 Peru (first-level administrative subdivisions).</p></dd>
+
+
 <dt>method</dt>
 <dd><p>defines the type of natural, geographical, or administrative
   division that should be returned. Possible values are:</p>
@@ -98,16 +100,19 @@ Peru (first-level administrative subdivisions).</p></dd>
   - TC: (Lima no incluye Huarua/Cañete)<a href="https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx" class="external-link">Administratives Macro Regions of the Constitutional Tribunal</a>
   - Cardinal: North, South, Amazon Jungle, or Lima &amp; Callao
   - Trad_Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Converts characters where it detects regions of Peru with the resulting divisions specified.</p>
+    
+
+<p>Converts characters where it detects regions of Peru with the resulting divisions specified.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/healthinnovation/innovar" class="external-link">innovar</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/healthinnovation/innovar" class="external-link">innovar</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -116,21 +121,21 @@ Peru (first-level administrative subdivisions).</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"><span class="va">df_dep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">Region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LIMA"</span>, <span class="st">"CALLAO"</span>, <span class="st">"CAJAMARCA"</span>, <span class="st">"AMAZONAS"</span>,</span>
-<span class="r-in">           <span class="st">"SAN MARTIN"</span>, <span class="st">"HUANUCO"</span>, <span class="st">"PASCO"</span>, <span class="st">"JUNIN"</span>, <span class="st">"CUSCO"</span>, <span class="st">"PUNO"</span>, <span class="st">"APURIMAC"</span>,</span>
-<span class="r-in">            <span class="st">"AYACUCHO"</span>, <span class="st">"HUANCAVELICA"</span>, <span class="st">"TUMBES"</span>, <span class="st">"PIURA"</span>, <span class="st">"LAMBAYEQUE"</span>,</span>
-<span class="r-in">            <span class="st">"LA LIBERTAD"</span>, <span class="st">"ANCASH"</span>, <span class="st">"ICA"</span>, <span class="st">"AREQUIPA"</span>, <span class="st">"TACNA"</span>, <span class="st">"MOQUEGUA"</span>,</span>
-<span class="r-in">            <span class="st">"LORETO"</span>, <span class="st">"UCAYALI"</span>, <span class="st">"MADRE DE DIOS"</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">          <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_dep</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span class="r-in">    Reg_traditional <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Traditional"</span><span class="op">)</span>,</span>
-<span class="r-in">    Reg_TC <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"TC"</span><span class="op">)</span>,</span>
-<span class="r-in">    Reg_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Cardinal"</span><span class="op">)</span>,</span>
-<span class="r-in">    Reg_Trad_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Trad_Cardinal"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span><span class="va">df_dep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>Region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LIMA"</span>, <span class="st">"CALLAO"</span>, <span class="st">"CAJAMARCA"</span>, <span class="st">"AMAZONAS"</span>,</span></span>
+<span class="r-in"><span>           <span class="st">"SAN MARTIN"</span>, <span class="st">"HUANUCO"</span>, <span class="st">"PASCO"</span>, <span class="st">"JUNIN"</span>, <span class="st">"CUSCO"</span>, <span class="st">"PUNO"</span>, <span class="st">"APURIMAC"</span>,</span></span>
+<span class="r-in"><span>            <span class="st">"AYACUCHO"</span>, <span class="st">"HUANCAVELICA"</span>, <span class="st">"TUMBES"</span>, <span class="st">"PIURA"</span>, <span class="st">"LAMBAYEQUE"</span>,</span></span>
+<span class="r-in"><span>            <span class="st">"LA LIBERTAD"</span>, <span class="st">"ANCASH"</span>, <span class="st">"ICA"</span>, <span class="st">"AREQUIPA"</span>, <span class="st">"TACNA"</span>, <span class="st">"MOQUEGUA"</span>,</span></span>
+<span class="r-in"><span>            <span class="st">"LORETO"</span>, <span class="st">"UCAYALI"</span>, <span class="st">"MADRE DE DIOS"</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>          <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_dep</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    Reg_traditional <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Traditional"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Reg_TC <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"TC"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Reg_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Cardinal"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Reg_Trad_Cardinal <span class="op">=</span> <span class="fu">gen_admin_div</span><span class="op">(</span><span class="va">Region</span>, method <span class="op">=</span> <span class="st">"Trad_Cardinal"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Region Reg_traditional        Reg_TC  Reg_Cardinal</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1           LIMA   LIMA &amp; CALLAO LIMA &amp; CALLAO LIMA &amp; CALLAO</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2         CALLAO   LIMA &amp; CALLAO LIMA &amp; CALLAO LIMA &amp; CALLAO</span>
@@ -183,7 +188,7 @@ Peru (first-level administrative subdivisions).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 23         AMAZON JUNGLE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24         AMAZON JUNGLE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25         AMAZON JUNGLE</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -195,7 +200,7 @@ Peru (first-level administrative subdivisions).</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer></div>
