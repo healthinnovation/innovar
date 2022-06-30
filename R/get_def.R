@@ -43,7 +43,7 @@ get_def <- function(from, to, region, scale = 100) {
   end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
-  rango <- c(1:20)
+  rango <- c(1:22)
   names(rango) <- 2000:2021
   anio <- rango[c(as.character(start_year:end_year))]
 
