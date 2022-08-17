@@ -28,12 +28,12 @@
 #' region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_nlv1(
+#' data <- region_ee %>% get_noa(
 #'   from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 1000)
 #' }
 #' @export
 
-get_nlv1 <- function(from, to, region, fun = "mean", scale = 100) {
+get_noa <- function(from, to, region, fun = "mean", scale = 100) {
 
   # Conditions about the times
   start_year <- substr(from, 1, 4) %>% as.numeric()
