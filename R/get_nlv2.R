@@ -1,6 +1,6 @@
 #' Extract Night time light data
 #'
-#' A function that extract a time series of night time light by \bold{year} from \bold{1992-2014}.
+#' A function that extract a time series of night time light by \bold{year} from \bold{2012-2020}.
 #'
 #' @param to,from it's a string object,starting and final date.
 #' @param region it's a feature collection.
@@ -28,12 +28,12 @@
 #' region_ee <- pol_as_ee(region, id = 'distr' , simplify = 1000)
 #'
 #' # 2. Extracting climate information
-#' data <- region_ee %>% get_noaa(
+#' data <- region_ee %>% get_nlv2(
 #'   from = "2001-01-01", to = "2003-01-01",fun = "max",scale = 1000)
 #' }
 #' @export
 
-get_noaa <- function(from, to, region, fun = "mean", scale = 100) {
+get_nlv2 <- function(from, to, region, fun = "mean", scale = 100) {
 
   # Conditions about the times
   start_year <- substr(from, 1, 4) %>% as.numeric()
@@ -54,9 +54,9 @@ get_noaa <- function(from, to, region, fun = "mean", scale = 100) {
   }
 
   # Message of error
-  if (to < 1992  | from > 2014) {
-    to = "1992-01-01"
-    from = "2014-07-01"
+  if (to < 2014  | from > 2021) {
+    to = "2014-01-01"
+    from = "2021-05-01"
     start_year = substr(from, 1, 4) %>% as.numeric()
     end_year <- substr(to, 1, 4) %>% as.numeric()
     print(sprintf("No exist data"))
@@ -67,8 +67,8 @@ get_noaa <- function(from, to, region, fun = "mean", scale = 100) {
     map(
       ee_utils_pyfunc(
         function(x) {
-          ee$ImageCollection("NOAA/DMSP-OLS/NIGHTTIME_LIGHTS")$
-            select(c('stable_lights'))$
+          ee$ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG")$
+            select(c('avg_rad'))$
             filter(ee$Filter$calendarRange(x, x, "year"))$
             max()$
             rename('ntl')

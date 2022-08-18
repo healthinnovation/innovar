@@ -58,8 +58,8 @@ reference:
     - get_ghm
     - get_pop
     - get_urban
-    - get_noaa
-    - get_viirs
+    - get_nlv1
+    - get_nlv2
     - get_def
     - get_ghsl
   - title: "Census data"
@@ -93,4 +93,3 @@ reference:
 
 figures:
   dev: grDevices::png
- 
