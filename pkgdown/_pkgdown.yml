@@ -58,7 +58,7 @@ reference:
     - get_ghm
     - get_pop
     - get_urban
-    - get_noa
+    - get_noaa
     - get_viirs
     - get_def
     - get_ghsl
