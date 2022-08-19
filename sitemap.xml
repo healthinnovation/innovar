@@ -64,13 +64,10 @@
     <loc>/reference/get_ghsl.html</loc>
   </url>
   <url>
-    <loc>/reference/get_nlv1.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_nlv2.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_no2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_noaa.html</loc>
   </url>
   <url>
     <loc>/reference/get_o3.html</loc>
@@ -89,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/get_vegetation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_viirs.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
