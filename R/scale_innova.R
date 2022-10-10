@@ -59,12 +59,57 @@ mortality <- c(
   `low` = "#006495",`verylow` = "#4C194A"
   )
 
+# The 08 best colour palettes for 2020
+
+green <- c(
+  `veryhigh` ="#bc6c25",`high` = "#dda15e",`middle` ="#fefae0",
+  `low` = "#283618",`verylow` = "#606c38"
+)
+
+golden <- c(
+  `veryhigh` ="#772e25",`high` = "#c44536",`middle` ="#edddd4",
+  `low` = "#197278",`verylow` = "#283d3b"
+)
+
+dark_green <- c(
+  `veryhigh` ="#2f3e46",`high` = "#354f52",`middle` ="#52796f",
+  `low` = "#84a98c",`verylow` = "#cad2c5"
+  )
+
+blue_fall <- c(
+  `veryhigh` ="#eaac8b",`high` = "#e56b6f",`middle` ="#b56576",
+  `low` = "#6d597a",`verylow` = "#355070"
+)
+
+vermilion <- c(
+  `veryhigh` ="#ffba08",`high` = "#f48c06",`middle` ="#dc2f02",
+  `low` = "#6a040f",`verylow` = "#03071e"
+)
+
+wheat <- c(
+  `veryhigh` ="#432534",`high` = "#c44900",`middle` ="#efd6ac",
+  `low` = "#183a37",`verylow` = "#04151f"
+)
+
+peach <- c(
+  `veryhigh` ="#041f1e",`high` = "#1e2d2f",`middle` ="#c57b57",
+  `low` = "#f1ab86",`verylow` = "#f7dba7"
+)
+
+persian <- c(
+  `veryhigh` ="#495867",`high` = "#c18c5d",`middle` ="#ce796b",
+  `low` = "#e7ad99",`verylow` = "#ecc8af"
+)
+
 # List of palettes
 
 innova_palettes <- list(
   `ccvi` = ccvi, `npr` = npr, `blmbrg` = blmbrg, `ecomst` = ecomst, `ctp` = ctp,
   `jama` = jama, `mlobo` = mlobo, `btran` = btran, `nasa` = nasa,
-  `politico` = politico, `mortality` = mortality
+  `politico` = politico, `mortality` = mortality,
+  `green` = green,`golden` = golden,`dark_green` = dark_green,
+  `blue_fall` = blue_fall,`vermilion` = vermilion,
+  `wheat` = wheat,`peach` = peach,`persian` = persian
 )
 
 #' Return function to interpolate a lis color palette
