@@ -43,17 +43,17 @@ get_def <- function(from, to, region, scale = 100) {
   end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
-  rango <- c(1:22)
+  rango <- c(0:21)
   names(rango) <- 2000:2021
   anio <- rango[c(as.character(start_year:end_year))]
 
   # The base image collection
   img_base <- ee$Image("UMD/hansen/global_forest_change_2021_v1_9")$
     select(c('lossyear'))$
-    gte(anio)
+    eq(anio)
 
   def_area <- img_base$multiply(ee$Image$pixelArea())$
-    divide(1000000)
+    divide(1e6)
 
   data <- ee_sum(
     x = def_area,
