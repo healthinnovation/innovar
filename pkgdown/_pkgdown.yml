@@ -86,6 +86,7 @@ reference:
     - export
     - create_dap
     - use_xaringan
+    - use_rmd_flatly
 
   - title: "Dataset"
     contents:
