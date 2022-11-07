@@ -115,3 +115,38 @@ use_xaringan <- function(file) {
     edit = FALSE
   )
 }
+
+
+#' Use Innovar Rmarkdown Flatly
+#'
+#' This function populates the working directory with
+#' files corresponding to the Innovar Rmarkdown Flatly.
+#'
+#' @param file Name of the `.Rmd` file to create.
+#'
+#' @examples
+#' \dontrun{
+#' library(innovar)
+#' use_rmd_flatly("report_01.Rmd")
+#' }
+#' @export
+
+use_rmd_flatly <- function(file) {
+  if (missing(file)) {
+    if (interactive()) {
+      file <- readline("Enter a name for the file .Rmd: ")
+    } else {
+      stop("file argument must be specified", call. = FALSE)
+    }
+  }
+
+  if (tolower(fs::path_ext(file)) != "rmd") {
+    file <- fs::path_ext_set(fs::path_ext_remove(file), "Rmd")
+  }
+
+  rmarkdown::draft(file,
+                   template = "innovar-rmd-flatly",
+                   package = "innovar",
+                   edit = FALSE
+  )
+}
