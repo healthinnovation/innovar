@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.1
+# CITATION file created with {cffr} R package, v0.3.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -33,49 +33,6 @@ authors:
   given-names: Antony
   email: antonymarcosbarja@gmail.com
   orcid: https://orcid.org/0000-0001-5921-2858
-preferred-citation:
-  type: manual
-  title: 'innovar: InnovaLab Toolkit'
-  authors:
-  - family-names: Carrasco-Escobar
-    given-names: Gabriel
-    email: gabriel.carrasco@upch.edu.pe
-    orcid: https://orcid.org/0000-0002-6945-0419
-  - family-names: Cava
-    given-names: Renato
-    email: renato.cava@upch.edu.pe
-    orcid: https://orcid.org/0000-0002-4456-7450
-  - family-names: Ruiz-Cabrejos
-    given-names: Jorge
-    email: jorge.ruiz.c@upch.edu.pe
-    orcid: https://orcid.org/0000-0002-2055-3396
-  - family-names: Peña-Calero
-    given-names: Brian Norman
-    email: brianmsm@gmail.com
-    orcid: https://orcid.org/0000-0002-1073-9306
-  - family-names: Barja-Ingaruca
-    given-names: Antony
-    email: antonymarcosbarja@gmail.com
-    orcid: https://orcid.org/0000-0001-5921-2858
-  version: 0.1.2
-  abstract: Package of functions of the Laboratory of Innovation in Health (InnovaLab)
-    of the Institute of Tropical Medicine "Alexander von Humboldt", Universdiad Peruana
-    Cayetano Heredia.
-  repository-code: https://github.com/healthinnovation/innovar
-  url: https://github.com/healthinnovation/innovar
-  contact:
-  - family-names: Barja-Ingaruca
-    given-names: Antony
-    email: antonymarcosbarja@gmail.com
-    orcid: https://orcid.org/0000-0001-5921-2858
-  keywords:
-  - healthinformatics
-  - peru
-  - python
-  - r
-  - upch
-  license: MIT
-  year: '2022'
 repository-code: https://github.com/healthinnovation/innovar
 url: https://github.com/healthinnovation/innovar
 contact:
@@ -84,10 +41,11 @@ contact:
   email: antonymarcosbarja@gmail.com
   orcid: https://orcid.org/0000-0001-5921-2858
 keywords:
-- healthinformatics
+- healthinnovation
 - peru
 - python
 - r
+- rstats
 - upch
 references:
 - type: software
@@ -357,7 +315,7 @@ references:
   url: https://CRAN.R-project.org/package=zoo
 - type: software
   title: stringi
-  abstract: 'stringi: Character String Processing Facilities'
+  abstract: 'stringi: Fast and Portable Character String Processing Facilities'
   notes: Imports
   authors:
   - family-names: Gagolewski
@@ -396,6 +354,9 @@ references:
     given-names: Martin
     email: mmaechler+Matrix@gmail.com
     orcid: https://orcid.org/0000-0002-8685-9910
+  - family-names: Jagan
+    given-names: Mikael
+    orcid: https://orcid.org/0000-0002-3542-2938
   year: '2022'
   url: https://CRAN.R-project.org/package=Matrix
 - type: software
@@ -430,6 +391,25 @@ references:
     email: kevin@rstudio.com
   year: '2022'
   url: https://CRAN.R-project.org/package=renv
+- type: software
+  title: rstudioapi
+  abstract: 'rstudioapi: Safely Access the RStudio API'
+  notes: Imports
+  authors:
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@rstudio.com
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Ritchie
+    given-names: Gary
+    email: gary@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=rstudioapi
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
