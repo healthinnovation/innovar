@@ -1,0 +1,65 @@
+---
+title: "Innovar Rmd Flatly"
+author:
+  - name: Innovar 1
+    email: imt.innovlab@oficinas-upch.pe
+    affiliation: Innovar, UPCH
+  - name: Innovar 2
+    email: imt.innovlab@oficinas-upch.pe
+    affiliation: Innovar, UPCH
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+    number_sections: yes
+    code_folding: show
+    code_download: yes
+    theme: 
+      bootswatch: flatly
+    highlight: kate
+    highlight_downlit: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  dpi = 300,
+  fig.align = 'center'
+  # message = FALSE,
+  # warning = FALSE,
+  # error = TRUE
+)
+
+# The following code allows the rmd document chunks to be evaluated
+# and executed by setting the working directory to the folder where
+# the document is located. This can be useful when you have `Chunk
+# Output in Console` set or you are working with a different
+# configuration/IDE than usual (rstudio for example). If you wish to
+# handle this setting differently, you can comment out the line below
+# or simply delete it.
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+> **This template is based on [Rstudio Rmarkdown Template](https://github.com/rstudio/rstudio/blob/d152bb422d6d2af9edfaee66c42b4e9630caaaf7/src/cpp/session/resources/templates/document.Rmd).**
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+# Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
