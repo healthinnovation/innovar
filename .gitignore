@@ -12,5 +12,4 @@ export/
 .Renviron
 data/test/*
 test.R
-docs
 .directory
