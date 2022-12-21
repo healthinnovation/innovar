@@ -34,8 +34,9 @@ Name of color palette available
 }
 }
 \examples{
+\dontrun{
 library(innovar)
 # show_pal(name = "nasa",rev = TRUE, n = 5)
 show_pal()
-
+}
 }
