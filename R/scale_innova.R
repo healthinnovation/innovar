@@ -230,7 +230,7 @@ scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE
 #'@export show_pal
 
 show_pal <- function(name = "all",n = 5,rev = TRUE,...){
-
+  require(unikn)
   if(sum(unique(name %in% names(innova_palettes))) == 1) {
     list_names <- innova_palettes[name]
     range_color <- sapply(X = list_names,FUN = function(x){list(x[1:n])})

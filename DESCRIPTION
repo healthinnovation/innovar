@@ -44,7 +44,6 @@ VignetteBuilder:
 Imports:
     RCurl,
     sf,
-    unikn,
     magrittr,
     dplyr,
     purrr,
@@ -68,6 +67,7 @@ Imports:
     rstudioapi
 Suggests:
     knitr,
+    unikn,
     mapview,
     rmarkdown,
     tidyverse
