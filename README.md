@@ -23,7 +23,7 @@ The following code just copy and paste into the R console:
 
 ```
 if(!require("remotes")) install.packages("remotes")
-remotes::install_github("healthinnovation/innovar@v.0.1.0")
+remotes::install_github("healthinnovation/innovar@v.0.1.2")
 ```
 
 ```

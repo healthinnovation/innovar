@@ -12,6 +12,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# Innovar 0.1.2 📦
+
+  🔵 New color palettes
+
+  🔵 Fixed the get_def functions, thanks @zackarno
+  
+  🔵 New function use_xaringan by @brianmsm
+
 # Innovar 0.1.0 📦
 
 🔵 **25 functions** available for health analysis and spatial modelling 🌎.
