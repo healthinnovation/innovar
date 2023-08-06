@@ -233,7 +233,7 @@ show_pal <- function(name = "all",n = 5,rev = TRUE,...){
 
   if (!requireNamespace("unikn", quietly = TRUE)) {
     stop("Please install unikn: install.packages('unikn')")
-  }
+  } else {require(unikn)}
 
   if(sum(unique(name %in% names(innova_palettes))) == 1) {
     list_names <- innova_palettes[name]
