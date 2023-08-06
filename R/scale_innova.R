@@ -101,15 +101,33 @@ persian <- c(
   `low` = "#e7ad99",`verylow` = "#ecc8af"
 )
 
-# List of palettes
+#Sequential palettes
+innova_seq_palettes<- list(
+  `ccvi` = ccvi,
+  `mlobo` = mlobo,
+  `dark_green` = dark_green,
+  `ctp` = ctp,
+  `ecomst` = ecomst,
+  `btran` = btran)
 
-innova_palettes <- list(
-  `ccvi` = ccvi, `npr` = npr, `blmbrg` = blmbrg, `ecomst` = ecomst, `ctp` = ctp,
-  `jama` = jama, `mlobo` = mlobo, `btran` = btran, `nasa` = nasa,
-  `politico` = politico, `mortality` = mortality,
-  `green` = green,`golden` = golden,`dark_green` = dark_green,
-  `blue_fall` = blue_fall,`vermilion` = vermilion,
-  `wheat` = wheat,`peach` = peach,`persian` = persian
+#Diverging palettes
+innova_div_palettes<- list(
+  `npr` = npr,
+  `politico` = politico,
+  `green` = green,
+  `golden` = golden)
+
+#? palettes
+innova_other_palettes <- list(
+  `blmbrg` = blmbrg,
+  `jama` = jama,
+  `nasa` = nasa,
+  `mortality` = mortality,
+  `blue_fall` = blue_fall,
+  `vermilion` = vermilion,
+  `wheat` = wheat,
+  `peach` = peach,
+  `persian` = persian
 )
 
 #' Return function to interpolate a lis color palette
@@ -229,7 +247,7 @@ scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE
 #' }
 #'@export show_pal
 
-show_pal <- function(name = "all",n = 5,rev = TRUE,...){
+show_pal <- function(name = "all",n = 5,rev = TRUE, dir = "all", ...){
 
   if (!requireNamespace("unikn", quietly = TRUE)) {
     stop("Please install unikn: install.packages('unikn')")
@@ -257,17 +275,39 @@ show_pal <- function(name = "all",n = 5,rev = TRUE,...){
         )
     }
 
-  } else if (name == "all"){
-    list_names <- names(innova_palettes)
+  } else if (name == "all" & dir=="sequential"){
+    list_names <- names(innova_seq_palettes)
     list_panel <- list_names %>%
       map(.f = ~innova_pal(.,reverse = rev)(n=n)) %>%
       unikn::seecol(
         pal_names = list_names,
-        title = "Name of all innovar colour palettes",
+        title = "Name of all sequential innovar colour palettes",
         ...
       )
-    } else {
-    stop("Color palette is incorrect,please use show_pal() and choose a color")
+    } else if (name == "all" & dir=="divergent") {
+
+      list_names <- names(innova_div_palettes)
+      list_panel <- list_names %>%
+        map(.f = ~innova_pal(.,reverse = rev)(n=n)) %>%
+        unikn::seecol(
+          pal_names = list_names,
+          title = "Name of all divergent innovar colour palettes",
+          ...
+        )
+    } else if (name == "all" & dir=="all") {
+
+
+      list_names <- names(c(innova_seq_palettes,innova_div_palettes,innova_other_palettes))
+      list_panel <- list_names %>%
+        map(.f = ~innova_pal(.,reverse = rev)(n=n)) %>%
+        unikn::seecol(
+          pal_names = list_names,
+          title = "Name of all innovar colour palettes",
+          ...
+        )
+    }else{
+
+    stop("Color palette is incorrect, please use show_pal() and choose a color")
   }
 
 }
