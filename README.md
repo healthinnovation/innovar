@@ -1,11 +1,9 @@
-# **Health Innovation Lab** <img src="man/figures/logo.png" align="right" width="35%">
+# **Health Innovation Lab** <img src="man/figures/logo.png" align="right" width="35%"/>
 
 <!-- badges: start -->
 
-[![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/healthinnovation/innovar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/healthinnovation/innovar/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle:experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat) [![Project Status: Active -- The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![R-CMD-check](https://github.com/healthinnovation/innovar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/healthinnovation/innovar/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 ## 🔵 **Who we are**
@@ -16,23 +14,27 @@ Our main lines of research include the development of diagnostic and detection s
 
 ## 🔵 **Package installation**
 
-You can install the first version of innovar from
-[GitHub](https://github.com/):
+You can install the first version of innovar from [GitHub](https://github.com/):
 
 The following code just copy and paste into the R console:
 
-```
+```         
 if(!require("remotes")) install.packages("remotes")
 remotes::install_github("healthinnovation/innovar@v.0.1.2")
 ```
 
-```
+```         
 library(innovar)
 ```
+
+## 🔵 **Examples and tutorials**
+
+-   [Vignette](https://healthinnovation.github.io/innovar/articles/vignette.html)
 
 # 🔵 **Our social networks**
 
 <p align="left">
- <a href = "https://www.facebook.com/imt.innovalab">
- <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white"></a> <a href="https://twitter.com/innovalab_imt"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"></a> <a href="https://www.instagram.com/innovalab_imt/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a> <a href="https://www.innovalab.info/"><img src="https://img.shields.io/badge/Innovalab_web-000?style=for-the-badge&logo=wix&logoColor=white"></a> <a href="https://linktr.ee/innov_lab"><img src="https://img.shields.io/badge/linktree-39E09B?style=for-the-badge&logo=linktree&logoColor=whit"></a>
+
+<a href = "https://www.facebook.com/imt.innovalab"> <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&amp;logo=facebook&amp;logoColor=white"/></a> <a href="https://twitter.com/innovalab_imt"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&amp;logo=twitter&amp;logoColor=white"/></a> <a href="https://www.instagram.com/innovalab_imt/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&amp;logo=instagram&amp;logoColor=white"/></a> <a href="https://www.innovalab.info/"><img src="https://img.shields.io/badge/Innovalab_web-000?style=for-the-badge&amp;logo=wix&amp;logoColor=white"/></a> <a href="https://linktr.ee/innov_lab"><img src="https://img.shields.io/badge/linktree-39E09B?style=for-the-badge&amp;logo=linktree&amp;logoColor=whit"/></a>
+
 </p>
