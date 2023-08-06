@@ -21,6 +21,9 @@
 #' @examples
 #' library(innovar)
 #' library(dplyr)
+#' 
+#' ### Create data ###
+#' 
 #' df_dep <- data.frame(
 #' Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
 #'            "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC",
@@ -29,14 +32,27 @@
 #'             "LORETO", "UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE
 #'           )
 #'
-#' df_dep %>%
+#' df_dep <- df_dep %>%
 #'   mutate(
 #'     Reg_traditional = gen_admin_div(Region, method = "Traditional"),
 #'     Reg_TC = gen_admin_div(Region, method = "TC"),
 #'     Reg_Cardinal = gen_admin_div(Region, method = "Cardinal"),
 #'     Reg_Trad_Cardinal = gen_admin_div(Region, method = "Trad_Cardinal")
 #'   )
+#'   
+#' ### Create map ###
+#' 
+#'library(sf)
+#'library(ggplot2)
 #'
+#'data("Peru")
+#'
+#'Peru %>% 
+#'  mutate(`Regiones Constitucionales` = gen_admin_div(dep, method = "TC")) %>%
+#'  ggplot() +
+#'  geom_sf(aes(fill=`Regiones Constitucionales`)) +
+#'  scale_fill_innova(palette="mortality")
+#'   
 #' @export gen_admin_div
 #'
 gen_admin_div <- function(x,
