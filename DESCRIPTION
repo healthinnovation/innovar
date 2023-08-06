@@ -36,7 +36,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Depends: R (>= 3.6)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 URL: https://github.com/healthinnovation/innovar
 BugReports: https://github.com/healthinnovation/innovar/issues
 VignetteBuilder:

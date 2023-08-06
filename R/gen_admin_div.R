@@ -8,6 +8,7 @@
 #'   Peru (first-level administrative subdivisions).
 #' @param method defines the type of natural, geographical, or administrative
 #'   division that should be returned. Possible values are:
+#'   
 #'   \itemize{
 #'   \item \bold{Traditional}:Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
 #'   \item \bold{TC}:(Lima no incluye Huarua/Cañete)\href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}

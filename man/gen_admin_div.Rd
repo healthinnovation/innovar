@@ -12,11 +12,13 @@ Peru (first-level administrative subdivisions).}
 
 \item{method}{defines the type of natural, geographical, or administrative
   division that should be returned. Possible values are:
-
-  - Traditional: Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
-  - TC: (Lima no incluye Huarua/Cañete)\href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}
-  - Cardinal: North, South, Amazon Jungle, or Lima & Callao
-  - Trad_Cardinal:  Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)}
+  
+  \itemize{
+  \item \bold{Traditional}:Coastal, Andes Mountains, Amazon Jungle, or Lima & Callao
+  \item \bold{TC}:(Lima no incluye Huarua/Cañete)\href{https://andina.pe/agencia/noticia-tc-crea-cinco-macro-regiones-para-facilitar-acceso-a-justicia-constitucional-604658.aspx}{Administratives Macro Regions of the Constitutional Tribunal}
+  \item \bold{Cardinal}:North, South, Amazon Jungle, or Lima & Callao
+  \item \bold{Trad_Cardinal}:Coastal and Andes Mountains are divided into North and South (e.g. South Andes Mountains)
+}}
 }
 \value{
 Converts characters where it detects regions of Peru with the resulting divisions specified.
