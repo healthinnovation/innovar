@@ -130,6 +130,8 @@ innova_other_palettes <- list(
   `persian` = persian
 )
 
+innova_palettes <- c(innova_seq_palettes,innova_div_palettes,innova_other_palettes)
+
 #' Return function to interpolate a lis color palette
 #'
 #' @param palette Character name of palette in lis_palettes
@@ -222,22 +224,32 @@ scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE
 
 #' Show a set of palette color Lab
 #' @param name Character name of palette in lis_palettes
-#' @param rev  Boolean indicating whether the palette should be reversed
 #' @param n    Integer, number of colors
+#' @param rev  Boolean indicating whether the palette should be reversed
+#' @param dir  Character name of palette subgroups. The values can be  "sequential", "divergent", "all". Default is "all"
 #' @param ...  Additional arguments passed to seecol()
 #'
 #' @details Name of color palette available
 #' \itemize{
 #' \item \bold{ccvi}
-#' \item \bold{npr}
-#' \item \bold{blmbrg}
-#' \item \bold{ctp}
-#' \item \bold{jama}
 #' \item \bold{mlobo}
+#' \item \bold{dark_green}
+#' \item \bold{ctp}
+#' \item \bold{ecomst}
 #' \item \bold{btran}
-#' \item \bold{nasa}
+#' \item \bold{npr}
 #' \item \bold{politico}
+#' \item \bold{green}
+#' \item \bold{golden}
+#' \item \bold{blmbrg}
+#' \item \bold{jama}
+#' \item \bold{nasa}
 #' \item \bold{mortality}
+#' \item \bold{blue_fall}
+#' \item \bold{verimilion}
+#' \item \bold{wheat}
+#' \item \bold{peach}
+#' \item \bold{persian}
 #' }
 #' @examples
 #' \dontrun{
@@ -297,7 +309,7 @@ show_pal <- function(name = "all",n = 5,rev = TRUE, dir = "all", ...){
     } else if (name == "all" & dir=="all") {
 
 
-      list_names <- names(c(innova_seq_palettes,innova_div_palettes,innova_other_palettes))
+      list_names <- names(innova_palettes)
       list_panel <- list_names %>%
         map(.f = ~innova_pal(.,reverse = rev)(n=n)) %>%
         unikn::seecol(

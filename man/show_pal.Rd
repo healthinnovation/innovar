@@ -4,7 +4,7 @@
 \alias{show_pal}
 \title{Show a set of palette color Lab}
 \usage{
-show_pal(name = "all", n = 5, rev = TRUE, ...)
+show_pal(name = "all", n = 5, rev = TRUE, dir = "all", ...)
 }
 \arguments{
 \item{name}{Character name of palette in lis_palettes}
@@ -12,6 +12,8 @@ show_pal(name = "all", n = 5, rev = TRUE, ...)
 \item{n}{Integer, number of colors}
 
 \item{rev}{Boolean indicating whether the palette should be reversed}
+
+\item{dir}{Character name of palette subgroups. The values can be  "sequential", "divergent", "all". Default is "all"}
 
 \item{...}{Additional arguments passed to seecol()}
 }
@@ -22,15 +24,24 @@ Show a set of palette color Lab
 Name of color palette available
 \itemize{
 \item \bold{ccvi}
-\item \bold{npr}
-\item \bold{blmbrg}
-\item \bold{ctp}
-\item \bold{jama}
 \item \bold{mlobo}
+\item \bold{dark_green}
+\item \bold{ctp}
+\item \bold{ecomst}
 \item \bold{btran}
-\item \bold{nasa}
+\item \bold{npr}
 \item \bold{politico}
+\item \bold{green}
+\item \bold{golden}
+\item \bold{blmbrg}
+\item \bold{jama}
+\item \bold{nasa}
 \item \bold{mortality}
+\item \bold{blue_fall}
+\item \bold{verimilion}
+\item \bold{wheat}
+\item \bold{peach}
+\item \bold{persian}
 }
 }
 \examples{
