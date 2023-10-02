@@ -56,17 +56,17 @@ get_vegetation <- function(from, to, band, region, fun = "count", scale = 1000) 
 
   # Message of error
 
-  if (end_year < 1999 | start_year >= 2021) {
+  if (end_year < 1999 | start_year > 2024) {
     print(sprintf("No exist data"))
   }
 
   # NDVI - EVI
 
   if (band == "SAVI") {
-    collection <- ee$ImageCollection("MODIS/006/MOD13A1")$
+    collection <- ee$ImageCollection("MODIS/061/MOD13A1")$
       select(c("sur_refl_b01", "sur_refl_b02", "DetailedQA"))
   } else {
-    collection <- ee$ImageCollection("MODIS/006/MOD13A1")$
+    collection <- ee$ImageCollection("MODIS/061/MOD13A1")$
       select(c(band, "DetailedQA"))
   }
 
