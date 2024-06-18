@@ -36,19 +36,19 @@
 #' }
 #' @export
 
-get_def <- function(from, to, region, scale = 100) {
+get_def <- function(from, to, region, scale = 30) {
 
   # Conditions about the times
   start_year <- substr(from, 1, 4) %>% as.numeric()
   end_year <- substr(to, 1, 4) %>% as.numeric()
 
   # loss condition
-  rango <- c(0:21)
-  names(rango) <- 2000:2021
+  rango <- c(0:23)
+  names(rango) <- 2000:2023
   anio <- rango[c(as.character(start_year:end_year))]
 
   # The base image collection
-  img_base <- ee$Image("UMD/hansen/global_forest_change_2021_v1_9")$
+  img_base <- ee$Image("UMD/hansen/global_forest_change_2023_v1_11")$
     select(c('lossyear'))$
     eq(anio)
 
