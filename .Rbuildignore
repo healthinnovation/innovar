@@ -5,3 +5,9 @@
 ^LICENSE\.md$
 ^docs$
 ^\.github$
+^README\.Rmd$
+^files$
+^pkgdown$
+^py$
+CITATION.cff
+^data/

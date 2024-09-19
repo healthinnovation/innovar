@@ -15,8 +15,9 @@
 #'   \item{\bold{capital}}{Name of the capital main}
 #' }
 #' @usage data(Peru)
+#' @name Peru
 #' @source \url{https://www.inei.gob.pe/}
-"Peru"
+NULL
 
 #' Raw migration data from the Peru census of 2017
 #'
@@ -42,6 +43,7 @@
 #' formatting or setting column names, and containing the information about migration
 #' described above.
 #' @usage data(migration17raw)
+#' @name migration17raw
 #' @source \url{https://censos2017.inei.gob.pe/redatam/}
 #' @seealso \code{\link{get_od_data}}
-"migration17raw"
+NULL

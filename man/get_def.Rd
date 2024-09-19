@@ -4,7 +4,7 @@
 \alias{get_def}
 \title{Extract deforestation area data from Hansen}
 \usage{
-get_def(from, to, region, scale = 100)
+get_def(from, to, region, scale = 30)
 }
 \arguments{
 \item{to, from}{it's a string object,starting and final date.}

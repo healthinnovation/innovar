@@ -1,3 +1,13 @@
+#' @keywords internal
+#' @keywords internal
+utils::globalVariables(
+  c(".","origin", "destination", "dept_ori", "dept_des",
+    "prov_ori", "distr_ori", "prov_des", "distr_des",
+    "cases", "ubigeo_ori", "ubigeo_des", "Codename",
+    "string", ":="))
+
+#' @keywords internal
+#' @import rgee
 ee_count <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -39,7 +49,8 @@ ee_count <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -81,7 +92,8 @@ ee_kurstosis <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_max <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -122,7 +134,8 @@ ee_max <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_mean <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -164,6 +177,8 @@ ee_mean <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
+#' @keywords internal
+#' @import rgee
 ee_median <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -204,7 +219,8 @@ ee_median <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_min <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -246,7 +262,8 @@ ee_min <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_mode <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -288,7 +305,8 @@ ee_mode <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_percentile <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -330,6 +348,8 @@ ee_percentile <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
+#' @keywords internal
+#' @import rgee
 ee_std <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -371,6 +391,8 @@ ee_std <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
+#' @keywords internal
+#' @import rgee
 ee_sum <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -412,6 +434,8 @@ ee_sum <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
+#' @keywords internal
+#' @import rgee
 ee_variance <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -453,7 +477,8 @@ ee_variance <- function(x, y, by = 1000,scale = 1000) {
   return(dataset)
 }
 
-
+#' @keywords internal
+#' @import rgee
 ee_first <- function(x, y, by = 1000,scale = 1000) {
   y_len <- y$size()$getInfo()
 
@@ -478,7 +503,7 @@ ee_first <- function(x, y, by = 1000,scale = 1000) {
         mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .)))
 
     } else {
-      db_local <- ee_extract(
+      db_local <- rgee::ee_extract(
         x = x,
         y = ee_value_layer,
         fun = ee$Reducer$first(),
