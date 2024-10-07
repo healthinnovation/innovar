@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from pathlib import Path
 import csv
 
-def export(filepath, dbname, user, password):
+def export_csv2mongodb(filepath, dbname, user, password):
     infile = Path(filepath)
     filename = infile.stem
     data = {}

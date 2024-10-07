@@ -81,8 +81,7 @@ reference:
     contents:
     - allpautils_names
     - read_batch
-    - pol_as_ee
-    - export
+    - export_csv2mongodb
     - create_dap
     - use_xaringan
     - use_rmd_flatly

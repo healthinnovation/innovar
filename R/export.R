@@ -19,10 +19,10 @@
 #' dbname = "<database-name>"
 #' user <- Sys.getenv("USER")
 #' password <- Sys.getenv("PASSWORD")
-#' export("cars.csv", dbname, user, password)
+#' export_csv2mongodb("cars.csv", dbname, user, password)
 #' }
 #' @export
-export <- function(filepath, dbname, user, password, interpreter = NULL) {
+export_csv2mongodb <- function(filepath, dbname, user, password, interpreter = NULL) {
   if (is.null(filepath)) stop("File path (filepath) is required.")
 
   if (is.null(dbname)) stop("Database names (dbname) is required.")
@@ -36,7 +36,7 @@ export <- function(filepath, dbname, user, password, interpreter = NULL) {
   source_python("./py/export.py")
 
   arg <- list(filepath, dbname, user, password)
-  status <- do.call(export, arg)
+  status <- do.call(export_csv2mongodb, arg)
 
   if (status) {
     print("Collection was exported succesfully.")
