@@ -15,16 +15,13 @@
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta)
 #' read_batch(data_dir = data_dir, extension = "dta", fun = haven::read_dta, env = F)
 #'}
-#' @importFrom purrr map
-#' @importFrom fs dir_ls
-#' @importFrom readr read_csv
 #' @export
-read_batch <- function(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...) {
+read_batch <- function(data_dir, ext = "csv", fun = read.csv, env = TRUE, ...) {
 
-  file <- dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))
+  file <- fs::dir_ls(data_dir, regexp = paste0("\\.", ext, "$"))
 
   data_objects<-file %>%
-    map(fun, ...)
+    purrr::map(fun, ...)
 
   names(data_objects) <- sub('\\..*$', '', basename(file))
 

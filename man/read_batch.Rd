@@ -4,7 +4,7 @@
 \alias{read_batch}
 \title{Utility for dataset batch importing  in multiple formats}
 \usage{
-read_batch(data_dir, ext = "csv", fun = readr::read_csv, env = TRUE, ...)
+read_batch(data_dir, ext = "csv", fun = read.csv, env = TRUE, ...)
 }
 \arguments{
 \item{data_dir}{data_dir is the file path that contains the files that will be imported}

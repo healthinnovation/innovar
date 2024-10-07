@@ -51,7 +51,7 @@ reference:
     - get_no2
     - get_o3
     - get_so2
-    - get_aero
+    - extract_sentinel5_uvai
     - get_vegetation
   - title: "Human intervention"
     contents:
@@ -88,7 +88,6 @@ reference:
 
   - title: "Dataset"
     contents:
-    - Peru
     - migration17raw
 
 figures:

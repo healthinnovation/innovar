@@ -4,7 +4,7 @@ utils::globalVariables(
   c(".","origin", "destination", "dept_ori", "dept_des",
     "prov_ori", "distr_ori", "prov_des", "distr_des",
     "cases", "ubigeo_ori", "ubigeo_des", "Codename",
-    "string", ":="))
+    "string", ":=","read.csv"))
 
 #' @keywords internal
 #' @import rgee

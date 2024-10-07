@@ -19,24 +19,32 @@
 #' @examples
 #' library(innovar)
 #' library(dplyr)
-#' df_dep <- data.frame(
-#' Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
-#'            "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN", "CUSCO", "PUNO", "APURIMAC",
-#'             "AYACUCHO", "HUANCAVELICA", "TUMBES", "PIURA", "LAMBAYEQUE",
-#'             "LA LIBERTAD", "ANCASH", "ICA", "AREQUIPA", "TACNA", "MOQUEGUA",
-#'             "LORETO", "UCAYALI", "MADRE DE DIOS"), stringsAsFactors = FALSE
-#'           )
 #'
-#' df_dep %>%
+#' # Create a data frame with regions
+#' df_dep <- data.frame(
+#'   Region = c("LIMA", "CALLAO", "CAJAMARCA", "AMAZONAS",
+#'              "SAN MARTIN", "HUANUCO", "PASCO", "JUNIN",
+#'              "CUSCO", "PUNO", "APURIMAC", "AYACUCHO",
+#'              "HUANCAVELICA", "TUMBES", "PIURA", "LAMBAYEQUE",
+#'              "LA LIBERTAD", "ANCASH", "ICA", "AREQUIPA",
+#'              "TACNA", "MOQUEGUA", "LORETO", "UCAYALI",
+#'              "MADRE DE DIOS"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Generate administrative divisions using different methods
+#' df_dep <- df_dep |>
 #'   mutate(
-#'     Reg_traditional = gen_admin_div(Region, method = "Traditional"),
+#'     Reg_Traditional = gen_admin_div(Region, method = "Traditional"),
 #'     Reg_TC = gen_admin_div(Region, method = "TC"),
 #'     Reg_Cardinal = gen_admin_div(Region, method = "Cardinal"),
 #'     Reg_Trad_Cardinal = gen_admin_div(Region, method = "Trad_Cardinal")
 #'   )
 #'
-#' @export gen_admin_div
+#' # View the updated data frame
+#' print(df_dep)
 #'
+#' @export gen_admin_div
 gen_admin_div <- function(x,
                           method="Traditional") {
   reg_mountain_north <- c("CAJAMARCA","AMAZONAS","SAN MARTIN","HUANUCO","PASCO")

@@ -26,8 +26,6 @@
 #'
 #' @examples
 #' \dontrun{
-#'
-#' library(tidyverse)
 #' library(rgee)
 #' library(innovar)
 #' library(sf)
@@ -44,20 +42,19 @@
 #' }
 #' @export
 
-get_aero <- function(from, to, band, region, fun = "count", scale = 1000) {
+extract_sentinel5_uvai <- function(from, to, band, region, fun = "count", scale = 1000) {
 
   # Conditions about the times
-  start_year <- substr(from, 1, 4) %>% as.numeric()
-  end_year <- substr(to, 1, 4) %>% as.numeric()
+  start_year <- substr(from, 1, 4) |>  as.numeric()
+  end_year <- substr(to, 1, 4) |> as.numeric()
 
   # Message of error
 
   if (start_year < 2018) {
     from = "2018-07-01"
-    start_year = substr(from, 1, 4) %>% as.numeric()
+    start_year = substr(from, 1, 4) |>  as.numeric()
     print(sprintf("No exist data, aerosol is available from > 2018"))
   }
-
 
   # Dataset
   collection <- ee$ImageCollection("COPERNICUS/S5P/NRTI/L3_AER_AI")$
