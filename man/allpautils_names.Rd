@@ -4,16 +4,19 @@
 \alias{allpautils_names}
 \title{Remove accents and hyphens in character vector}
 \usage{
-allpautils_names(string)
+allpautils_names(string = NULL)
 }
 \arguments{
-\item{string}{Characters vector}
+\item{string}{A character vector.}
+}
+\value{
+A character vector standardized without accents or hyphens and any strange characters.
 }
 \description{
-This function will allow you to remove accents, hyphens and
-  any strange characters that come from the UTF-8 encoding, with the intention
-  of working with standardized names or texts.Review:
-  https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html
+This function will allow you to \bold{remove accents, hyphens and
+  any strange characters that come from the UTF-8 encoding}, with the intention
+  of working with standardized names or texts.
+  For information, please refer to the following link \url{https://cran.r-project.org/web/packages/MazamaSpatialUtils/vignettes/MazamaSpatialUtils.html}
 }
 \examples{
 library(innovar)

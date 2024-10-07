@@ -7,8 +7,7 @@ Authors@R:
            family = "Carrasco-Escobar",
            role = c("aut"),
            email = "gabriel.carrasco@upch.edu.pe",
-           comment = c(ORCID = "0000-0002-6945-0419",
-                        webpage = "http://gcarrasco.rbind.io/")),
+           comment = c(ORCID = "0000-0002-6945-0419",webpage = "http://gcarrasco.rbind.io/")),
     person(given = "Renato",
            family = "Cava",
            role = c("aut"),
@@ -68,6 +67,5 @@ Imports:
 Suggests:
     knitr,
     mapview,
-    rmarkdown,
-    tidyverse
+    rmarkdown
 VignetteBuilder: knitr
