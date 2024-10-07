@@ -1,24 +1,3 @@
-#' Peru names and spatial
-#'
-#' A dataset containing the names of the 1874 districts, 196 provinces and 25 departments of Peru according INEI - 2017, additionally also is the limits administrative level 3 in a spatial vector format.
-#'
-#' @format A dataset with 1874 rows and 9 variables:
-#'
-#' \describe{
-#'   \item{\bold{ubigeo}}{Code of six numbers for each district}
-#'   \item{\bold{dep.code}}{Code to each departament}
-#'   \item{\bold{dep}}{Name of each departament}
-#'   \item{\bold{prov.code}}{Code to each province}
-#'   \item{\bold{prov}}{Name of each province}
-#'   \item{\bold{distr.code}}{Code to each district}
-#'   \item{\bold{distr}}{Name of each district}
-#'   \item{\bold{capital}}{Name of the capital main}
-#' }
-#' @usage data(Peru)
-#' @name Peru
-#' @source \url{https://www.inei.gob.pe/}
-NULL
-
 #' Raw migration data from the Peru census of 2017
 #'
 #' The Institute of Statistics and Informatics (INEI, by its acronym in Spanish)
@@ -42,7 +21,6 @@ NULL
 #' @format A untidy data frame which resulted from reading an Excel file without
 #' formatting or setting column names, and containing the information about migration
 #' described above.
-#' @usage data(migration17raw)
 #' @name migration17raw
 #' @source \url{https://censos2017.inei.gob.pe/redatam/}
 #' @seealso \code{\link{get_od_data}}

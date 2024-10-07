@@ -63,9 +63,8 @@ Imports:
     psych,
     gert,
     renv,
-    unikn
-Suggests:
-    knitr,
-    mapview,
+    unikn,
     rmarkdown
+Suggests:
+    knitr
 VignetteBuilder: knitr

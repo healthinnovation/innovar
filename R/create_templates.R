@@ -35,7 +35,7 @@ create_dap <- function(dir,
   }
 
   fs::dir_create(fs::path(dir, "00_legacy"))
-fs::dir_create(fs::path(dir, "01_data/processed"))
+  fs::dir_create(fs::path(dir, "01_data/processed"))
   fs::dir_create(fs::path(dir, "01_data/raw"))
   fs::dir_create(fs::path(dir, "02_output/plots"))
   fs::dir_create(fs::path(dir, "02_output/tables"))

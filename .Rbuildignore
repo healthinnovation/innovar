@@ -10,4 +10,4 @@
 ^pkgdown$
 ^py$
 CITATION.cff
-^data/
+^data/\.+$

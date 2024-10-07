@@ -11,9 +11,6 @@ described above.
 \source{
 \url{https://censos2017.inei.gob.pe/redatam/}
 }
-\usage{
-data(migration17raw)
-}
 \description{
 The Institute of Statistics and Informatics (INEI, by its acronym in Spanish)
 of Peru carried out the last census on 2017. This census data can be
