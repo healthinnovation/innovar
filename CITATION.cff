@@ -372,7 +372,7 @@ references:
   authors:
   - family-names: Ooms
     given-names: Jeroen
-    email: jeroen@berkeley.edu
+    email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2024'
   doi: 10.32614/CRAN.package.gert
@@ -488,16 +488,4 @@ references:
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2024'
   doi: 10.32614/CRAN.package.rmarkdown
-- type: software
-  title: tidyverse
-  abstract: 'tidyverse: Easily Install and Load the ''Tidyverse'''
-  notes: Suggests
-  url: https://tidyverse.tidyverse.org
-  repository: https://CRAN.R-project.org/package=tidyverse
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2024'
-  doi: 10.32614/CRAN.package.tidyverse
 
