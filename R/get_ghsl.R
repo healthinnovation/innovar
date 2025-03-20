@@ -34,8 +34,7 @@ get_ghsl <- function(region, scale = 100) {
     img_base <- ee$ImageCollection("users/ambarja/ghsl")$
       toBands()
 
-    ghsl_area <- img_base$multiply(ee$Image$pixelArea())$
-      divide(1000000)
+    ghsl_area <- img_base$ divide(1000000)
 
     data <- ee_sum(
       x = ghsl_area,
