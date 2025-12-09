@@ -39,29 +39,6 @@ navbar:
       href: https://github.com/healthinnovation/innovar
 
 reference:
-  - title: "Climate"
-    # desc: These functions build cartographic layers.
-    contents:
-    - get_climate
-    - get_etp
-    - get_fldas
-  - title: "Enviroment"
-    contents:
-    - get_co
-    - get_no2
-    - get_o3
-    - get_so2
-    - get_aero
-    - get_vegetation
-  - title: "Human intervention"
-    contents:
-    - get_ghm
-    - get_pop
-    - get_urban
-    - get_noaa
-    - get_viirs
-    - get_def
-    - get_ghsl
   - title: "Census data"
     contents:
     - get_od_data
@@ -81,7 +58,6 @@ reference:
     contents:
     - allpautils_names
     - read_batch
-    - pol_as_ee
     - export
     - create_dap
     - use_xaringan

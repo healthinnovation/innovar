@@ -41,26 +41,21 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Depends: R (>= 3.6)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.3
 URL: https://github.com/healthinnovation/innovar
 BugReports: https://github.com/healthinnovation/innovar/issues
 VignetteBuilder:
   knitr
 Imports:
-    RCurl,
-    sf,
     magrittr,
     dplyr,
     purrr,
     stringr,
-    rgee,
     ggplot2,
     readr,
     rlang,
     tidyr,
-    broom,
     methods,
-    MASS,
     reticulate,
     zoo,
     stringi,
@@ -69,10 +64,13 @@ Imports:
     psych,
     gert,
     renv,
-    rstudioapi
+    unikn
 Suggests:
+    MASS,
+    RCurl,
+    broom,
+    rstudioapi,
+    sf,
     knitr,
-    unikn,
     mapview,
-    rmarkdown,
-    tidyverse
+    rmarkdown

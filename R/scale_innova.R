@@ -49,6 +49,13 @@ nasa <- c(
   `nasa10`  = "#6BB4F8"
 )
 
+innovalab <- c(
+  `innovalab1` ="#073B3A",
+  `innovalab2` = "#30c6a9",
+  `innovalab3` ="#007d58",
+  `innovalab4` = "#7abf7a"
+)
+
 politico <- c(
   `strongly` = "#F1BBAC",`supporting` = "#F8D2B0",`mixed` = "#DBDADA",
   `nosupporting` = "#C67399",`opposing` = "#9C4482"
@@ -101,6 +108,7 @@ persian <- c(
   `low` = "#e7ad99",`verylow` = "#ecc8af"
 )
 
+
 # List of palettes
 
 innova_palettes <- list(
@@ -109,7 +117,8 @@ innova_palettes <- list(
   `politico` = politico, `mortality` = mortality,
   `green` = green,`golden` = golden,`dark_green` = dark_green,
   `blue_fall` = blue_fall,`vermilion` = vermilion,
-  `wheat` = wheat,`peach` = peach,`persian` = persian
+  `wheat` = wheat,`peach` = peach,`persian` = persian,
+  `innovalab` = innovalab
 )
 
 #' Return function to interpolate a lis color palette
@@ -230,7 +239,6 @@ scale_fill_innova <- function(palette = "ccvi", discrete = TRUE, reverse = FALSE
 #'@export show_pal
 
 show_pal <- function(name = "all",n = 5,rev = TRUE,...){
-  require(unikn)
   if(sum(unique(name %in% names(innova_palettes))) == 1) {
     list_names <- innova_palettes[name]
     range_color <- sapply(X = list_names,FUN = function(x){list(x[1:n])})
