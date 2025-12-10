@@ -1,0 +1,84 @@
+# **Health Innovation Lab**
+
+## 🔵 **Who we are**
+
+We are a multidisciplinary team focused on **designing and evaluating
+innovative and accessible technologies to improve people’s health**. We
+promote the **use of technologies and open data** in order to lower
+implementation barriers, reproducibility and increase the impact of
+innovation proposals.
+
+Our main lines of research include the development of diagnostic and
+detection systems, development of tools for environmental parameter
+detection, data science and big data applied to tropical diseases, and
+geospatial analysis of mobility and migration patterns.
+
+## 🔵 **Package installation**
+
+You can install the first version of innovar from
+[GitHub](https://github.com/):
+
+The following code just copy and paste into the R console:
+
+    if(!require("remotes")) install.packages("remotes")
+    remotes::install_github("healthinnovation/innovar@v.0.1.2")
+
+    library(innovar)
+
+# 🔵 **Our social networks**
+
+[![](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/imt.innovalab)
+[![](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/innovalab_imt)
+[![](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/innovalab_imt/)
+[![](https://img.shields.io/badge/Innovalab_web-000?style=for-the-badge&logo=wix&logoColor=white)](https://www.innovalab.info/)
+[![](https://img.shields.io/badge/linktree-39E09B?style=for-the-badge&logo=linktree&logoColor=whit)](https://linktr.ee/innov_lab)
+
+# Package index
+
+## Census data
+
+- [`get_od_data()`](get_od_data.md) : Get census-like data in a
+  origin-destination format
+
+## Graphics
+
+- [`show_pal()`](show_pal.md) : Show a set of palette color Lab
+- [`scale_color_innova()`](scale_color_innova.md) : Color scale
+  constructor for lis colors
+- [`scale_fill_innova()`](scale_fill_innova.md) : Fill scale constructor
+  for lis colors
+- [`innova_pal()`](innova_pal.md) : Return function to interpolate a lis
+  color palette
+
+## Administrative limit
+
+- [`gen_admin_div()`](gen_admin_div.md) : Create categories for
+  adiministrative divisions (Peru)
+
+## Vulnerability
+
+- [`vulnerability_index()`](vulnerability_index.md) : Vulnerability
+  Index
+
+## Utils
+
+- [`allpautils_names()`](allpautils_names.md) : Remove accents and
+  hyphens in character vector
+- [`read_batch()`](read_batch.md) : Utility for dataset batch importing
+  in multiple formats
+- [`export()`](export.md) : Export CSV file to MongoDB
+- [`create_dap()`](create_dap.md) : Create a Data Analysis Project
+- [`use_xaringan()`](use_xaringan.md) : Use Innovar Xaringan Template
+- [`use_rmd_flatly()`](use_rmd_flatly.md) : Use Innovar Rmarkdown Flatly
+
+## Dataset
+
+- [`Peru`](Peru.md) : Peru names and spatial
+- [`migration17raw`](migration17raw.md) : Raw migration data from the
+  Peru census of 2017
+
+# Articles
+
+### All vignettes
+
+- [Introduction](Introduction.md):
